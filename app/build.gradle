@@ -1,0 +1,270 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.haitian.servicestaffapp"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions 'default'
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+        multiDexEnabled true
+//        manifestPlaceholders = [
+//                JPUSH_PKGNAME: applicationId,
+//                JPUSH_APPKEY : "6b85c1a5067e01299b065b7b", //JPush上注册的包名对应的appkey.
+//                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+//        ]
+    }
+    packagingOptions {//加上这写代码
+        exclude 'META-INF/rxjava.properties'
+        pickFirst 'META-INF/*'
+        pickFirst 'lib/armeabi-v7a/libijkplayer.so'// Fix: More than one file was found
+        pickFirst 'lib/x86/libijkplayer.so'// Fix: More than one file was found
+    }
+    buildTypes {
+        release {
+            lintOptions {
+                debuggable true
+                checkReleaseBuilds false
+                abortOnError false
+            }
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildToolsVersion '28.0.3'
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+
+//    signingConfigs {
+//        debug {
+//            storeFile file('release.jks')
+//            storePassword "ctnq12316"
+//            keyAlias "key0"
+//            keyPassword "ctnq12316"
+//        }
+//    }
+//
+//    /*配置渠道*/
+//    productFlavors {
+//        shouji_oppo {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "shouji_oppo"]
+//        }
+//        shouji_xiaomi {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "shouji_xiaomi"]
+//        }
+//        pingtai_tengxun {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "pingtai_tengxun"]
+//        }
+//        pingtai_ali {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "pingtai_ali"]
+//        }
+//        pingtai_360 {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "pingtai_360"]
+//        }
+//        pingtai_baidu {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "pingtai_baidu"]
+//        }
+//        shouji_vivo {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "shouji_vivo"]
+//        }
+//        shouji_sanxing {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "shouji_sanxing"]
+//        }
+//        shouji_meizu {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "shouji_meizu"]
+//        }
+//        shouji_leshi {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "shouji_leshi"]
+//        }
+//        shouji_kupai {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "shouji_kupai"]
+//        }
+//        shouji_lianxiang {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "shouji_lianxiang"]
+//        }
+//        shouji_huawei {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "shouji_huawei"]
+//        }
+//        shouji_chuizi {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "shouji_chuizi"]
+//        }
+//    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //解决64K报错
+    implementation 'com.android.support:multidex:1.0.1'
+
+    //butterknife
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    //OkhttpLogging
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    implementation 'io.reactivex:rxjava:1.+'
+    implementation 'io.reactivex:rxandroid:1.+'
+
+    //侧滑返回
+    implementation 'com.youngfeng.android:snake:0.1.0'
+    annotationProcessor 'com.youngfeng.android:snake-compiler:0.1.0'
+    implementation 'com.google.code.gson:gson:2.8.0'
+
+    //BottomTabBar
+    implementation 'com.hjm:BottomTabBar:1.1.3'
+
+    //中文转拼音
+
+    //    implementation files('libs/pinyin4j-2.5.0.jar')
+
+    //轮播图
+    implementation 'com.youth.banner:banner:1.4.10'
+
+    //glide加载图片
+//    implementation 'com.github.bumptech.glide:glide:4.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    //刷新框架
+    implementation 'com.liaoinstan.springview:library:1.5.0'
+
+    //okhttp
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+
+    //时间选择器
+    implementation 'com.contrarywind:Android-PickerView:3.2.6'
+
+    //城市选择器
+    implementation 'liji.library.dev:citypickerview:1.1.0'
+
+    //evenbus传值
+
+    //    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.android.support:cardview-v7:26.1.0'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+
+    //弹出框
+    implementation 'com.mylhyl:circleDialog:2.6.6'
+
+    //进度
+    implementation 'com.github.gittjy:LoadingDialog:1.0.2'
+
+    //图片多选
+    implementation 'com.baoyz.actionsheet:library:1.1.7'
+
+    //水平侧滑
+    implementation 'cn.finalteam:galleryfinal:1.4.8.7'
+    implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
+
+    //图片选择器
+    implementation 'com.github.lovetuzitong:MultiImageSelector:1.2'
+
+    //视频播放
+    implementation 'com.shuyu:GSYVideoPlayer:6.0.0-beta'
+
+    //日历
+    implementation 'com.github.Othershe:CalendarView:1.2.1'
+
+    //视频选择器
+    implementation 'com.zhihu.android:matisse:0.5.0-alpha4'
+
+    //历史搜索
+    implementation 'com.wenwenwen888:searchbox:1.0.1'
+    implementation 'com.contrarywind:Android-PickerView:3.2.6'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    //recyclerview下拉加载依赖
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4'
+
+    //    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'   //必要依赖，解析gson
+
+    //snackbar
+    implementation 'com.nispok:snackbar:2.11.+'
+    implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+
+    //星级评定
+    implementation 'com.feezu.liuli:timeselector:1.0.8+'
+//    implementation files('libs/umeng-analytics-8.0.2.jar')
+//    implementation files('libs/umeng-common-2.0.2.jar')
+//    implementation files('libs/umeng-share-core-6.9.4.jar')
+//    implementation files('libs/umeng-share-QQ-simplify-6.9.4.jar')
+//    implementation files('libs/umeng-share-sina-simplify-6.9.4.jar')
+//    implementation files('libs/umeng-share-wechat-simplify-6.9.4.jar')
+//    implementation files('libs/umeng-shareboard-widget-6.9.4.jar')
+//    implementation files('libs/umeng-sharetool-6.9.4.jar')
+
+    //微信库
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:1.3.4'
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    implementation 'com.github.castorflex.verticalviewpager:library:19.0.1'
+    implementation 'com.facebook.fresco:fresco:1.11.0'
+//    implementation files('libs/AliRTCSdk.jar')
+//    implementation files('libs/utdid4all-1.5.0-proguard.jar')
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    implementation 'com.github.castorflex.verticalviewpager:library:19.0.1'
+    implementation 'com.facebook.fresco:fresco:1.11.0'
+//    implementation 'cn.jiguang.sdk:jmessage:2.7.0'
+//    implementation project(':chatlibrary')
+//    implementation files('libs/jpush-android-3.3.6.jar')
+//    implementation files('libs/jcore-android-2.0.0.jar')
+//    implementation files('libs/core-3.2.1.jar')
+
+    //    implementation(name: 'AndroidEmoji-1.0.0', ext: 'aar')
+//    implementation files('libs/BaiduLBS_Android.jar')
+//    implementation files('libs/pinyin4j-2.5.0.jar')
+
+    implementation 'com.alibaba:fastjson:1.1.54.android'
+    implementation 'com.zhy:base-rvadapter:3.0.3'
+
+//    implementation 'com.github.wangchenyan:html-text:1.0'
+
+    //加载富文本
+    implementation('com.zzhoujay.richtext:richtext:3.0.7') {
+        exclude group: 'com.android.support'
+    }
+
+    implementation 'com.github.BolexLiu:PressScanCode:v1.0.0'
+
+
+    // 下面各SDK根据宿主App是否使用相关业务按需引入。
+    // OAID目前为目前国内市场主流的Android Q设备标识，可根据需要选择。
+    // 友盟统计SDK
+//    implementation  'com.umeng.umsdk:common:9.1.0' // (必选)
+//    implementation  'com.umeng.umsdk:game:9.1.0+G' // 游戏统计SDK依赖(可选)
+//    implementation  'com.umeng.umsdk:asms:1.1.3' // asms包依赖(必选)
+//    implementation 'com.umeng.umsdk:crash:0.0.4' // native crash包依赖(必选)
+//    implementation  'com.umeng.umsdk:oaid_lenovo:1.0.0' // (可选)
+//    implementation  'com.umeng.umsdk:oaid_mi:1.0.0' // (可选)
+//    implementation  'com.umeng.umsdk:oaid_oppo:1.0.4' // (可选)
+//    implementation  'com.umeng.umsdk:oaid_vivo:1.0.0.1' // (可选)
+
+    implementation 'me.zhouzhuo.zzratingbar:zz-rating-bar:1.0.0'
+}

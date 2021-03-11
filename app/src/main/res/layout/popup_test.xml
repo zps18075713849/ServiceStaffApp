@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/all_tv"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="wrap_content"
+        android:text="全部"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="@dimen/sp_14"
+        android:padding="@dimen/dp_10"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/daijieshou_tv"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:textSize="@dimen/sp_14"
+        android:gravity="center"
+        android:padding="@dimen/dp_10"
+
+        android:text="待接收" />
+
+    <TextView
+        android:id="@+id/yijieshou_tv"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        android:gravity="center"
+        android:padding="@dimen/dp_10"
+        android:layout_gravity="center"
+        android:text="已接收" />
+
+    <TextView
+        android:id="@+id/yijujue_tv"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_14"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:padding="@dimen/dp_10"
+        android:layout_gravity="center"
+        android:text="已拒绝" />
+
+</LinearLayout>

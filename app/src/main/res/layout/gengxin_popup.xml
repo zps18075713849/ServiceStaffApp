@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#33000000"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="378dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dp_45"
+        android:layout_marginRight="@dimen/dp_45"
+        android:background="@drawable/gengxin_xml_bg">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@mipmap/jianchagengxin_bg" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_21"
+            android:text="发现新版本"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18" />
+
+
+        <TextView
+            android:id="@+id/new_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_28"
+            android:layout_marginTop="@dimen/dp_136"
+            android:text="新版本特性"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_136"
+            android:layout_marginRight="@dimen/dp_22"
+            android:text="V1.2.0"
+            android:textColor="@color/liji_material_red_500"
+            android:textSize="@dimen/sp_16" />
+
+
+        <LinearLayout
+            android:id="@+id/center_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/new_tv"
+            android:layout_marginLeft="@dimen/dp_28"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_22">
+
+            <ImageView
+                android:layout_width="@dimen/dp_6"
+                android:layout_height="@dimen/dp_6"
+                android:layout_gravity="center"
+                android:src="@drawable/select_green_bg" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="优化个人中心个人便携资料"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/center_1"
+            android:layout_marginRight="@dimen/dp_20"
+
+            android:layout_marginLeft="@dimen/dp_28"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <ImageView
+                android:layout_width="@dimen/dp_6"
+                android:layout_height="@dimen/dp_6"
+                android:layout_gravity="center"
+                android:src="@drawable/select_green_bg" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="优化闪退问题"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14" />
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/gengxin_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/dp_60"
+            android:layout_marginRight="@dimen/dp_60"
+            android:layout_marginBottom="@dimen/dp_30"
+            android:background="@drawable/gengxin_blue_bg"
+            android:text="立即更新"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

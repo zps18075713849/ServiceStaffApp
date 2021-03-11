@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="main_color">#0290ff</color>
+    <color name="main_color2">#0290ff</color>
+    <color name="main_text">#0290ff</color>
+    <color name="white">#FFFFFF</color>
+    <color name="transparency_color">#00000000</color>
+    <color name="item_logo_edit">#33000000</color>
+    <color name="line_color">#f3f3f3</color>
+    <color name="hui">#f5f5f5</color>
+    <color name="text_color">#333333</color>
+    <color name="mydoctor_color">#8b8b8b</color>
+    <color name="hui_color">#c3c3c3</color>
+    <color name="color_black">#222222</color>
+    <color name="qian_hui">#454545</color>
+    <color name="hui_1">#BEBEBE</color>
+    <color name="hui_2">#E9E9E9</color>
+
+    <color name="un_checkd">#515151</color>
+    <color name="user_title_color1">#51AF85</color>
+    <color name="user_title_color2">#168B77</color>
+    <color name="search_bg_color">#19b9b6b6</color>
+    <color name="item_logo_color">#33000000</color>
+    <color name="delete_bt_color">#ff1122</color>
+    <color name="juhuang">#F19322</color>
+    <color name="fense">#EB6790</color>
+    <color name="qianlan">#0aa2ed</color>
+    <color name="bjhui">#F0F0F0</color>
+    <color name="background_color">#00A6FC</color>
+    <color name="loginTextColor_select">#26BF4F</color>
+    <color name="loginTextColor_unselect">#999999</color>
+    <color name="rechargeBtnColor">#26BF4F</color>
+    <color name="hui_text_color">#8b8b8b</color>
+    <color name="black">#000000</color>
+    <color name="black_color">#222222</color>
+    <color name="line_color2">#E4E5EE</color>
+
+    <color name="color_999999">#999999</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_eeeeee">#eeeeee</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_ffffff">#ffffff</color>
+    <color name="color_c61a04">#c61a04</color>
+    <color name="color_cccccc">#cccccc</color>
+    <color name="color_d81e06">#d81e06</color>
+    <color name="color_b0b8b2">#b0b8b2</color>
+    <color name="color_28d19d">#28d19d</color>
+    <color name="color_000000">#000000</color>
+    <color name="color_00BDF9">#00BDF9</color>
+    <color name="xunijianpan">#EBEBEB</color>
+    <color name="hui_color_text">#8e8e93</color>
+    <color name="zitihui">#757575</color>
+    <color name="weikaiqi">#BDBEC6</color>
+    <color name="yikaiqi">#0050AF</color>
+    <color name="checkdaycount">#329AE3</color>
+    <color name="weiwancheng">#F5A623</color>
+    <color name="checkblue">#329AE3</color>
+    <color name="background">#f5f6fe</color>
+
+    <color name="black_alpha_5">#1a000000</color>
+    <color name="dark_gray">#FF2c2c2c</color>
+    <color name="holo_light_gray">#F8F8FF</color>
+
+    <color name="yellow_alpha_100">#FF9806</color>
+    <color name="zitihui2">#9B9B9B</color>
+    <color name="toolbarcolor">#0099F2</color>
+    <color name="shebeiBackground">#F8F8F8</color>
+</resources>

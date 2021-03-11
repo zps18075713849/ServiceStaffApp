@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.MainActivity">
+
+    <FrameLayout
+        android:id="@+id/main_fragid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:background="@color/white" />
+
+    <RadioGroup
+        android:id="@+id/main_radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_homepage"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_50"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/rb_homepage_selector"
+            android:drawablePadding="@dimen/dp_5"
+            android:gravity="center"
+            android:paddingTop="@dimen/dp_8"
+            android:text="首页"
+            android:textColor="@color/textcolor_select" />
+
+
+        <TextView
+            android:id="@+id/rb_sousuo"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:drawableTop="@mipmap/icon_sousuo"
+            android:gravity="center"
+            android:paddingTop="@dimen/dp_8"
+            android:drawablePadding="@dimen/dp_5"
+            android:background="@color/white"
+            android:text="搜索"
+            android:textColor="@color/black" />
+
+        <RadioButton
+            android:id="@+id/rb_setting"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_50"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/rb_setting_selector"
+            android:drawablePadding="@dimen/dp_5"
+            android:gravity="center"
+            android:text="设置"
+            android:paddingTop="@dimen/dp_8"
+            android:textColor="@color/textcolor_select" />
+
+
+    </RadioGroup>
+
+</LinearLayout>

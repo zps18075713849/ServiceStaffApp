@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/dp_10"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10">
+
+        <LinearLayout
+            android:id="@+id/jibenxinxi_line"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_116"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/gongdan_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="60"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_28" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="积分"
+                android:layout_marginTop="@dimen/dp_7"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14" />
+
+
+            <Button
+                android:id="@+id/duihuan_btn"
+                android:layout_width="@dimen/dp_88"
+                android:layout_height="@dimen/dp_28"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_9"
+                android:background="@drawable/blue_bg"
+                android:text="兑换"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/dp_6"
+            android:layout_height="match_parent"
+            android:background="@color/background" />
+
+        <LinearLayout
+            android:id="@+id/shebei_line"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_116"
+            android:layout_marginRight="@dimen/dp_11"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/renwu_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="208"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_28" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_7"
+                android:text="余额"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dp_14" />
+
+            <Button
+                android:id="@+id/tixian_btn"
+                android:layout_width="@dimen/dp_88"
+                android:layout_height="@dimen/dp_28"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_9"
+                android:background="@drawable/blue_bg"
+                android:text="提现"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
