@@ -45,17 +45,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activity.MineSetting_Activity"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activity.CodeLogin_Activity"
+            android:theme="@style/LoginTheme"></activity>
+        <activity android:name=".activity.MineSetting_Activity" />
         <activity android:name=".activity.AboutAs_Activity" />
         <activity android:name=".activity.UpdateZiTiSize_Activity" />
         <activity android:name=".activity.UpdatePassWord_Activity" />
         <activity android:name=".activity.DataSetting_Activity" />
         <activity
             android:name=".activity.SplashActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:theme="@style/LoginTheme">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".activity.TongZhiGongGao_Activity" />
@@ -69,45 +78,27 @@
         <activity android:name=".activity.KeHuGuanLi_Activity" />
         <activity android:name=".activity.FuWuTongJi_Activity" />
         <activity android:name=".activity.PingJiaTouSu_Activity" />
-        <activity android:name=".activity.Reigster_UploadCertificate_Activity"
-            android:theme="@style/LoginTheme"/>
-        <activity android:name=".activity.Register_Upload_CardId_Activity"
-            android:theme="@style/LoginTheme">
-
-
-
-        </activity>
-        <activity android:name=".activity.Register_MessageInfo_Activity"
-            android:theme="@style/LoginTheme">
-
-
-
-        </activity>
+        <activity
+            android:name=".activity.Reigster_UploadCertificate_Activity"
+            android:theme="@style/LoginTheme" />
+        <activity
+            android:name=".activity.Register_Upload_CardId_Activity"
+            android:theme="@style/LoginTheme"></activity>
+        <activity
+            android:name=".activity.Register_MessageInfo_Activity"
+            android:theme="@style/LoginTheme"></activity>
         <activity
             android:name=".activity.Register_Activity"
-            android:theme="@style/LoginTheme" >
-
-
-
-        </activity>
-        <activity android:name=".activity.ForGetPassWord_Activity"
-            android:theme="@style/LoginTheme"/>
+            android:theme="@style/LoginTheme"></activity>
+        <activity
+            android:name=".activity.ForGetPassWord_Activity"
+            android:theme="@style/LoginTheme" />
         <activity
             android:name=".activity.Login_Activity"
-            android:theme="@style/LoginTheme" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:theme="@style/LoginTheme">
 
         </activity>
-        <activity android:name=".activity.MainActivity" >
-
-
-
-        </activity>
+        <activity android:name=".activity.MainActivity"></activity>
     </application>
 
 </manifest>

@@ -25,6 +25,7 @@ import com.baoyz.actionsheet.ActionSheet;
 import com.bumptech.glide.Glide;
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.base.BaseActivity;
+import com.haitian.servicestaffapp.utils.LogUtil;
 import com.haitian.servicestaffapp.utils.ToastUtils;
 
 import java.io.BufferedOutputStream;
@@ -49,6 +50,14 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
     private String pathImage;
     private String personlIcon;
     private int type;   //0 身份证正面   1  反面  2  手持
+    private String mMobile;
+    private String mPassword;
+    private String mMes_code;
+    private String mName;
+    private String mFuwu_typeid;
+    private String mFuwu_suoshuid;
+    private String mYanzheng_code;
+
     @Override
     protected Activity provideBindView() {
         return this;
@@ -80,6 +89,21 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
         mId_card_fan_iv = findViewById(R.id.id_card_fan_iv);
         //手持照片
         mShouchi_img = findViewById(R.id.shouchi_img);
+
+        try {
+            mMobile = getIntent().getStringExtra("mobile");
+            mPassword = getIntent().getStringExtra("password");
+            mMes_code = getIntent().getStringExtra("mes_code");
+            mName = getIntent().getStringExtra("name");
+            mFuwu_typeid = getIntent().getStringExtra("fuwu_typeid");
+            mFuwu_suoshuid = getIntent().getStringExtra("suoshuid");
+            mYanzheng_code = getIntent().getStringExtra("yanzhengid");
+
+            LogUtil.e("服务id："+mFuwu_typeid);
+            LogUtil.e("所属id："+mFuwu_suoshuid);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -62,6 +62,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_35"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/dp_30">
 
             <TextView
