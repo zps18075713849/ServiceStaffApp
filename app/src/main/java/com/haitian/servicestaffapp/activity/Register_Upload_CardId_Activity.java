@@ -20,11 +20,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.baoyz.actionsheet.ActionSheet;
 import com.bumptech.glide.Glide;
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.base.BaseActivity;
+import com.haitian.servicestaffapp.utils.LogUtil;
 import com.haitian.servicestaffapp.utils.ToastUtils;
 
 import java.io.BufferedOutputStream;
@@ -49,6 +51,17 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
     private String pathImage;
     private String personlIcon;
     private int type;   //0 身份证正面   1  反面  2  手持
+    private String mMobile;
+    private String mPassword;
+    private String mMes_code;
+    private String mName;
+    private String mFuwu_typeid;
+    private String mFuwu_suoshuid;
+    private String mYanzheng_code;
+    private String mIdCard_Zheng = "";
+    private String mIdCard_Fan = "";
+    private String mIdCard_ShouChi = "";
+
     @Override
     protected Activity provideBindView() {
         return this;
@@ -80,6 +93,21 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
         mId_card_fan_iv = findViewById(R.id.id_card_fan_iv);
         //手持照片
         mShouchi_img = findViewById(R.id.shouchi_img);
+
+        try {
+            mMobile = getIntent().getStringExtra("mobile");
+            mPassword = getIntent().getStringExtra("password");
+            mMes_code = getIntent().getStringExtra("mes_code");
+            mName = getIntent().getStringExtra("name");
+            mFuwu_typeid = getIntent().getStringExtra("fuwu_typeid");
+            mFuwu_suoshuid = getIntent().getStringExtra("suoshuid");
+            mYanzheng_code = getIntent().getStringExtra("yanzhengid");
+
+            LogUtil.e("服务id："+mFuwu_typeid);
+            LogUtil.e("所属id："+mFuwu_suoshuid);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -139,7 +167,29 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
         mNext_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mIdCard_Zheng.equals("")){
+                    Toast.makeText(mContext, "请上传您的身份证正面照片", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (mIdCard_Fan.equals("")){
+                    Toast.makeText(mContext, "请上传您的身份证反面照片", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (mIdCard_ShouChi.equals("")){
+                    Toast.makeText(mContext, "请上传您的手持身份证照片", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent = new Intent(Register_Upload_CardId_Activity.this, Reigster_UploadCertificate_Activity.class);
+                intent.putExtra("mobile",mMobile);
+                intent.putExtra("password",mPassword);
+                intent.putExtra("mes_code",mMes_code);
+                intent.putExtra("name",mName);
+                intent.putExtra("fuwu_typeid",mFuwu_typeid);
+                intent.putExtra("suoshuid",mFuwu_suoshuid);
+                intent.putExtra("yanzhengid",mYanzheng_code);
+                intent.putExtra("idcard_zheng",mIdCard_Zheng);
+                intent.putExtra("idcard_fan",mIdCard_Fan);
+                intent.putExtra("idcard_shouchi",mIdCard_ShouChi);
                 startActivity(intent);
             }
         });
@@ -277,7 +327,7 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Log.e("上传头像22222", "onActivityResult: " + file.getPath());
+            Log.e("上传头像111111", "onActivityResult: " + file.getPath());
             if (!file.exists()) {
                 file.mkdirs();
             }
@@ -285,12 +335,15 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
             if (type == 0){
                 Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_zheng_iv);
                 mId_card_zheng_iv.setVisibility(View.VISIBLE);
+                mIdCard_Zheng = file.getPath();
             }else if (type == 1){
                 Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_fan_iv);
                 mId_card_fan_iv.setVisibility(View.VISIBLE);
+                mIdCard_Fan = file.getPath();
             }else if (type == 2){
                 Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mShouchi_img);
                 mShouchi_img.setVisibility(View.VISIBLE);
+                mIdCard_ShouChi = file.getPath();
             }
         }
         if (requestCode == 201 && resultCode == Register_Upload_CardId_Activity.RESULT_OK) {
@@ -302,7 +355,6 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
                 e.printStackTrace();
             }
             Log.e("上传头像22222", "onActivityResult: " + file.getPath());
-//            Log.e("上传头像22222", "onActivityResult8888: " + file);
             if (!file.exists()) {
                 file.mkdirs();
             }
@@ -310,12 +362,18 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
             if (type == 0){
                 Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_zheng_iv);
                 mId_card_zheng_iv.setVisibility(View.VISIBLE);
+                mIdCard_Zheng = file.getPath();
+
             }else if (type == 1){
                 Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_fan_iv);
                 mId_card_fan_iv.setVisibility(View.VISIBLE);
+                mIdCard_Fan = file.getPath();
+
             }else if (type == 2){
                 Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mShouchi_img);
                 mShouchi_img.setVisibility(View.VISIBLE);
+                mIdCard_ShouChi = file.getPath();
+
             }
         }
     }

@@ -2,6 +2,7 @@ package com.haitian.servicestaffapp.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.haitian.servicestaffapp.R;
+import com.haitian.servicestaffapp.app.DoctorBaseAppliction;
 import com.haitian.servicestaffapp.base.BaseActivity;
 
 import org.w3c.dom.Text;
@@ -49,6 +51,16 @@ public class MineSetting_Activity extends BaseActivity {
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
+            }
+        });
+
+        mExit_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DoctorBaseAppliction.spUtil.clear();
+                Intent intent = new Intent(MineSetting_Activity.this, Login_Activity.class);
+                startActivity(intent);
                 finish();
             }
         });
