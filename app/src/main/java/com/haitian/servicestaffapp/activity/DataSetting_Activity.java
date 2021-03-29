@@ -19,11 +19,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baoyz.actionsheet.ActionSheet;
 import com.bumptech.glide.Glide;
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.base.BaseActivity;
+import com.haitian.servicestaffapp.bean.CodeMessageBean;
+import com.haitian.servicestaffapp.bean.DataSettingBean;
+import com.haitian.servicestaffapp.okutils.DoctorNetService;
+import com.haitian.servicestaffapp.okutils.NetWorkRequestInterface;
+import com.haitian.servicestaffapp.utils.LogUtil;
 import com.haitian.servicestaffapp.utils.ToastUtils;
 
 import org.w3c.dom.Text;
@@ -32,6 +38,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import me.nereo.multi_image_selector.bean.Image;
 
@@ -84,7 +92,32 @@ public class DataSetting_Activity extends BaseActivity {
         //身份证反面照片
         mId_card_fan_iv = findViewById(R.id.id_card_fan_iv);
 
+        requestData();
+    }
 
+    private void requestData() {
+        Map<String,Object> map = new HashMap<>();
+        map.put("user_id","68");
+        DoctorNetService.requestDataSetting("http://111.17.215.37:817/waiter/login/profiles", map, new NetWorkRequestInterface() {
+            @Override
+            public void onError(Throwable throwable) {
+                LogUtil.e("---------");
+            }
+
+            @Override
+            public void onNext(Object info) {
+                DataSettingBean codeMessageBean = (DataSettingBean) info;
+                try {
+                    LogUtil.e("---------"+codeMessageBean.getCode());
+                    if(codeMessageBean.getCode()==20021){
+                        Toast.makeText(DataSetting_Activity.this,"密码修改成功",0).show();
+                        finish();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override
@@ -190,7 +223,7 @@ public class DataSetting_Activity extends BaseActivity {
 
     private void startPhotoAlbum() {
         //调用相册
-        //Intent.ACTION_PICK打开相册
+        //Intent.ACTION_PICK打开相册 
         Intent it = new Intent(Intent.ACTION_PICK);
         //设置图片的格式
         it.setType("image/*");
@@ -306,7 +339,7 @@ public class DataSetting_Activity extends BaseActivity {
         }
         return file;
     }
-
+    // affiliate dept role
     @Override
     public Context context() {
         return null;
