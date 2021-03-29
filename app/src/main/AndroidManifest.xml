@@ -47,8 +47,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.CodeLogin_Activity"
-            android:theme="@style/LoginTheme"></activity>
+        <activity android:name=".activity.TongZhiInfo_Activity"></activity>
+        <activity
+            android:name=".activity.CodeLogin_Activity"
+            android:theme="@style/LoginTheme" />
         <activity android:name=".activity.MineSetting_Activity" />
         <activity android:name=".activity.AboutAs_Activity" />
         <activity android:name=".activity.UpdateZiTiSize_Activity" />
@@ -59,13 +61,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".activity.TongZhiGongGao_Activity" />
         <activity android:name=".activity.TiXian_Activity" />
@@ -83,22 +83,20 @@
             android:theme="@style/LoginTheme" />
         <activity
             android:name=".activity.Register_Upload_CardId_Activity"
-            android:theme="@style/LoginTheme"></activity>
+            android:theme="@style/LoginTheme" />
         <activity
             android:name=".activity.Register_MessageInfo_Activity"
-            android:theme="@style/LoginTheme"></activity>
+            android:theme="@style/LoginTheme" />
         <activity
             android:name=".activity.Register_Activity"
-            android:theme="@style/LoginTheme"></activity>
+            android:theme="@style/LoginTheme" />
         <activity
             android:name=".activity.ForGetPassWord_Activity"
             android:theme="@style/LoginTheme" />
         <activity
             android:name=".activity.Login_Activity"
-            android:theme="@style/LoginTheme">
-
-        </activity>
-        <activity android:name=".activity.MainActivity"></activity>
+            android:theme="@style/LoginTheme"></activity>
+        <activity android:name=".activity.MainActivity" />
     </application>
 
 </manifest>

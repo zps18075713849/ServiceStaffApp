@@ -48,4 +48,10 @@ public interface Constants {
     String GETCODE = Host + "login/sendmessage";
     //验证码登录
     String CODELOGIN = Host + "login/phonelogin";
+    //注册新用户
+    String REGISTER = Host + "login/newuser";
+    //通知公告
+    String TONGZHILIST = Host + "login/tongzhigonggao";
+    //通知公告详情
+    String TONGZHIINFO = Host + "login/tongzhidetails";
 }

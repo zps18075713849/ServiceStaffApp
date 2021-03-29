@@ -80,6 +80,15 @@
     </RelativeLayout>
 
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recy_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_21"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20" />
+
+
     <Button
         android:id="@+id/right_btn"
         android:layout_width="match_parent"

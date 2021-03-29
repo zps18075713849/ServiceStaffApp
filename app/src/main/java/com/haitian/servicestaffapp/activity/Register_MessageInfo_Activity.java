@@ -224,7 +224,7 @@ public class Register_MessageInfo_Activity extends BaseActivity {
                     public void run() {
                         if (mBuMen_Bean.getCode() == 20041){
                             for (int i = 0; i < mBuMen_Bean.getData().size(); i++) {
-                                mCardItem.add(mBuMen_Bean.getData().get(i).getSupplier_name());
+                                mCardItem.add(mBuMen_Bean.getData().get(i).getAgencyName());
                             }
                             pvOptions.setPicker(mCardItem);
                             pvOptions.show();
@@ -273,7 +273,7 @@ public class Register_MessageInfo_Activity extends BaseActivity {
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 String tx = mCardItem.get(options1);
                 view.setText(tx);
-                SUOSHUID = mBuMen_Bean.getData().get(options1).getSupplier_id()+"";
+                SUOSHUID = mBuMen_Bean.getData().get(options1).getId()+"";
             }
         })
                 .setContentTextSize(20)//设置滚轮文字大小

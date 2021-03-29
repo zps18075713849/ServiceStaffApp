@@ -1,6 +1,8 @@
 package com.haitian.servicestaffapp.activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +12,7 @@ import android.os.Looper;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -30,6 +33,7 @@ import com.haitian.servicestaffapp.view.MyEdtext;
 import org.w3c.dom.Text;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Login_Activity extends BaseActivity {
@@ -193,5 +197,22 @@ public class Login_Activity extends BaseActivity {
         return null;
     }
 
+    //    退出应用
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void exitAPP() {
+        ActivityManager activityManager = (ActivityManager) this.getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.AppTask> appTaskList = activityManager.getAppTasks();
+        for (ActivityManager.AppTask appTask : appTaskList) {
+            appTask.finishAndRemoveTask();
+        }
+    }
 
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exitAPP();
+            DoctorBaseAppliction.spUtil.clear();
+        }
+        return false;
+    }
 }
