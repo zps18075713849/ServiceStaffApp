@@ -25,12 +25,13 @@
             android:textSize="@dimen/sp_14" />
 
         <TextView
+            android:id="@+id/mobile_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_20"
-            android:text="1888888888"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/sp_14" />
 
@@ -56,12 +57,13 @@
             android:textSize="@dimen/sp_14" />
 
         <TextView
+            android:id="@+id/service_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_20"
-            android:hint="去选择"
+            android:gravity="right"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_14" />
 
@@ -86,15 +88,16 @@
             android:textColor="@color/black"
             android:textSize="@dimen/sp_14" />
 
-        <EditText
+        <TextView
+            android:id="@+id/gongsi_tv"
             android:background="@null"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_20"
-            android:hint="请输入公司名称"
             android:textColor="@color/black"
+            android:singleLine="true"
             android:gravity="right"
             android:textSize="@dimen/sp_14" />
 
@@ -116,7 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_21"
-            android:text="上传手持身份证照片"
+            android:text="上传身份证照片"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_14" />
 
@@ -227,6 +230,7 @@
         android:layout_marginRight="@dimen/dp_20"
         android:background="@drawable/login_blue_bg"
         android:text="保存修改"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:visibility="gone"/>
 
 </LinearLayout>
