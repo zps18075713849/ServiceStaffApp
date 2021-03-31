@@ -1,7 +1,17 @@
 package com.haitian.servicestaffapp.fragment;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -9,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.baidu.location.LocationClient;
 import com.bumptech.glide.Glide;
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.activity.FuWuTongJi_Activity;
@@ -19,6 +30,7 @@ import com.haitian.servicestaffapp.activity.KeHuGuanLi_Activity;
 import com.haitian.servicestaffapp.activity.PingJiaTouSu_Activity;
 import com.haitian.servicestaffapp.activity.QiangDan_Activity;
 import com.haitian.servicestaffapp.activity.RenWu_Activity;
+import com.haitian.servicestaffapp.activity.SplashActivity;
 import com.haitian.servicestaffapp.activity.TongZhiGongGao_Activity;
 import com.haitian.servicestaffapp.base.BaseFragment;
 import com.haitian.servicestaffapp.bean.TestPhotoBean;
@@ -46,6 +58,13 @@ public class Home_Fragment extends BaseFragment {
     private LinearLayout mTongzhigonggao_line;
     ArrayList<String> titleList = new ArrayList<>();
 
+    List<String> mPermissionList = new ArrayList<>();
+    private final int mRequestCode = 100;//权限请求码
+    String[] per = {
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };
+    private boolean permission = false;
 
     @Override
     protected Object provideBindView() {
@@ -94,7 +113,7 @@ public class Home_Fragment extends BaseFragment {
                 .setImageLoader(new ImageLoader() {
                     @Override
                     public void displayImage(Context context, Object path, ImageView imageView) {
-                        LogUtil.e("Path:"+path);
+                        LogUtil.e("Path:" + path);
                         Glide.with(getContext()).load(path.toString()).into(imageView);
                     }
                 }).start();
@@ -170,8 +189,19 @@ public class Home_Fragment extends BaseFragment {
         mQiangdan_line.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), QiangDan_Activity.class);
-                startActivity(intent);
+
+
+                if (permission){
+                    Intent intent = new Intent(getActivity(), QiangDan_Activity.class);
+                    startActivity(intent);
+                }else {
+                    //获取权限
+                    if (Build.VERSION.SDK_INT >= 23) {//6.0才用动态权限
+                        initPar();
+                    }
+                }
+
+
             }
         });
 
@@ -224,7 +254,7 @@ public class Home_Fragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 int displayedChild = mViewfil.getDisplayedChild();
-                Toast.makeText(getContext(), "标题：" +titleList.get(displayedChild), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "标题：" + titleList.get(displayedChild), Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent(getActivity(), LunBoTitle_Info_Activity.class);
 //                intent.putExtra("titleName", mTitlelist.get(displayedChild).getTitle());
 ////                intent.putExtra("text", mTitlelist.get(displayedChild).getText());
@@ -233,4 +263,124 @@ public class Home_Fragment extends BaseFragment {
             }
         });
     }
+
+    //申请权限
+    private void initPar() {
+        mPermissionList.clear();//清空没有通过的权限
+        //逐个判断你要的权限是否已经通过
+        for (int i = 0; i < per.length; i++) {
+            if (ContextCompat.checkSelfPermission(getContext(), per[i]) != PackageManager.PERMISSION_GRANTED) {
+                mPermissionList.add(per[i]);//添加还未授予的权限
+            }
+        }
+
+        //申请权限
+        if (mPermissionList.size() > 0) {//有权限没有通过，需要申请
+            new AlertDialog.Builder(getContext())
+                    .setMessage("需要开启定位权限才能使用此功能")
+                    .setPositiveButton("设置", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //引导用户到设置中去进行设置
+                            Intent intent = new Intent();
+                            intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+                            intent.setData(Uri.fromParts("package", getActivity().getPackageName(), null));
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .create()
+                    .show();
+
+        } else {
+            //权限都已经通过
+            permission = true;
+        }
+    }
+
+    //请求权限后回调的方法
+    //参数： requestCode  是我们自己定义的权限请求码
+    //参数： permissions  是我们请求的权限名称数组
+    //参数： grantResults 是我们在弹出页面后是否允许权限的标识数组，数组的长度对应的是权限名称数组的长度，数组的数据0表示允许权限，-1表示我们点击了禁止权限
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        boolean hasPermissionDismiss = false;//有权限没有通过
+        if (mRequestCode == requestCode) {
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] == -1) {
+                    LogUtil.e(grantResults[i] + "i:" + i);
+
+                    hasPermissionDismiss = true;
+                }
+            }
+            //如果有权限没有被允许
+            if (hasPermissionDismiss) {
+                showPermissionDialog();//跳转到系统设置权限页面，或者直接关闭页面，不让他继续访问
+            } else {
+                //全部权限通过，可以进行下一步操作。。。
+            }
+        }
+
+    }
+
+    /**
+     * 不再提示权限时的展示对话框
+     */
+    AlertDialog mPermissionDialog;
+
+    private void showPermissionDialog() {
+        if (mPermissionDialog == null) {
+            mPermissionDialog = new AlertDialog.Builder(getContext())
+                    .setMessage("已禁用定位权限，是否确定授予权限")
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            getAppDetailSettingIntent(getContext());
+                            cancelPermissionDialog();
+                            LogUtil.e("点击确定了");
+                        }
+                    })
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //关闭页面或者做其他操作
+                            cancelPermissionDialog();
+
+                        }
+                    })
+                    .create();
+        }
+        mPermissionDialog.show();
+    }
+
+    //关闭对话框
+    private void cancelPermissionDialog() {
+        mPermissionDialog.cancel();
+    }
+
+    /**
+     * 跳转到权限设置界面
+     */
+    private void getAppDetailSettingIntent(Context context) {
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (Build.VERSION.SDK_INT >= 9) {
+            intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+            intent.setData(Uri.fromParts("package", getActivity().getPackageName(), null));
+        } else if (Build.VERSION.SDK_INT <= 8) {
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setClassName("com.android.settings", "com.android.settings.InstalledAppDetails");
+            intent.putExtra("com.android.settings.ApplicationPkgName", getActivity().getPackageName());
+        }
+        startActivity(intent);
+    }
+
 }

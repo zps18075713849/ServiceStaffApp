@@ -97,6 +97,15 @@
             android:name=".activity.Login_Activity"
             android:theme="@style/LoginTheme"></activity>
         <activity android:name=".activity.MainActivity" />
+
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="aLFKhHZl5eBu1Q3aWmgFgfMNIazYvwrN" />
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"></service>
     </application>
 
 </manifest>
