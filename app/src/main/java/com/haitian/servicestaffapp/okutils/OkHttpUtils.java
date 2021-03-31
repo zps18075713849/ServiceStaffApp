@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -88,24 +89,12 @@ public class OkHttpUtils {
     /**
      * @param key_value 参数键值对, key是参数名,value是参数内容, 原先string就直接放进去, 原先是结构体就转成string...
      */
-    public static BaseReturnBean initPostRequest(String url, Map<String, Object> key_value) {
+    public static String initPostRequest(String url, Map<String, Object> key_value) {
         if (key_value == null || key_value.isEmpty()) {
             throw new IllegalArgumentException("param is null");
         }
         final String sendJson = JSONUtil.parseMapToJson(key_value);
-        RequestBody requestBodyPost = null;
-        if (key_value.size() == 3) {
-            requestBodyPost = new FormBody.Builder()
-                    .add("data", (String) key_value.get("data"))
-                    .add("act", (String) key_value.get("act"))
-                    .add("filter", (String) key_value.get("filter"))
-                    .build();
-        } else {
-            requestBodyPost = new FormBody.Builder()
-                    .add("data", (String) key_value.get("data"))
-                    .add("act", (String) key_value.get("act"))
-                    .build();
-        }
+        RequestBody requestBodyPost = RequestBody.create(MediaType.parse("application/json"), sendJson);;
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBodyPost)
@@ -115,13 +104,7 @@ public class OkHttpUtils {
             Response response = DoctorBaseAppliction.sOkHttpClient.newCall(request).execute();
             if (response.isSuccessful()) {
                 String result = response.body().string();
-                LogUtil.d("vvvvvvvvvvvv", "url :" + url);
-                LogUtil.d("vvvvvvvvvvvv", "params :" + sendJson);
-                LogUtil.d("vvvvvvvvvvvv", "修改治返回结果 :" + result);
-                BaseReturnBean bean = optBaseReturnBean(result);
-                LogUtil.d("returnBean.code>>" + bean.code);
-                LogUtil.d("returnBean.desc>>" + bean.desc);
-                return bean;
+                return result;
             }
         } catch (IOException e) {
             e.printStackTrace();

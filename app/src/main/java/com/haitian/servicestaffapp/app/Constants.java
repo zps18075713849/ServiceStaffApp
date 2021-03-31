@@ -54,4 +54,8 @@ public interface Constants {
     String TONGZHILIST = Host + "login/tongzhigonggao";
     //通知公告详情
     String TONGZHIINFO = Host + "login/tongzhidetails";
+    //个人信息
+    String USERDATA = Host + "/login/profiles";
+    //修改个人信息
+    String UPDATEUSERDATA = Host + "/login/upprofiles";
 }
