@@ -1,6 +1,7 @@
 package com.haitian.servicestaffapp.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -25,9 +26,9 @@ import android.widget.Toast;
 import com.baoyz.actionsheet.ActionSheet;
 import com.bumptech.glide.Glide;
 import com.haitian.servicestaffapp.R;
+import com.haitian.servicestaffapp.app.Constants;
 import com.haitian.servicestaffapp.base.BaseActivity;
 import com.haitian.servicestaffapp.utils.LogUtil;
-import com.haitian.servicestaffapp.utils.ToastUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -125,13 +126,26 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 type = 0;
-                if (ContextCompat.checkSelfPermission(Register_Upload_CardId_Activity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                    showSelect();
-                } else {
-                    //否则去请求相机权限
-                    ToastUtils.showMessage(Register_Upload_CardId_Activity.this, "请打开相机权限");
-                    ActivityCompat.requestPermissions(Register_Upload_CardId_Activity.this, new String[]{Manifest.permission.CAMERA}, 100);
+
+                if (ContextCompat.checkSelfPermission(Register_Upload_CardId_Activity.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {   //权限还没有授予，需要在这里写申请权限的代码
+                    // 第二个参数是一个字符串数组，里面是你需要申请的权限 可以设置申请多个权限
+                    // 最后一个参数是标志你这次申请的权限，该常量在 onRequestPermissionsResult 中使用到
+                    ActivityCompat.requestPermissions(Register_Upload_CardId_Activity.this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            REQUEST_CODE_TAKE_PICTURE1);
+                } else { //权限已经被授予，在这里直接写要执行的相应方法即可
+                        showSelect();
                 }
+
+//                if (ContextCompat.checkSelfPermission(Register_Upload_CardId_Activity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+//                    showSelect();
+//                } else {
+//                    //否则去请求相机权限
+//                    ToastUtils.showMessage(Register_Upload_CardId_Activity.this, "请打开相机权限");
+//                    ActivityCompat.requestPermissions(Register_Upload_CardId_Activity.this, new String[]{Manifest.permission.CAMERA}, 100);
+//                }
             }
         });
 
@@ -139,13 +153,28 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 type = 1;
-                if (ContextCompat.checkSelfPermission(Register_Upload_CardId_Activity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+
+
+                if (ContextCompat.checkSelfPermission(Register_Upload_CardId_Activity.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {   //权限还没有授予，需要在这里写申请权限的代码
+                    // 第二个参数是一个字符串数组，里面是你需要申请的权限 可以设置申请多个权限
+                    // 最后一个参数是标志你这次申请的权限，该常量在 onRequestPermissionsResult 中使用到
+                    ActivityCompat.requestPermissions(Register_Upload_CardId_Activity.this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            REQUEST_CODE_TAKE_PICTURE1);
+                } else { //权限已经被授予，在这里直接写要执行的相应方法即可
                     showSelect();
-                } else {
-                    //否则去请求相机权限
-                    ToastUtils.showMessage(Register_Upload_CardId_Activity.this, "请打开相机权限");
-                    ActivityCompat.requestPermissions(Register_Upload_CardId_Activity.this, new String[]{Manifest.permission.CAMERA}, 100);
                 }
+
+
+//                if (ContextCompat.checkSelfPermission(Register_Upload_CardId_Activity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+//                    showSelect();
+//                } else {
+//                    //否则去请求相机权限
+//                    ToastUtils.showMessage(Register_Upload_CardId_Activity.this, "请打开相机权限");
+//                    ActivityCompat.requestPermissions(Register_Upload_CardId_Activity.this, new String[]{Manifest.permission.CAMERA}, 100);
+//                }
             }
         });
 
@@ -153,13 +182,28 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 type = 2;
-                if (ContextCompat.checkSelfPermission(Register_Upload_CardId_Activity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+
+
+                if (ContextCompat.checkSelfPermission(Register_Upload_CardId_Activity.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {   //权限还没有授予，需要在这里写申请权限的代码
+                    // 第二个参数是一个字符串数组，里面是你需要申请的权限 可以设置申请多个权限
+                    // 最后一个参数是标志你这次申请的权限，该常量在 onRequestPermissionsResult 中使用到
+                    ActivityCompat.requestPermissions(Register_Upload_CardId_Activity.this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            REQUEST_CODE_TAKE_PICTURE1);
+                } else { //权限已经被授予，在这里直接写要执行的相应方法即可
                     showSelect();
-                } else {
-                    //否则去请求相机权限
-                    ToastUtils.showMessage(Register_Upload_CardId_Activity.this, "请打开相机权限");
-                    ActivityCompat.requestPermissions(Register_Upload_CardId_Activity.this, new String[]{Manifest.permission.CAMERA}, 100);
                 }
+
+
+//                if (ContextCompat.checkSelfPermission(Register_Upload_CardId_Activity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+//                    showSelect();
+//                } else {
+//                    //否则去请求相机权限
+//                    ToastUtils.showMessage(Register_Upload_CardId_Activity.this, "请打开相机权限");
+//                    ActivityCompat.requestPermissions(Register_Upload_CardId_Activity.this, new String[]{Manifest.permission.CAMERA}, 100);
+//                }
             }
         });
 
@@ -351,6 +395,7 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
             File file = null;
             try {
                 file = saveBitmapFile(bitmap, Environment.getExternalStorageDirectory().getCanonicalPath() + "/Android/data" + "/" + getAppProcessName(Register_Upload_CardId_Activity.this) + "/xxhold/" + System.currentTimeMillis() + ".png");
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -361,15 +406,19 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
 //            upLoadPic(file);
             if (type == 0){
                 Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_zheng_iv);
+//                Picasso.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_zheng_iv);
                 mId_card_zheng_iv.setVisibility(View.VISIBLE);
                 mIdCard_Zheng = file.getPath();
 
             }else if (type == 1){
                 Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_fan_iv);
+//                Picasso.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_fan_iv);
                 mId_card_fan_iv.setVisibility(View.VISIBLE);
                 mIdCard_Fan = file.getPath();
 
             }else if (type == 2){
+//                Picasso.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mShouchi_img);
+
                 Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mShouchi_img);
                 mShouchi_img.setVisibility(View.VISIBLE);
                 mIdCard_ShouChi = file.getPath();
@@ -378,10 +427,25 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
         }
     }
 
+    @SuppressLint("ObsoleteSdkInt")
     public static File saveBitmapFile(Bitmap bitmap, String filepath) {
         File file = new File(filepath);//将要保存图片的路径
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) { //android 11
+//            File file1 = new File(filepath, filepath);
+//            if (!file.exists()) {
+//                try {
+//                    new File(filepath).mkdirs();
+//                    file.createNewFile();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+
+
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+
             bitmap.compress(Bitmap.CompressFormat.JPEG, 80, bos);
             bos.flush();
             bos.close();

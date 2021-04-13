@@ -91,14 +91,29 @@
         android:textColor="@color/liji_material_red_500"
         android:textSize="@dimen/sp_14" />
 
+
     <Button
+        android:id="@+id/zhuanchu_btn"
         android:layout_width="@dimen/dp_88"
         android:layout_height="@dimen/dp_28"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/dp_50"
         android:layout_marginBottom="@dimen/dp_14"
         android:background="@drawable/blue_bg"
         android:text="转出"
+        android:textColor="@color/white" />
+
+
+    <Button
+        android:id="@+id/jiedan_btn"
+        android:layout_width="@dimen/dp_88"
+        android:layout_height="@dimen/dp_28"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/dp_50"
+        android:layout_marginBottom="@dimen/dp_14"
+        android:background="@drawable/blue_bg"
+        android:text="接单"
         android:textColor="@color/white" />
 
 </RelativeLayout>
