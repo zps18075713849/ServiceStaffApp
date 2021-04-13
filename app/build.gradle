@@ -49,6 +49,7 @@ android {
     sourceSets {
         main {
             jniLibs.srcDir 'libs'
+            jni.srcDirs = []    //disable automatic ndk-build
         }
     }
 
@@ -266,4 +267,6 @@ dependencies {
 //    implementation  'com.umeng.umsdk:oaid_vivo:1.0.0.1' // (可选)
 
     implementation 'me.zhouzhuo.zzratingbar:zz-rating-bar:1.0.0'
+
+
 }

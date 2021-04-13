@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.haitian.servicestaffapp.R;
+import com.haitian.servicestaffapp.app.Constants;
+import com.haitian.servicestaffapp.app.DoctorBaseAppliction;
 import com.haitian.servicestaffapp.base.BaseActivity;
 import com.haitian.servicestaffapp.bean.CodeMessageBean;
 import com.haitian.servicestaffapp.okutils.DoctorNetService;
@@ -83,13 +85,13 @@ public class UpdatePassWord_Activity extends BaseActivity {
                 if(mNew_password_myedString.length()<8){
                     Toast.makeText(UpdatePassWord_Activity.this,"密码长度应大于8",0).show();
                 }
-                if(mNew_password_myedString.equals(mNew_password_myed2String)){
+                if(!mNew_password_myedString.equals(mNew_password_myed2String)){
                     Toast.makeText(UpdatePassWord_Activity.this,"两次输入密码不一致",0).show();
                 }
                 Map<String,Object> map = new HashMap<>();
-                map.put("user_id","1");
-                map.put("user_pwd","");
-                map.put("newuser_pwd","");
+                map.put("user_id", DoctorBaseAppliction.spUtil.getString(Constants.USERID,""));
+                map.put("user_pwd",mOld_password_myedString);
+                map.put("newuser_pwd",mNew_password_myedString);
                 DoctorNetService.requestUpdatePw("", map, new NetWorkRequestInterface() {
                     @Override
                     public void onError(Throwable throwable) {
