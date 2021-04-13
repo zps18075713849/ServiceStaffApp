@@ -46,7 +46,7 @@ public class Home_Fragment extends BaseFragment {
     private LinearLayout mTongzhigonggao_line;
     ArrayList<String> titleList = new ArrayList<>();
 
-    //OpenSSL SSL_read: SSL_ERROR_SYSCALL, errno 10054
+    //OpenSSL SSL_read: SSL_ERROR_SYSCALL, errno 1005
     @Override
     protected Object provideBindView() {
         return this;
