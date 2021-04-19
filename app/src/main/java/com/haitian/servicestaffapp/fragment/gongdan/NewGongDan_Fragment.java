@@ -72,8 +72,7 @@ public class NewGongDan_Fragment extends BaseFragment {
             public void onClick(int position, int type) {
                 switch (type){
                     case 0:{
-                        //转出
-                        openPopupwindow(position);
+
                         break;
                     }
                     case 1:{
@@ -86,49 +85,7 @@ public class NewGongDan_Fragment extends BaseFragment {
         });
     }
 
-    private void openPopupwindow(final int position) {
-        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.gongdanzhuanchu_popup, null);
-        mPopupWindow = new PopupWindow(inflate, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
-        mPopupWindow.setBackgroundDrawable(null);
-        mPopupWindow.setOutsideTouchable(true);
-
-        mPopupWindow.showAtLocation(mLl, Gravity.CENTER,0,0);
-
-        inflate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPopupWindow.dismiss();
-            }
-        });
-
-        final MyEdtext yuanyin_ed = inflate.findViewById(R.id.yuanyin_ed);
-        Button quxiao_btn = inflate.findViewById(R.id.quxiao_btn);
-        Button right_btn = inflate.findViewById(R.id.right_btn);
-
-        quxiao_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPopupWindow.dismiss();
-            }
-        });
-
-        right_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String yuanyin = yuanyin_ed.getText().toString().trim();
-                int id = mlist.get(position).getId();
-                if (yuanyin.equals("")){
-                    Toast.makeText(getActivity(), "请填写转出原因", Toast.LENGTH_SHORT).show();
-                    return;
-                }else {
-                    requestZhuanChu(id,yuanyin);
-                }
-            }
-        });
-
-
-    }
 
     //接单
     private void requestJieDan(int position) {
@@ -171,40 +128,7 @@ public class NewGongDan_Fragment extends BaseFragment {
         });
     }
 
-    //转出
-    private void requestZhuanChu(int gongdanid,String yuanyin) {
-        showWaitDialog();
-        Map<String, Object> map = new HashMap<>();
-        map.put("user_id",DoctorBaseAppliction.spUtil.getString(Constants.USERID,""));
-        map.put("zhuanchuzhanghao",DoctorBaseAppliction.spUtil.getString(Constants.USER_NAME,""));
-        map.put("yuanyin",yuanyin);
-        map.put("gongdanid",gongdanid);
 
-        OkHttpUtil.getInteace().doPost(Constants.GONGDANZHUANDAN, map, getActivity(), new OkHttpUtil.OkCallBack() {
-            @Override
-            public void onFauile(Exception e) {
-                hideWaitDialog();
-                LogUtil.e("工单转出失败："+e.getMessage());
-            }
-
-            @Override
-            public void onResponse(String json) {
-                hideWaitDialog();
-                LogUtil.e("工单转出成功："+json);
-
-                Handler handler = new Handler(Looper.getMainLooper());
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mlist.clear();
-                        requestListData();
-                    }
-                });
-
-            }
-        });
-
-    }
 
     private void requestListData() {
         showWaitDialog();

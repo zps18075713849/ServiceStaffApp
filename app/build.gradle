@@ -269,5 +269,6 @@ dependencies {
 
     implementation 'me.zhouzhuo.zzratingbar:zz-rating-bar:1.0.0'
 
-
+//折线图
+    implementation files('libs/hellocharts-library-1.5.8.jar')
 }

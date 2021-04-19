@@ -1,6 +1,5 @@
 package com.haitian.servicestaffapp.adapter;
 
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
@@ -13,8 +12,6 @@ import android.widget.TextView;
 
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.bean.NewGongDan_Bean;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -32,7 +29,7 @@ public class NewGongDan_Adapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View inflate = LayoutInflater.from(mActivity).inflate(R.layout.gongdan_item, null, false);
+        View inflate = LayoutInflater.from(mActivity).inflate(R.layout.new_gongdan_item, null, false);
         viewholderItem viewholderItem = new viewholderItem(inflate);
         return viewholderItem;
     }
