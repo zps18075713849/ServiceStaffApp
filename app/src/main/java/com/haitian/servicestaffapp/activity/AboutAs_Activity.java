@@ -48,7 +48,7 @@ public class AboutAs_Activity extends BaseActivity {
         mQuanguomianfeidianhua_tv = findViewById(R.id.quanguomianfeidianhua_tv);
         //客服电话
         mKefu_tv = findViewById(R.id.kefurexiandianhua_tv);
-        //意见反馈
+        //意见反馈复杂度
         mYijian_ed = findViewById(R.id.yijian_ed);
         //提交
         mRight_btn = findViewById(R.id.right_btn);
