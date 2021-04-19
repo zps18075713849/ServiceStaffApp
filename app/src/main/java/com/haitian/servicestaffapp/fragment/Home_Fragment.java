@@ -23,6 +23,7 @@ import com.baidu.location.LocationClient;
 import com.bumptech.glide.Glide;
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.activity.FuWuTongJi_Activity;
+import com.haitian.servicestaffapp.activity.FuWuXiangMu_Activity;
 import com.haitian.servicestaffapp.activity.GongDan_Activity;
 import com.haitian.servicestaffapp.activity.JiFen_Activity;
 import com.haitian.servicestaffapp.activity.JieSuanYe_Activity;
@@ -49,8 +50,7 @@ public class Home_Fragment extends BaseFragment {
     private ViewFlipper mViewfil;
     private LinearLayout mFuwutongji_line;
     private LinearLayout mPingjiatousu_line;
-    private LinearLayout mKehuguanli_line;
-    private LinearLayout mQiangdan_line;
+    private LinearLayout mFuwuXiangMu_line;
     private LinearLayout mGongdan_line;
     private LinearLayout mRenwu_line;
     private LinearLayout mJifen_line;
@@ -65,6 +65,7 @@ public class Home_Fragment extends BaseFragment {
             Manifest.permission.ACCESS_FINE_LOCATION
     };
     private boolean permission = false;
+    private LinearLayout mShangcheng_line;
 
     @Override
     protected Object provideBindView() {
@@ -87,10 +88,10 @@ public class Home_Fragment extends BaseFragment {
         mFuwutongji_line = view.findViewById(R.id.fuwutongji_line);
         //评价投诉
         mPingjiatousu_line = view.findViewById(R.id.pingjiatousu_line);
-        //客户管理
-        mKehuguanli_line = view.findViewById(R.id.kehuguanli_line);
-        //抢单
-        mQiangdan_line = view.findViewById(R.id.qiangdan_line);
+        //服务项目
+        mFuwuXiangMu_line = view.findViewById(R.id.fuwuxiangmu_line);
+       //商城
+        mShangcheng_line = view.findViewById(R.id.shangcheng_line);
         //工单
         mGongdan_line = view.findViewById(R.id.gongdan_line);
         //任务
@@ -176,21 +177,10 @@ public class Home_Fragment extends BaseFragment {
             }
         });
 
-        //客户管理
-        mKehuguanli_line.setOnClickListener(new View.OnClickListener() {
+        //工单
+        mGongdan_line.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), KeHuGuanLi_Activity.class);
-                startActivity(intent);
-            }
-        });
-
-        //抢单
-        mQiangdan_line.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
                 if (permission){
                     Intent intent = new Intent(getActivity(), QiangDan_Activity.class);
                     startActivity(intent);
@@ -200,17 +190,6 @@ public class Home_Fragment extends BaseFragment {
                         initPar();
                     }
                 }
-
-
-            }
-        });
-
-        //工单
-        mGongdan_line.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), GongDan_Activity.class);
-                startActivity(intent);
             }
         });
 
@@ -260,6 +239,14 @@ public class Home_Fragment extends BaseFragment {
 ////                intent.putExtra("text", mTitlelist.get(displayedChild).getText());
 //                intent.putExtra("weburl", mTitlelist.get(displayedChild).getWangyelianjie());
 //                startActivity(intent);
+            }
+        });
+
+        //服务项目
+        mFuwuXiangMu_line.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), FuWuXiangMu_Activity.class));
             }
         });
     }

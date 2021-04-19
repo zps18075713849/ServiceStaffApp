@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff5f6fe"
+    tools:context=".activity.FuWuXiangMu_Activity">
+
+    <include layout="@layout/sousuotoolbar3"/>
+
+    <com.mcxtzhang.swipemenulib.SwipeMenuLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="@dimen/dp_139"
+        >
+
+        <RelativeLayout
+            android:id="@+id/xiangmu_relative"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="@dimen/dp_139">
+
+            <ImageView
+                android:id="@+id/photo_img"
+                android:layout_width="@dimen/dp_132"
+                android:layout_height="@dimen/dp_97"
+                android:layout_marginLeft="@dimen/dp_25"
+                android:layout_marginTop="@dimen/dp_21"
+                android:src="@color/black" />
+
+
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_toRightOf="@id/photo_img"
+                android:text="家政服务保洁家政服务保洁家政服务保洁"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14" />
+
+
+            <TextView
+                android:id="@+id/price_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_tv"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_17"
+                android:layout_toRightOf="@id/photo_img"
+                android:text="￥200"
+                android:textColor="@color/liji_material_red_500"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_tv"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_18"
+                android:layout_toRightOf="@id/price_tv"
+                android:text="100人付款"
+                android:textColor="#A2A2A2"
+                android:textSize="@dimen/sp_12" />
+
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/delete_btn"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@color/delete_bt_color"
+            android:focusable="false"
+            android:text="删除"
+            android:textColor="@android:color/white" />
+
+    </com.mcxtzhang.swipemenulib.SwipeMenuLayout>
+
+</LinearLayout>

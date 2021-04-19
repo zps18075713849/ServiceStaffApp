@@ -123,7 +123,7 @@
                 android:background="@color/background" />
 
             <LinearLayout
-                android:id="@+id/kehuguanli_line"
+                android:id="@+id/fuwuxiangmu_line"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_116"
                 android:layout_weight="1"
@@ -135,14 +135,14 @@
                     android:layout_width="@dimen/dp_37"
                     android:layout_height="@dimen/dp_38"
                     android:layout_gravity="center"
-                    android:src="@mipmap/icon_kehuguanli" />
+                    android:src="@mipmap/btn_project" />
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="客户管理"
+                    android:text="服务项目"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14" />
 
@@ -156,7 +156,7 @@
             android:layout_marginTop="@dimen/dp_2">
 
             <LinearLayout
-                android:id="@+id/qiangdan_line"
+                android:id="@+id/shangcheng_line"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_116"
                 android:layout_weight="1"
@@ -168,14 +168,14 @@
                     android:layout_width="@dimen/dp_37"
                     android:layout_height="@dimen/dp_38"
                     android:layout_gravity="center"
-                    android:src="@mipmap/icon_qiangdan" />
+                    android:src="@mipmap/btn_store" />
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="抢单"
+                    android:text="商城"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14" />
 
@@ -216,9 +216,8 @@
                 android:layout_width="@dimen/dp_2"
                 android:layout_height="match_parent"
                 android:background="@color/background" />
-
             <LinearLayout
-                android:id="@+id/renwu_line"
+                android:id="@+id/tongzhigonggao_line"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_116"
                 android:layout_weight="1"
@@ -229,19 +228,18 @@
                 <ImageView
                     android:layout_width="@dimen/dp_37"
                     android:layout_height="@dimen/dp_38"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/icon_renwu" />
-
+                    android:src="@mipmap/icon_tongzhigonggao" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="任务"
+                    android:text="通知公告"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14" />
 
             </LinearLayout>
+
 
         </LinearLayout>
 
@@ -254,6 +252,7 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_weight="1">
 
                 <LinearLayout
@@ -297,6 +296,7 @@
             <View
                 android:layout_width="@dimen/dp_2"
                 android:layout_height="match_parent"
+                android:visibility="gone"
                 android:background="@color/background" />
 
             <LinearLayout
@@ -305,6 +305,7 @@
                 android:layout_height="@dimen/dp_116"
                 android:layout_weight="1"
                 android:background="@color/white"
+                android:visibility="gone"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -326,27 +327,31 @@
             <View
                 android:layout_width="@dimen/dp_2"
                 android:layout_height="match_parent"
+                android:visibility="gone"
                 android:background="@color/background" />
 
             <LinearLayout
-                android:id="@+id/tongzhigonggao_line"
+                android:id="@+id/renwu_line"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_116"
                 android:layout_weight="1"
                 android:background="@color/white"
+                android:visibility="gone"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="@dimen/dp_37"
                     android:layout_height="@dimen/dp_38"
-                    android:src="@mipmap/icon_tongzhigonggao" />
+                    android:layout_gravity="center"
+                    android:src="@mipmap/icon_renwu" />
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="通知公告"
+                    android:text="任务"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14" />
 

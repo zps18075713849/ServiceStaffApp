@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="#33000000"
     android:gravity="center"
-    android:orientation="vertical">
-
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dp_10"
-            android:text="是否将此工单转出"
+            android:text="拒单"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_16" />
 
@@ -31,7 +29,7 @@
             android:layout_centerInParent="true"
             android:layout_marginLeft="@dimen/dp_18"
             android:layout_marginRight="@dimen/dp_18"
-            android:visibility="gone">
+            android:visibility="visible">
 
 
             <ImageView
@@ -42,38 +40,20 @@
                 android:padding="@dimen/dp_6"
                 android:src="@mipmap/zhaungshixian" />
 
-
+            <EditText
+                android:id="@+id/jujue_ed"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@drawable/jianjie_shape"
+                android:gravity="top"
+                android:hint="拒绝原因"
+                android:padding="@dimen/dp_5"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
         </RelativeLayout>
 
 
-        <EditText
-            android:id="@+id/zhuanruzhanghao_ed"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_30"
-            android:layout_marginLeft="@dimen/dp_40"
-            android:layout_marginTop="@dimen/dp_50"
-            android:layout_marginRight="@dimen/dp_40"
-            android:background="@drawable/jianjie_shape"
-            android:gravity="top"
-            android:hint="转入账号"
-            android:padding="@dimen/dp_5"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
 
-        <EditText
-            android:id="@+id/yuanyin_ed"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_30"
-            android:layout_below="@id/zhuanruzhanghao_ed"
-            android:layout_marginLeft="@dimen/dp_40"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_40"
-            android:background="@drawable/jianjie_shape"
-            android:gravity="top"
-            android:hint="转出原因"
-            android:padding="@dimen/dp_5"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
 
 
         <Button

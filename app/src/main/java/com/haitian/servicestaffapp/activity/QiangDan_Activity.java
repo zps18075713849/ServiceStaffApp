@@ -15,12 +15,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +34,10 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.base.BaseActivity;
+import com.haitian.servicestaffapp.fragment.gongdan.JinXingZhongQiangDan_Fragment;
+import com.haitian.servicestaffapp.fragment.gongdan.NewGongDan_Fragment;
+import com.haitian.servicestaffapp.fragment.gongdan.YiJieDanQiangDan_Fragment;
+import com.haitian.servicestaffapp.fragment.gongdan.YiWanChengGongDan_Fragment;
 import com.haitian.servicestaffapp.utils.LogUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -50,7 +57,12 @@ public class QiangDan_Activity extends BaseActivity {
     private SmartRefreshLayout mSmart_id;
     private RecyclerView mRecy_id;
     private LocationClient mLocationClient;
-
+    private FrameLayout mQiangdan_frame;
+    private NewGongDan_Fragment mNewGongDan_fragment;
+    private YiWanChengGongDan_Fragment mYiWanChengGongDan_fragment;
+    private FragmentManager mManager;
+    private JinXingZhongQiangDan_Fragment mJinXingZhongQiangDan_fragment;
+    private YiJieDanQiangDan_Fragment mYiJieDanQiangDan_fragment;
 
 
     @Override
@@ -68,8 +80,6 @@ public class QiangDan_Activity extends BaseActivity {
         super.initViews();
 
 
-
-
         mTitle_back = findViewById(R.id.title_back);
         mSousuo_tv = findViewById(R.id.sousuo_tv2);
 
@@ -80,12 +90,41 @@ public class QiangDan_Activity extends BaseActivity {
         mRecy_id = findViewById(R.id.recy_id);
 
         mTab_id = findViewById(R.id.tab_id);
+        mTab_id.addTab(mTab_id.newTab().setText("新工单"));
         mTab_id.addTab(mTab_id.newTab().setText("进行中"));
+        mTab_id.addTab(mTab_id.newTab().setText("已接单"));
         mTab_id.addTab(mTab_id.newTab().setText("已完成"));
+
+        mQiangdan_frame = findViewById(R.id.qiangdan_frame);
 
         //百度开放平台 APPKEY：aLFKhHZl5eBu1Q3aWmgFgfMNIazYvwrN
 
         initLocationOption();
+
+        initFragment();
+
+        initFirstFragment();
+
+    }
+
+    private void initFragment() {
+        mManager = getSupportFragmentManager();
+        mNewGongDan_fragment = new NewGongDan_Fragment();
+        mJinXingZhongQiangDan_fragment = new JinXingZhongQiangDan_Fragment();
+        mYiJieDanQiangDan_fragment = new YiJieDanQiangDan_Fragment();
+        mYiWanChengGongDan_fragment = new YiWanChengGongDan_Fragment();
+
+        FragmentTransaction transaction = mManager.beginTransaction();
+        transaction.add(R.id.qiangdan_frame, mNewGongDan_fragment);
+        transaction.add(R.id.qiangdan_frame, mJinXingZhongQiangDan_fragment);
+        transaction.add(R.id.qiangdan_frame, mYiJieDanQiangDan_fragment);
+        transaction.add(R.id.qiangdan_frame, mYiWanChengGongDan_fragment);
+        transaction.commit();
+    }
+
+    private void initFirstFragment() {
+        FragmentTransaction transaction = mManager.beginTransaction();
+        transaction.show(mNewGongDan_fragment).hide(mYiWanChengGongDan_fragment).hide(mJinXingZhongQiangDan_fragment).hide(mYiJieDanQiangDan_fragment).commit();
     }
 
     @Override
@@ -97,6 +136,37 @@ public class QiangDan_Activity extends BaseActivity {
                 finish();
             }
         });
+
+        mTab_id.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                if (position == 0){
+                    FragmentTransaction transaction = mManager.beginTransaction();
+                    transaction.show(mNewGongDan_fragment).hide(mYiWanChengGongDan_fragment).hide(mJinXingZhongQiangDan_fragment).hide(mYiJieDanQiangDan_fragment).commit();
+                }else if (position == 1){
+                    FragmentTransaction transaction = mManager.beginTransaction();
+                    transaction.show(mJinXingZhongQiangDan_fragment).hide(mYiJieDanQiangDan_fragment).hide(mYiWanChengGongDan_fragment).hide(mNewGongDan_fragment).commit();
+                }else if (position == 2){
+                    FragmentTransaction transaction = mManager.beginTransaction();
+                    transaction.show(mYiJieDanQiangDan_fragment).hide(mNewGongDan_fragment).hide(mJinXingZhongQiangDan_fragment).hide(mYiWanChengGongDan_fragment).commit();
+                }else if (position == 3){
+                    FragmentTransaction transaction = mManager.beginTransaction();
+                    transaction.show(mYiWanChengGongDan_fragment).hide(mNewGongDan_fragment).hide(mJinXingZhongQiangDan_fragment).hide(mYiJieDanQiangDan_fragment).commit();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
     }
 
     /**
@@ -147,7 +217,6 @@ public class QiangDan_Activity extends BaseActivity {
         mLocationClient.start();
     }
 
-
     /**
      * 实现定位回调
      */
@@ -171,16 +240,13 @@ public class QiangDan_Activity extends BaseActivity {
 
             LogUtil.e("经度：" + longitude);     //4.9E-324定位失败
             LogUtil.e("纬度：" + latitude);
-            if ("4.9E-324".equals(latitude+"")) {
+            if ("4.9E-324".equals(latitude + "")) {
                 Toast.makeText(mContext, "请检查手机GPS定位是否打开", Toast.LENGTH_SHORT).show();
                 finish();
                 return;
             }
         }
     }
-
-
-
 
     @Override
     protected void onDestroy() {
