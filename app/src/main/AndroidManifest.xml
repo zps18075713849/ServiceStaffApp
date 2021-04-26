@@ -47,12 +47,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        android:label="@string/app_name"
-        android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/logo"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
         <activity android:name=".activity.UpdateFuWuXiangMu_Activity"></activity>
         <activity android:name=".activity.FuWuXiangMu_Activity" />
 
@@ -70,9 +64,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.TongZhiGongGao_Activity" />
         <activity android:name=".activity.TiXian_Activity" />
@@ -91,11 +87,7 @@
         <activity
             android:name=".activity.Register_Upload_CardId_Activity"
             android:theme="@style/LoginTheme" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>>
         <activity
             android:name=".activity.Register_MessageInfo_Activity"

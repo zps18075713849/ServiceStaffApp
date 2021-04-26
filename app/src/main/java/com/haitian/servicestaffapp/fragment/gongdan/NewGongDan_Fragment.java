@@ -19,7 +19,9 @@ import com.haitian.servicestaffapp.adapter.NewGongDan_Adapter;
 import com.haitian.servicestaffapp.app.Constants;
 import com.haitian.servicestaffapp.app.DoctorBaseAppliction;
 import com.haitian.servicestaffapp.base.BaseFragment;
+import com.haitian.servicestaffapp.bean.CodeMessageBean;
 import com.haitian.servicestaffapp.bean.NewGongDan_Bean;
+import com.haitian.servicestaffapp.bean.QiangdanListBean;
 import com.haitian.servicestaffapp.okutils.OkHttpUtil;
 import com.haitian.servicestaffapp.utils.LogUtil;
 import com.haitian.servicestaffapp.view.MyEdtext;
@@ -32,6 +34,7 @@ public class NewGongDan_Fragment extends BaseFragment {
 
     private RecyclerView mRecy_id;
     private ArrayList<NewGongDan_Bean.DataBean> mlist = new ArrayList<>();
+    private ArrayList<QiangdanListBean.DataBean> mQiangdanlist = new ArrayList<>();
     private NewGongDan_Adapter mAdapter;
     private PopupWindow mPopupWindow;
     private LinearLayout mLl;
@@ -52,6 +55,8 @@ public class NewGongDan_Fragment extends BaseFragment {
         mRecy_id = view.findViewById(R.id.recy_id);
         mLl = view.findViewById(R.id.ll);
 
+//        NewGongDan_Bean newGongDan_bean = new NewGongDan_Bean(1);
+//        mlist.addAll(newGongDan_bean.getData());
         mRecy_id.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new NewGongDan_Adapter(getActivity(),mlist);
         mRecy_id.setAdapter(mAdapter);
@@ -61,7 +66,7 @@ public class NewGongDan_Fragment extends BaseFragment {
     @Override
     protected void initData() {
         super.initData();
-        requestListData();
+        requestQiangDanListData();
     }
 
     @Override
@@ -77,7 +82,7 @@ public class NewGongDan_Fragment extends BaseFragment {
                     }
                     case 1:{
                         //接单
-                        requestJieDan(position);
+                        requestQiangDanBt(position);
                         break;
                     }
                 }
@@ -85,6 +90,78 @@ public class NewGongDan_Fragment extends BaseFragment {
         });
     }
 
+    //抢单list
+    private void requestQiangDanListData() {
+        showWaitDialog();
+        String userid = DoctorBaseAppliction.spUtil.getString(Constants.USERID, "");
+        Integer id = Integer.valueOf(userid);
+        Map<String, Object> map = new HashMap<>();
+        map.put("user_id",id);
+
+        OkHttpUtil.getInteace().doPost(Constants.QIANGDDAN_LIST, map, getActivity(), new OkHttpUtil.OkCallBack() {
+            @Override
+            public void onFauile(Exception e) {
+                hideWaitDialog();
+                LogUtil.e("新工单失败："+e.getMessage());
+            }
+
+            @Override
+            public void onResponse(String json) {
+                hideWaitDialog();
+                LogUtil.e("新工单成功："+json);
+                Gson gson = new Gson();
+                final QiangdanListBean bean = gson.fromJson(json, QiangdanListBean.class);
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (bean.getCode() == 20041){
+                            try {
+                                mQiangdanlist.addAll(bean.getData());
+                                mAdapter.notifyDataSetChanged();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    private void requestQiangDanBt(int position) {
+        showWaitDialog();
+        String userid = DoctorBaseAppliction.spUtil.getString(Constants.USERID, "");
+        Integer id = Integer.valueOf(userid);
+        Map<String, Object> map = new HashMap<>();
+        map.put("user_id",id);
+        map.put("gongdanid",position);
+
+        OkHttpUtil.getInteace().doPost(Constants.QIANGDDAN_BT, map, getActivity(), new OkHttpUtil.OkCallBack() {
+            @Override
+            public void onFauile(Exception e) {
+                hideWaitDialog();
+                LogUtil.e("新工单失败："+e.getMessage());
+            }
+
+            @Override
+            public void onResponse(String json) {
+                hideWaitDialog();
+                LogUtil.e("新工单成功："+json);
+                Gson gson = new Gson();
+                final CodeMessageBean bean = gson.fromJson(json, CodeMessageBean.class);
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (bean.getCode() == 20041){
+                           Toast.makeText(getActivity(),"抢单成功",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+    }
 
 
     //接单

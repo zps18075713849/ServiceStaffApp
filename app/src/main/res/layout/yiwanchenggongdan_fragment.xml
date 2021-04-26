@@ -2,11 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_134">
+        android:layout_height="@dimen/dp_124"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/img_id"
@@ -29,15 +31,15 @@
 
         <me.zhouzhuo.zzratingbar.ZzRatingBar
             android:id="@+id/xing_bar"
-            app:zrb_rating="3"
-            app:zrb_star_count="5"
-            app:zrb_star_dimension="@dimen/dp_12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/mobile_tv"
             android:layout_marginLeft="@dimen/dp_6"
             android:layout_toRightOf="@id/img_id"
-            android:clickable="false" />
+            android:clickable="false"
+            app:zrb_rating="3"
+            app:zrb_star_count="5"
+            app:zrb_star_dimension="@dimen/dp_12" />
 
 
         <TextView
@@ -56,10 +58,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/dp_6"
-            android:layout_marginRight="@dimen/dp_10"
             android:checked="true"
-            android:visibility="gone" />
+            android:layout_marginTop="@dimen/dp_6"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/dp_10"
+            />
 
 
         <TextView
@@ -104,6 +107,40 @@
             android:textColor="@color/liji_material_red_500"
             android:textSize="@dimen/sp_14" />
 
+
+        <Button
+            android:id="@+id/zhuanchu_btn"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_28"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/dp_50"
+            android:layout_marginBottom="@dimen/dp_14"
+            android:background="@drawable/blue_bg"
+            android:text="转出"
+            android:visibility="gone"
+            android:textColor="@color/white" />
+
+
+        <Button
+            android:id="@+id/jiedan_btn"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_28"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/dp_50"
+            android:layout_marginBottom="@dimen/dp_14"
+            android:background="@drawable/blue_bg"
+            android:text="接单"
+            android:visibility="gone"
+            android:textColor="@color/white" />
+
     </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/yiwancheng_recyc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

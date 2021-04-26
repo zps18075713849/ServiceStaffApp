@@ -168,4 +168,15 @@ public interface Constants {
     String GONGDANJIEDAN = Host + "gongdan/jiedan";
     //转单
     String GONGDANZHUANDAN = Host + "gongdan/zhuanchu";
+    //抢单查询页面
+    String QIANGDDAN_LIST = Host + "gongdan/qiangdan";
+    //抢单接单按钮
+    String QIANGDDAN_BT = Host + "gongdan/qiangdanjiedan";
+    //已完成工单
+    String YIWANCHANGGONGDAN = Host + "gongdan/yiwancheng";
+    //评价
+    String PINGJIA = Host + "gongdan/pingjiazanshi";
+    //回复
+    String PINGJIAHUIFU = Host + "gongdan/pingjiahuifu";
+
 }

@@ -12,16 +12,17 @@ import android.widget.TextView;
 
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.bean.NewGongDan_Bean;
+import com.haitian.servicestaffapp.bean.PingJiaListBean;
 
 import java.util.ArrayList;
 
 import me.zhouzhuo.zzratingbar.ZzRatingBar;
 
-public class NewGongDan_Adapter extends RecyclerView.Adapter {
+public class PingjiaList_Adapter extends RecyclerView.Adapter {
     private final FragmentActivity mActivity;
-    private final ArrayList<NewGongDan_Bean.DataBean> mMlist;
+    private final ArrayList<PingJiaListBean.DataBean> mMlist;
 
-    public NewGongDan_Adapter(FragmentActivity activity, ArrayList<NewGongDan_Bean.DataBean> mlist) {
+    public PingjiaList_Adapter(FragmentActivity activity, ArrayList<PingJiaListBean.DataBean> mlist) {
         mActivity = activity;
         mMlist = mlist;
     }
@@ -29,7 +30,7 @@ public class NewGongDan_Adapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View inflate = LayoutInflater.from(mActivity).inflate(R.layout.new_gongdan_item, null, false);
+        View inflate = LayoutInflater.from(mActivity).inflate(R.layout.pingjia_item, null, false);
         viewholderItem viewholderItem = new viewholderItem(inflate);
         return viewholderItem;
     }
@@ -37,11 +38,11 @@ public class NewGongDan_Adapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         viewholderItem viewitem = (viewholderItem) viewHolder;
-        viewitem.mFuwu_address.setText("地址："+mMlist.get(i).getWaiter_address());
+        viewitem.mFuwu_address.setText("地址："+mMlist.get(i).getGongdan().getWaiter_address());
         viewitem.mFuwuleixing_tv.setText("服务类型：");
-        viewitem.mFuwuneirong_tv.setText("服务内容："+mMlist.get(i).getFuwu_value());
-        viewitem.mFuwutime_tv.setText("服务时间："+mMlist.get(i).getStartTime()+"-"+mMlist.get(i).getEndTime());
-        viewitem.mPrice_tv.setText("￥"+mMlist.get(i).getCost());
+        viewitem.mFuwuneirong_tv.setText("服务内容："+mMlist.get(i).getGongdan().getFuwu_value());
+        viewitem.mFuwutime_tv.setText("服务时间："+mMlist.get(i).getGongdan().getStartTime()+"-"+mMlist.get(i).getGongdan().getEndTime());
+        viewitem.mPrice_tv.setText("￥"+mMlist.get(i).getGongdan().getCost());
 
 
         viewitem.mZhuanchu_btn.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +104,7 @@ public class NewGongDan_Adapter extends RecyclerView.Adapter {
     }
 
     public interface onClickItem{
-        void onClick(int position,int type);
+        void onClick(int position, int type);
     }
 
 }

@@ -1,34 +1,26 @@
-package com.haitian.servicestaffapp.fragment.gongdan;
+package com.haitian.servicestaffapp.fragment;
 
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.haitian.servicestaffapp.R;
-import com.haitian.servicestaffapp.adapter.NewGongDan_Adapter;
 import com.haitian.servicestaffapp.adapter.YiwanchangGongDan_Adapter;
 import com.haitian.servicestaffapp.app.Constants;
 import com.haitian.servicestaffapp.app.DoctorBaseAppliction;
 import com.haitian.servicestaffapp.base.BaseFragment;
-import com.haitian.servicestaffapp.bean.CodeMessageBean;
-import com.haitian.servicestaffapp.bean.NewGongDan_Bean;
-import com.haitian.servicestaffapp.bean.QiangdanListBean;
 import com.haitian.servicestaffapp.bean.YiwanchangGongDanBean;
 import com.haitian.servicestaffapp.okutils.DoctorNetService;
 import com.haitian.servicestaffapp.okutils.NetWorkRequestInterface;
-import com.haitian.servicestaffapp.okutils.OkHttpUtil;
 import com.haitian.servicestaffapp.utils.LogUtil;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class YiWanChengGongDan_Fragment extends BaseFragment {
+public class Tousu_Fragment extends BaseFragment {
 
     private RecyclerView mRecy_id;
     private ArrayList<YiwanchangGongDanBean.DataBean> mQiangdanlist = new ArrayList<>();
@@ -41,13 +33,13 @@ public class YiWanChengGongDan_Fragment extends BaseFragment {
 
     @Override
     protected int provideLayoutId() {
-        return R.layout.yiwanchenggongdan_fragment;
+        return R.layout.tousu_fragment;
     }
 
     @Override
     protected void initViews(View view) {
         super.initViews(view);
-        mRecy_id = view.findViewById(R.id.yiwancheng_recyc);
+        mRecy_id = view.findViewById(R.id.recy_id);
 
         mRecy_id.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new YiwanchangGongDan_Adapter(getActivity(),mQiangdanlist);

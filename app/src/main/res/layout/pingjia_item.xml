@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:id="@+id/ll"
-    android:background="@color/white">
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_164"
-        android:background="@color/white">
+        android:layout_height="@dimen/dp_114"
+        >
 
         <ImageView
             android:id="@+id/img_id"
@@ -41,8 +40,7 @@
             android:clickable="false"
             app:zrb_rating="3"
             app:zrb_star_count="5"
-            app:zrb_star_dimension="@dimen/dp_12"
-            />
+            app:zrb_star_dimension="@dimen/dp_12" />
 
 
         <TextView
@@ -143,6 +141,58 @@
             android:layout_marginTop="@dimen/dp_15"
             android:background="#ffeceef6" />
 
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24"
+                android:layout_marginTop="@dimen/dp_10"
+                android:src="@drawable/red_bg"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="罗燕"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2020-02-02"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="刚收到就用上了，很好用"
+        android:textColor="@color/black"
+        android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+        />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_45"
@@ -171,7 +221,6 @@
                 android:textSize="@dimen/sp_14" />
 
             <Button
-                android:id="@+id/jujue_btn"
                 android:layout_width="@dimen/dp_58"
                 android:layout_height="@dimen/dp_24"
                 android:background="@drawable/chengse_bg"
@@ -182,11 +231,11 @@
                 android:visibility="invisible" />
 
             <Button
-                android:id="@+id/jiedan_btn"
+                android:id="@+id/huifu_btn"
                 android:layout_width="@dimen/dp_58"
                 android:layout_height="@dimen/dp_24"
                 android:background="@drawable/blue_bg"
-                android:text="接单"
+                android:text="回复"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/dp_15"
                 android:textColor="@color/white"
@@ -194,11 +243,9 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recy_id"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+
+
 
 </LinearLayout>
