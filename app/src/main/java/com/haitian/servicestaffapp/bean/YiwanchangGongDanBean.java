@@ -2,11 +2,17 @@ package com.haitian.servicestaffapp.bean;
 
 import java.util.List;
 
-public class NewGongDan_Bean {
+/**
+ * Created by Android Studio.
+ * User: user
+ * Date: 2021/4/19
+ * Time: 15:19
+ */
+public class YiwanchangGongDanBean {
 
     /**
      * code : 20041
-     * data : [{"id":1,"xingji":"2","user_id":7,"fuwutype_id":2,"fuwu_value":"做饭","startTime":"2021-03-26 15:51:52.0","endTime":"2021-03-26 18:50:59.0","waiter_address":"泰安市泰山区明堂路60号","cost":"1000","state":"1","creatTime":"2021-03-26 11:52:08.0","wanchengState":"0"}]
+     * data : [{"id":3,"xingji":"3","user_id":7,"fuwutype_id":2,"fuwu_value":"洗脚","startTime":"2021-03-26 15:51:52.0","endTime":"2021-03-26 18:50:59.0","waiter_address":"泰安市泰山区明堂路60","cost":null,"state":"1","creatTime":"2021-03-26 15:01:30.0","wanchengState":"0"}]
      * message : null
      */
 
@@ -38,23 +44,19 @@ public class NewGongDan_Bean {
         this.data = data;
     }
 
-    public NewGongDan_Bean(int code) {
-        this.code = code;
-    }
-
     public static class DataBean {
         /**
-         * id : 1
-         * xingji : 2
+         * id : 3
+         * xingji : 3
          * user_id : 7
          * fuwutype_id : 2
-         * fuwu_value : 做饭
+         * fuwu_value : 洗脚
          * startTime : 2021-03-26 15:51:52.0
          * endTime : 2021-03-26 18:50:59.0
-         * waiter_address : 泰安市泰山区明堂路60号
-         * cost : 1000
+         * waiter_address : 泰安市泰山区明堂路60
+         * cost : null
          * state : 1
-         * creatTime : 2021-03-26 11:52:08.0
+         * creatTime : 2021-03-26 15:01:30.0
          * wanchengState : 0
          */
 
@@ -66,12 +68,10 @@ public class NewGongDan_Bean {
         private String startTime;
         private String endTime;
         private String waiter_address;
-        private String cost;
+        private Object cost;
         private String state;
         private String creatTime;
         private String wanchengState;
-
-
 
         public int getId() {
             return id;
@@ -137,11 +137,11 @@ public class NewGongDan_Bean {
             this.waiter_address = waiter_address;
         }
 
-        public String getCost() {
+        public Object getCost() {
             return cost;
         }
 
-        public void setCost(String cost) {
+        public void setCost(Object cost) {
             this.cost = cost;
         }
 

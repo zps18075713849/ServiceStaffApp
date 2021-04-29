@@ -42,21 +42,21 @@ public interface Constants {
          * /storage/emulated/0/Android/data/包名/files/Media/
          * android Q 以下版本默认"/sdcard/DCIM/Camera/"
          */
-        public static String getDir(Context context) {
-            String dir;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                dir = context.getExternalFilesDir("") + File.separator + "Media" + File.separator;
-            } else {
-                dir = Environment.getExternalStorageDirectory() + File.separator + "DCIM"
-                        + File.separator + "Camera" + File.separator;
-            }
-            File file = new File(dir);
-            if (!file.exists()) {
-                //noinspection ResultOfMethodCallIgnored
-                file.mkdirs();
-            }
-            return dir;
-        }
+//        public static String getDir(Context context) {
+//            String dir;
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//                dir = context.getExternalFilesDir("") + File.separator + "Media" + File.separator;
+//            } else {
+//                dir = Environment.getExternalStorageDirectory() + File.separator + "DCIM"
+//                        + File.separator + "Camera" + File.separator;
+//            }
+//            File file = new File(dir);
+//            if (!file.exists()) {
+//                //noinspection ResultOfMethodCallIgnored
+//                file.mkdirs();
+//            }
+//            return dir;
+//        }
 
         /**
          * 获取外部缓存目录 版本默认"/storage/emulated/0/Android/data/包名/file/Cache/svideo"
@@ -184,5 +184,16 @@ public interface Constants {
     String YIJIEDANGONGDANLIST = Host + "gongdan/jiedanchakan";
     //客户管理
     String KEHUGUANLILIST = Host + "gongdan//kehuguanli";
+
+    //抢单查询页面
+    String QIANGDDAN_LIST = Host + "gongdan/qiangdan";
+    //抢单接单按钮
+    String QIANGDDAN_BT = Host + "gongdan/qiangdanjiedan";
+    //已完成工单
+    String YIWANCHANGGONGDAN = Host + "gongdan/yiwancheng";
+    //评价
+    String PINGJIA = Host + "gongdan/pingjiazanshi";
+    //回复
+    String PINGJIAHUIFU = Host + "gongdan/pingjiahuifu";
 
 }

@@ -12,16 +12,17 @@ import android.widget.TextView;
 
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.bean.NewGongDan_Bean;
+import com.haitian.servicestaffapp.bean.YiwanchangGongDanBean;
 
 import java.util.ArrayList;
 
 import me.zhouzhuo.zzratingbar.ZzRatingBar;
 
-public class NewGongDan_Adapter extends RecyclerView.Adapter {
+public class YiwanchangGongDan_Adapter extends RecyclerView.Adapter {
     private final FragmentActivity mActivity;
-    private final ArrayList<NewGongDan_Bean.DataBean> mMlist;
+    private final ArrayList<YiwanchangGongDanBean.DataBean> mMlist;
 
-    public NewGongDan_Adapter(FragmentActivity activity, ArrayList<NewGongDan_Bean.DataBean> mlist) {
+    public YiwanchangGongDan_Adapter(FragmentActivity activity, ArrayList<YiwanchangGongDanBean.DataBean> mlist) {
         mActivity = activity;
         mMlist = mlist;
     }
@@ -29,8 +30,7 @@ public class NewGongDan_Adapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View inflate = LayoutInflater.from(mActivity).inflate(R.layout.new_gongdan_item, null, false);
-        View inflate = LayoutInflater.from(mActivity).inflate(R.layout.jinxingzhong_gongdan_item, null, false);
+        View inflate = LayoutInflater.from(mActivity).inflate(R.layout.yiwancheng_gongdan_item, null, false);
         viewholderItem viewholderItem = new viewholderItem(inflate);
         return viewholderItem;
     }
@@ -44,9 +44,8 @@ public class NewGongDan_Adapter extends RecyclerView.Adapter {
         viewitem.mFuwutime_tv.setText("服务时间："+mMlist.get(i).getStartTime()+"-"+mMlist.get(i).getEndTime());
         viewitem.mPrice_tv.setText("￥"+mMlist.get(i).getCost());
 
-        viewitem.mZhuanchu_btn.setOnClickListener(new View.OnClickListener() {
-        viewitem.mJujue_btn.setOnClickListener(new View.OnClickListener() {
 
+        viewitem.mZhuanchu_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mOnClickItem!=null){
@@ -82,7 +81,6 @@ public class NewGongDan_Adapter extends RecyclerView.Adapter {
         private final TextView mPrice_tv;
         private final Button mZhuanchu_btn;
         private final Button mJiedan_btn;
-        private final Button mJujue_btn;
 
         public viewholderItem(@NonNull View itemView) {
             super(itemView);
@@ -96,7 +94,6 @@ public class NewGongDan_Adapter extends RecyclerView.Adapter {
             mPrice_tv = itemView.findViewById(R.id.price_tv);
             mZhuanchu_btn = itemView.findViewById(R.id.zhuanchu_btn);
             mJiedan_btn = itemView.findViewById(R.id.jiedan_btn);
-            mJujue_btn = itemView.findViewById(R.id.jujue_btn);
         }
     }
 
@@ -107,7 +104,7 @@ public class NewGongDan_Adapter extends RecyclerView.Adapter {
     }
 
     public interface onClickItem{
-        void onClick(int position,int type);
+        void onClick(int position, int type);
     }
 
 }
