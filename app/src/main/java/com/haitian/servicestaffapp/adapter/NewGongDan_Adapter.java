@@ -30,7 +30,7 @@ public class NewGongDan_Adapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View inflate = LayoutInflater.from(mActivity).inflate(R.layout.new_gongdan_item, null, false);
-        View inflate = LayoutInflater.from(mActivity).inflate(R.layout.jinxingzhong_gongdan_item, null, false);
+//        View inflate = LayoutInflater.from(mActivity).inflate(R.layout.jinxingzhong_gongdan_item, null, false);
         viewholderItem viewholderItem = new viewholderItem(inflate);
         return viewholderItem;
     }
@@ -44,7 +44,7 @@ public class NewGongDan_Adapter extends RecyclerView.Adapter {
         viewitem.mFuwutime_tv.setText("服务时间："+mMlist.get(i).getStartTime()+"-"+mMlist.get(i).getEndTime());
         viewitem.mPrice_tv.setText("￥"+mMlist.get(i).getCost());
 
-        viewitem.mZhuanchu_btn.setOnClickListener(new View.OnClickListener() {
+//        viewitem.mZhuanchu_btn.setOnClickListener(new View.OnClickListener() {
         viewitem.mJujue_btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
