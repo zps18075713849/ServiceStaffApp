@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:id="@+id/ll"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_164"
         android:background="@color/white"
-        android:layout_height="@dimen/dp_164">
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/img_id"
@@ -147,10 +148,10 @@
                 android:id="@+id/zhuanchu_btn"
                 android:layout_width="@dimen/dp_58"
                 android:layout_height="@dimen/dp_24"
-                android:background="@drawable/chengse_bg"
                 android:layout_gravity="center"
-                android:text="转出"
                 android:layout_marginLeft="@dimen/dp_50"
+                android:background="@drawable/chengse_bg"
+                android:text="转出"
                 android:textColor="@color/white"
                 android:visibility="visible" />
 
@@ -158,15 +159,20 @@
                 android:id="@+id/zhixing_btn"
                 android:layout_width="@dimen/dp_58"
                 android:layout_height="@dimen/dp_24"
-                android:background="@drawable/blue_bg"
-                android:text="执行"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/dp_15"
+                android:background="@drawable/blue_bg"
+                android:text="执行"
                 android:textColor="@color/white"
                 android:visibility="visible" />
 
         </LinearLayout>
 
     </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recy_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

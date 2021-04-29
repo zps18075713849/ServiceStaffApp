@@ -33,11 +33,14 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.haitian.servicestaffapp.R;
+import com.haitian.servicestaffapp.app.Constants;
+import com.haitian.servicestaffapp.app.DoctorBaseAppliction;
 import com.haitian.servicestaffapp.base.BaseActivity;
 import com.haitian.servicestaffapp.fragment.gongdan.JinXingZhongQiangDan_Fragment;
 import com.haitian.servicestaffapp.fragment.gongdan.NewGongDan_Fragment;
 import com.haitian.servicestaffapp.fragment.gongdan.YiJieDanQiangDan_Fragment;
 import com.haitian.servicestaffapp.fragment.gongdan.YiWanChengGongDan_Fragment;
+import com.haitian.servicestaffapp.okutils.OkHttpUtil;
 import com.haitian.servicestaffapp.utils.LogUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -46,8 +49,10 @@ import org.w3c.dom.Text;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class QiangDan_Activity extends BaseActivity {
 
@@ -63,6 +68,7 @@ public class QiangDan_Activity extends BaseActivity {
     private FragmentManager mManager;
     private JinXingZhongQiangDan_Fragment mJinXingZhongQiangDan_fragment;
     private YiJieDanQiangDan_Fragment mYiJieDanQiangDan_fragment;
+    private TextView mTitle_content;
 
 
     @Override
@@ -83,8 +89,12 @@ public class QiangDan_Activity extends BaseActivity {
         mTitle_back = findViewById(R.id.title_back);
         mSousuo_tv = findViewById(R.id.sousuo_tv2);
 
+        mTitle_content = findViewById(R.id.title_content);
+
         mTitle_back.setVisibility(View.VISIBLE);
-        mSousuo_tv.setVisibility(View.VISIBLE);
+        mSousuo_tv.setVisibility(View.GONE);
+        mTitle_content.setVisibility(View.VISIBLE);
+        mTitle_content.setText("工单");
 
         mSmart_id = findViewById(R.id.smart_id);
         mRecy_id = findViewById(R.id.recy_id);
@@ -105,6 +115,25 @@ public class QiangDan_Activity extends BaseActivity {
 
         initFirstFragment();
 
+    }
+
+    private void requestGPSData(double longitude, double latitude) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("user_id", DoctorBaseAppliction.spUtil.getString(Constants.USERID,""));
+        map.put("fuwurenyuan_adress",latitude+","+longitude);
+
+        OkHttpUtil.getInteace().doPost(Constants.GPSUP, map, QiangDan_Activity.this, new OkHttpUtil.OkCallBack() {
+            @Override
+            public void onFauile(Exception e) {
+                LogUtil.e("抢单GPS上传失败");
+            }
+
+            @Override
+            public void onResponse(String json) {
+                LogUtil.e("抢单GPS上传成功");
+                //经纬度上传给后台就行  不用其余操作
+            }
+        });
     }
 
     private void initFragment() {
@@ -244,6 +273,8 @@ public class QiangDan_Activity extends BaseActivity {
                 Toast.makeText(mContext, "请检查手机GPS定位是否打开", Toast.LENGTH_SHORT).show();
                 finish();
                 return;
+            }else {
+                requestGPSData(longitude,latitude);
             }
         }
     }

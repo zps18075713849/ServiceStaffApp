@@ -66,6 +66,7 @@ public class Home_Fragment extends BaseFragment {
     };
     private boolean permission = false;
     private LinearLayout mShangcheng_line;
+    private LinearLayout mKehuguanli_line;
 
     @Override
     protected Object provideBindView() {
@@ -102,6 +103,9 @@ public class Home_Fragment extends BaseFragment {
         mJiesuan_line = view.findViewById(R.id.jiesuan_line);
         //通知公告
         mTongzhigonggao_line = view.findViewById(R.id.tongzhigonggao_line);
+        //客户管理
+        mKehuguanli_line = view.findViewById(R.id.kehuguanli_line);
+
 
         final ArrayList<String> photoUrlList = new ArrayList<>();
         photoUrlList.add("https://img.ivsky.com/img/tupian/pre/202002/29/dongji_xuejing-001.jpg");
@@ -247,6 +251,14 @@ public class Home_Fragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), FuWuXiangMu_Activity.class));
+            }
+        });
+
+        //客户管理
+        mKehuguanli_line.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),KeHuGuanLi_Activity.class));
             }
         });
     }

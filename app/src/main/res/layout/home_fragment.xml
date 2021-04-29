@@ -123,70 +123,6 @@
                 android:background="@color/background" />
 
             <LinearLayout
-                android:id="@+id/fuwuxiangmu_line"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="@dimen/dp_116"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/dp_37"
-                    android:layout_height="@dimen/dp_38"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/btn_project" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:text="服务项目"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_14" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_2">
-
-            <LinearLayout
-                android:id="@+id/shangcheng_line"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="@dimen/dp_116"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/dp_37"
-                    android:layout_height="@dimen/dp_38"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/btn_store" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:text="商城"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_14" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="@dimen/dp_2"
-                android:layout_height="match_parent"
-                android:background="@color/background" />
-
-            <LinearLayout
                 android:id="@+id/gongdan_line"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_116"
@@ -212,10 +148,84 @@
 
             </LinearLayout>
 
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_2">
+
+            <LinearLayout
+                android:id="@+id/shangcheng_line"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_116"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:gravity="center"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_37"
+                    android:layout_height="@dimen/dp_38"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/btn_store" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="商城"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14" />
+
+            </LinearLayout>
+
             <View
                 android:layout_width="@dimen/dp_2"
                 android:layout_height="match_parent"
+                android:visibility="gone"
                 android:background="@color/background" />
+
+
+
+
+            <LinearLayout
+                android:id="@+id/fuwuxiangmu_line"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_116"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:gravity="center"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_37"
+                    android:layout_height="@dimen/dp_38"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/btn_project" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="服务项目"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14" />
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="@dimen/dp_2"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:background="@color/background" />
+
             <LinearLayout
                 android:id="@+id/tongzhigonggao_line"
                 android:layout_width="@dimen/dp_0"
@@ -235,6 +245,67 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="通知公告"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/dp_2"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:background="@color/background" />
+
+            <LinearLayout
+                android:id="@+id/kehuguanli_line"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_116"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_37"
+                    android:layout_height="@dimen/dp_38"
+                    android:src="@mipmap/icon_kehuguanli" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="客户管理"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/dp_2"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:background="@color/background" />
+
+            <LinearLayout
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_116"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_37"
+                    android:layout_height="@dimen/dp_38"
+                    android:visibility="gone"
+                    android:src="@mipmap/icon_kehuguanli" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="客户管理"
+                    android:visibility="gone"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14" />
 

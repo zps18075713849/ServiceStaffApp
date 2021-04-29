@@ -54,6 +54,7 @@ public class TongZhiGongGao_Activity extends BaseActivity {
     private TongZhiList_Adapter mAdapter;
     private String mSousuo_name = "";
     private int mPosition = 0;
+    private TextView mTitle_content;
 
     @Override
     protected Activity provideBindView() {
@@ -74,7 +75,10 @@ public class TongZhiGongGao_Activity extends BaseActivity {
         mFrag_id = findViewById(R.id.frag_id);
 
         mTitle_back.setVisibility(View.VISIBLE);
-        mSousuo_tv2.setVisibility(View.VISIBLE);
+        mSousuo_tv2.setVisibility(View.GONE);
+        mTitle_content = findViewById(R.id.title_content);
+        mTitle_content.setText("通知公告");
+        mTitle_content.setVisibility(View.VISIBLE);
 
         mSmart_id = findViewById(R.id.smart_id);
         mRecy_id = findViewById(R.id.recy_id);

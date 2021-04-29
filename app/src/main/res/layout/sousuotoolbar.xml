@@ -30,6 +30,15 @@
         android:padding="8dp"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/title_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="xxx"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:textSize="@dimen/sp_14" />
 
     <TextView
         android:id="@+id/title_right_tv"
