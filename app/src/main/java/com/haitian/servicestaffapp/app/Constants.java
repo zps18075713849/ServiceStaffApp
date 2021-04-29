@@ -168,4 +168,21 @@ public interface Constants {
     String GONGDANJIEDAN = Host + "gongdan/jiedan";
     //转单
     String GONGDANZHUANDAN = Host + "gongdan/zhuanchu";
+    //GPS定位上传
+    String GPSUP = Host + "gongdan/gps";
+    //进行中的工单 拒绝按钮
+    String GONGDANINGJUJUE = Host + "gongdan/jujue";
+    //执行工单接口
+    String ZHIXINGGONGDAN = Host + "gongdan/zhixing";
+    //服务统计
+    String TONGJIALL = Host + "gongdan/fuwutongji";
+    //服务统计增长率
+    String TONGJIZENGZHANG = Host + "gongdan/zengzhanglv";
+    //走势图 折线图
+    String TONGJIZHEXIANTU = Host + "gongdan/zoushitu";
+    //已接单工单查看list
+    String YIJIEDANGONGDANLIST = Host + "gongdan/jiedanchakan";
+    //客户管理
+    String KEHUGUANLILIST = Host + "gongdan//kehuguanli";
+
 }

@@ -19,6 +19,7 @@
 
 
     <RelativeLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:background="@color/white"
         android:layout_marginTop="@dimen/dp_10"
@@ -58,30 +59,10 @@
             android:textSize="@dimen/sp_12" />
 
     </RelativeLayout>
-
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/smart_id"
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_10"
-        android:visibility="gone"
-        android:background="@color/white"
-        android:layout_height="match_parent">
-
-        <com.scwang.smartrefresh.layout.header.ClassicsHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recy_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-
-        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>
