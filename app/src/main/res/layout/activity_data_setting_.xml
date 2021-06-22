@@ -32,6 +32,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_20"
             android:text=""
+            android:hint="手机号"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_14" />
 
@@ -64,6 +65,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_20"
             android:gravity="right"
+            android:hint="请选择服务类型"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_14" />
 
@@ -97,6 +99,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_20"
             android:textColor="@color/black"
+            android:hint="请选择所属公司"
             android:singleLine="true"
             android:gravity="right"
             android:textSize="@dimen/sp_14" />
@@ -232,5 +235,6 @@
         android:text="保存修改"
         android:textColor="@color/white"
         android:visibility="gone"/>
+
 
 </LinearLayout>

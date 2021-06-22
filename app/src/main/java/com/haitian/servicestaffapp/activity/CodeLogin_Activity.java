@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,9 @@ public class CodeLogin_Activity extends BaseActivity {
     private TextView mLijizhuce_tv;
     private String yanzhengcode;
     private TimeCount time;
+    private TextView mFuwuxieyi_tv;
+    private TextView mYinsi_tv;
+    private CheckBox mTongyi_check;
 
     @Override
     protected Activity provideBindView() {
@@ -59,6 +63,10 @@ public class CodeLogin_Activity extends BaseActivity {
         mLogin_bt = findViewById(R.id.login_bt);
         mForgetpassword_tv = findViewById(R.id.forgetpassword_tv);
         mLijizhuce_tv = findViewById(R.id.lijizhuce_tv);
+
+        mFuwuxieyi_tv = findViewById(R.id.yonghuxieyi_tv);
+        mYinsi_tv = findViewById(R.id.yinsi_tv);
+        mTongyi_check = findViewById(R.id.tongyi_check);
 
         //倒计时重新获取验证码
         time = new TimeCount(60000, 1000);//构造CountDownTimer对象
@@ -103,9 +111,38 @@ public class CodeLogin_Activity extends BaseActivity {
         mLogin_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                boolean checked = mTongyi_check.isChecked();
+                if (checked){
+                    login();
+                }else {
+                    Toast.makeText(mContext, "请阅读并同意相关协议后登录！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
         });
+
+        //服务协议
+        mFuwuxieyi_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CodeLogin_Activity.this, XieYi_Web.class);
+                intent.putExtra("totalbarName","服务协议");
+                intent.putExtra("webUrl","http://111.17.215.37/yanglao/app/serviceAgreement.html");
+                startActivity(intent);
+            }
+        });
+
+        //隐私协议
+        mYinsi_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CodeLogin_Activity.this, XieYi_Web.class);
+                intent.putExtra("totalbarName","隐私协议");
+                intent.putExtra("webUrl","http://111.17.215.37/yanglao/app/privacyPolicy.html");
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void login() {
@@ -132,8 +169,17 @@ public class CodeLogin_Activity extends BaseActivity {
 
         OkHttpUtil.getInteace().doPost(Constants.CODELOGIN, map, CodeLogin_Activity.this, new OkHttpUtil.OkCallBack() {
             @Override
-            public void onFauile(Exception e) {
+            public void onFauile(final Exception e) {
                 LogUtil.e("验证码登录失败："+e.getMessage());
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (e.getMessage().equals("java.net.SocketTimeoutException: timeout")){
+                            Toast.makeText(mContext, "服务器请求超时", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+                });
             }
 
             @Override
@@ -169,9 +215,18 @@ public class CodeLogin_Activity extends BaseActivity {
         map.put("biaoji", 1);
         OkHttpUtil.getInteace().doPost(Constants.GETCODE, map, CodeLogin_Activity.this, new OkHttpUtil.OkCallBack() {
             @Override
-            public void onFauile(Exception e) {
+            public void onFauile(final Exception e) {
                 hideWaitDialog();
                 LogUtil.e("获取验证码失败：" + e.getMessage());
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (e.getMessage().equals("java.net.SocketTimeoutException: timeout")){
+                            Toast.makeText(mContext, "服务器请求超时", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+                });
             }
 
             @Override

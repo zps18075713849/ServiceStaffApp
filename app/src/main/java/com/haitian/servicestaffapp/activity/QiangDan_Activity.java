@@ -63,7 +63,7 @@ public class QiangDan_Activity extends BaseActivity {
     private RecyclerView mRecy_id;
     private LocationClient mLocationClient;
     private FrameLayout mQiangdan_frame;
-    private NewGongDan_Fragment mNewGongDan_fragment;
+//    private NewGongDan_Fragment mNewGongDan_fragment;
     private YiWanChengGongDan_Fragment mYiWanChengGongDan_fragment;
     private FragmentManager mManager;
     private JinXingZhongQiangDan_Fragment mJinXingZhongQiangDan_fragment;
@@ -100,7 +100,7 @@ public class QiangDan_Activity extends BaseActivity {
         mRecy_id = findViewById(R.id.recy_id);
 
         mTab_id = findViewById(R.id.tab_id);
-        mTab_id.addTab(mTab_id.newTab().setText("新工单"));
+//        mTab_id.addTab(mTab_id.newTab().setText("新工单"));
         mTab_id.addTab(mTab_id.newTab().setText("进行中"));
         mTab_id.addTab(mTab_id.newTab().setText("已接单"));
         mTab_id.addTab(mTab_id.newTab().setText("已完成"));
@@ -119,8 +119,8 @@ public class QiangDan_Activity extends BaseActivity {
 
     private void requestGPSData(double longitude, double latitude) {
         Map<String, Object> map = new HashMap<>();
-        map.put("user_id", DoctorBaseAppliction.spUtil.getString(Constants.USERID,""));
-        map.put("fuwurenyuan_adress",latitude+","+longitude);
+        map.put("user_id", DoctorBaseAppliction.spUtil.getString(Constants.USERID, ""));
+        map.put("fuwurenyuan_adress", latitude + "," + longitude);
 
         OkHttpUtil.getInteace().doPost(Constants.GPSUP, map, QiangDan_Activity.this, new OkHttpUtil.OkCallBack() {
             @Override
@@ -138,13 +138,13 @@ public class QiangDan_Activity extends BaseActivity {
 
     private void initFragment() {
         mManager = getSupportFragmentManager();
-        mNewGongDan_fragment = new NewGongDan_Fragment();
+//        mNewGongDan_fragment = new NewGongDan_Fragment();
         mJinXingZhongQiangDan_fragment = new JinXingZhongQiangDan_Fragment();
         mYiJieDanQiangDan_fragment = new YiJieDanQiangDan_Fragment();
         mYiWanChengGongDan_fragment = new YiWanChengGongDan_Fragment();
 
         FragmentTransaction transaction = mManager.beginTransaction();
-        transaction.add(R.id.qiangdan_frame, mNewGongDan_fragment);
+//        transaction.add(R.id.qiangdan_frame, mNewGongDan_fragment);
         transaction.add(R.id.qiangdan_frame, mJinXingZhongQiangDan_fragment);
         transaction.add(R.id.qiangdan_frame, mYiJieDanQiangDan_fragment);
         transaction.add(R.id.qiangdan_frame, mYiWanChengGongDan_fragment);
@@ -153,7 +153,8 @@ public class QiangDan_Activity extends BaseActivity {
 
     private void initFirstFragment() {
         FragmentTransaction transaction = mManager.beginTransaction();
-        transaction.show(mNewGongDan_fragment).hide(mYiWanChengGongDan_fragment).hide(mJinXingZhongQiangDan_fragment).hide(mYiJieDanQiangDan_fragment).commit();
+//        transaction.show(mNewGongDan_fragment).hide(mYiWanChengGongDan_fragment).hide(mJinXingZhongQiangDan_fragment).hide(mYiJieDanQiangDan_fragment).commit();
+        transaction.show(mJinXingZhongQiangDan_fragment).hide(mYiWanChengGongDan_fragment).hide(mYiJieDanQiangDan_fragment).commit();
     }
 
     @Override
@@ -170,19 +171,31 @@ public class QiangDan_Activity extends BaseActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
-                if (position == 0){
+//                if (position == 0) {
+//                    FragmentTransaction transaction = mManager.beginTransaction();
+//                    transaction.show(mNewGongDan_fragment).hide(mYiWanChengGongDan_fragment).hide(mJinXingZhongQiangDan_fragment).hide(mYiJieDanQiangDan_fragment).commit();
+//                } else if (position == 1) {
+//                    FragmentTransaction transaction = mManager.beginTransaction();
+//                    transaction.show(mJinXingZhongQiangDan_fragment).hide(mYiJieDanQiangDan_fragment).hide(mYiWanChengGongDan_fragment).hide(mNewGongDan_fragment).commit();
+//                } else if (position == 2) {
+//                    FragmentTransaction transaction = mManager.beginTransaction();
+//                    transaction.show(mYiJieDanQiangDan_fragment).hide(mNewGongDan_fragment).hide(mJinXingZhongQiangDan_fragment).hide(mYiWanChengGongDan_fragment).commit();
+//                } else if (position == 3) {
+//                    FragmentTransaction transaction = mManager.beginTransaction();
+//                    transaction.show(mYiWanChengGongDan_fragment).hide(mNewGongDan_fragment).hide(mJinXingZhongQiangDan_fragment).hide(mYiJieDanQiangDan_fragment).commit();
+//                }
+
+                if (position == 0) {
                     FragmentTransaction transaction = mManager.beginTransaction();
-                    transaction.show(mNewGongDan_fragment).hide(mYiWanChengGongDan_fragment).hide(mJinXingZhongQiangDan_fragment).hide(mYiJieDanQiangDan_fragment).commit();
-                }else if (position == 1){
+                    transaction.show(mJinXingZhongQiangDan_fragment).hide(mYiJieDanQiangDan_fragment).hide(mYiWanChengGongDan_fragment).commit();
+                } else if (position == 1) {
                     FragmentTransaction transaction = mManager.beginTransaction();
-                    transaction.show(mJinXingZhongQiangDan_fragment).hide(mYiJieDanQiangDan_fragment).hide(mYiWanChengGongDan_fragment).hide(mNewGongDan_fragment).commit();
-                }else if (position == 2){
+                    transaction.show(mYiJieDanQiangDan_fragment).hide(mJinXingZhongQiangDan_fragment).hide(mYiWanChengGongDan_fragment).commit();
+                } else if (position == 2) {
                     FragmentTransaction transaction = mManager.beginTransaction();
-                    transaction.show(mYiJieDanQiangDan_fragment).hide(mNewGongDan_fragment).hide(mJinXingZhongQiangDan_fragment).hide(mYiWanChengGongDan_fragment).commit();
-                }else if (position == 3){
-                    FragmentTransaction transaction = mManager.beginTransaction();
-                    transaction.show(mYiWanChengGongDan_fragment).hide(mNewGongDan_fragment).hide(mJinXingZhongQiangDan_fragment).hide(mYiJieDanQiangDan_fragment).commit();
+                    transaction.show(mYiWanChengGongDan_fragment).hide(mJinXingZhongQiangDan_fragment).hide(mYiJieDanQiangDan_fragment).commit();
                 }
+
             }
 
             @Override
@@ -273,8 +286,8 @@ public class QiangDan_Activity extends BaseActivity {
                 Toast.makeText(mContext, "请检查手机GPS定位是否打开", Toast.LENGTH_SHORT).show();
                 finish();
                 return;
-            }else {
-                requestGPSData(longitude,latitude);
+            } else {
+                requestGPSData(longitude, latitude);
             }
         }
     }

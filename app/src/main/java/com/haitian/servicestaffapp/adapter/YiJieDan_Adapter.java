@@ -12,12 +12,15 @@ import android.widget.TextView;
 
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.bean.YiJieDanList_Bean;
+import com.haitian.servicestaffapp.utils.HcUtils;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 import me.zhouzhuo.zzratingbar.ZzRatingBar;
+
+import static com.haitian.servicestaffapp.utils.DateUtils.FORMAT_1;
 
 public class YiJieDan_Adapter extends RecyclerView.Adapter {
     private final FragmentActivity mActivity;
@@ -31,7 +34,7 @@ public class YiJieDan_Adapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View inflate = LayoutInflater.from(mActivity).inflate(R.layout.yijiedan_gongdan_item, null, false);
+        View inflate = LayoutInflater.from(mActivity).inflate(R.layout.yijiedan_gongdan_item, viewGroup, false);
         viewholderItem viewholderItem = new viewholderItem(inflate);
         return viewholderItem;
     }
@@ -40,11 +43,24 @@ public class YiJieDan_Adapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         viewholderItem viewholder = (YiJieDan_Adapter.viewholderItem) viewHolder;
 
-        viewholder.mFuwu_address.setText("地址："+mMlist.get(i).getWaiter_address());
-        viewholder.mFuwuleixing_tv.setText("服务类型：");
-        viewholder.mFuwuneirong_tv.setText("服务内容："+mMlist.get(i).getFuwu_value());
-        viewholder.mFuwutime_tv.setText("服务时间："+mMlist.get(i).getStartTime()+"-"+mMlist.get(i).getEndTime());
-        viewholder.mPrice_tv.setText("￥"+mMlist.get(i).getCost());
+        try {
+            viewholder.mFuwu_address.setText("地址："+mMlist.get(i).getWaiter_address());
+            viewholder.mFuwuleixing_tv.setText("服务类型："+mMlist.get(i).getGoodstypeName());
+            viewholder.mFuwuneirong_tv.setText("服务内容："+mMlist.get(i).getFuwu_value());
+            viewholder.mPrice_tv.setText("￥"+mMlist.get(i).getCost());
+            viewholder.mMobile_tv.setText(mMlist.get(i).getOld_phone());
+            viewholder.mXing_bar.setRating(Integer.valueOf(mMlist.get(i).getXingji()));
+
+            long start = mMlist.get(i).getStartTime();
+            long end = mMlist.get(i).getEndTime();
+            String starttime = HcUtils.getData(start, FORMAT_1);
+            String endTime = HcUtils.getData(end, FORMAT_1);
+            viewholder.mFuwutime_tv.setText("服务时间："+starttime+"-"+endTime);
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
 
         viewholder.mZhuanchu_btn.setOnClickListener(new View.OnClickListener() {
             @Override

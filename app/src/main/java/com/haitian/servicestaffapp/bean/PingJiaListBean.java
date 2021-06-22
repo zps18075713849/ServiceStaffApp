@@ -12,7 +12,7 @@ public class PingJiaListBean {
 
     /**
      * code : 20041
-     * data : [{"user_name":"18266860807","huifu":"测试","gongdan":{"id":1,"xingji":"2","user_id":68,"fuwutype_id":2,"fuwu_value":"做饭","startTime":"2021-03-26 15:51:52.0","endTime":"2021-03-26 18:50:59.0","waiter_address":"泰安市泰山区明堂路60号","cost":"1000","state":"1","creatTime":"2021-03-26 11:52:08.0","wanchengState":"0","pingjiak":null}},{"user_name":"18266860807","huifu":"一直在测试","gongdan":{"id":2,"xingji":"3","user_id":68,"fuwutype_id":2,"fuwu_value":"洗脚","startTime":"2021-03-26 15:51:52.0","endTime":"2021-03-26 18:50:59.0","waiter_address":"泰安市泰山区明堂路60","cost":null,"state":"1","creatTime":"2021-03-26 15:01:30.0","wanchengState":"0","pingjiak":null}},{"user_name":"18266860807","huifu":"也是测试","gongdan":{"id":3,"xingji":"3","user_id":68,"fuwutype_id":2,"fuwu_value":"洗脚","startTime":"2021-03-26 15:51:52.0","endTime":"2021-03-26 18:50:59.0","waiter_address":"泰安市泰山区明堂路60","cost":null,"state":"1","creatTime":"2021-03-26 15:01:30.0","wanchengState":"0","pingjiak":null}}]
+     * data : [{"evaluate":{"content":null,"startTime":"2024-05-25 18:13:00.0","id":"191e43c04d1c4f64a3555e115809241d","xingji":"5","old_phone":"18854806444","fuwu_value":"打扫卫生","pinglunTime":null,"goodsTypeName":"家政保洁","addr":"要去","oldtupian":"upload/head/20210514/171714972.png","endTime":"2024-05-25 18:13:00.0","old_name":"刘守民","cost":"0.01"},"reply":{"reply_content":"","fuwurenyuanuser_id":72}},{"evaluate":{"content":null,"startTime":"2023-05-21 17:26:00.0","id":"09cdf342330c4d64be5391453aa24822","xingji":"5","old_phone":"15588522851","fuwu_value":"炒锅饭","pinglunTime":null,"goodsTypeName":"美食配送","addr":"i我","oldtupian":"","endTime":"2023-05-21 17:26:00.0","old_name":"汤辟邦","cost":"0.01"},"reply":{"reply_content":"","fuwurenyuanuser_id":72}},{"evaluate":{"content":null,"startTime":"2023-05-21 15:25:00.0","id":"0b773f384e6b41dcb0bc4000b1d04485","xingji":"5","old_phone":"18854806444","fuwu_value":"炒锅饭","pinglunTime":null,"goodsTypeName":"美食配送","addr":"i我","oldtupian":"upload/head/20210514/171714972.png","endTime":"2023-05-21 16:25:00.0","old_name":"刘守民","cost":"0.01"},"reply":{"reply_content":"","fuwurenyuanuser_id":72}},{"evaluate":{"content":null,"startTime":"2023-05-19 20:34:00.0","id":"1e9d5be10e834b3f986f8e31cce46613","xingji":"5","old_phone":"13611127052","fuwu_value":"炒锅饭","pinglunTime":null,"goodsTypeName":"美食配送","addr":"要去","oldtupian":"upload/head/20210526/092259610.png","endTime":"2023-05-19 22:34:00.0","old_name":"华","cost":"0.01"},"reply":{"reply_content":"","fuwurenyuanuser_id":72}},{"evaluate":{"content":null,"startTime":"2022-05-24 16:35:00.0","id":"27e23532511642fbb157f83764fe78f0","xingji":"5","old_phone":"18854806444","fuwu_value":"炒锅饭","pinglunTime":null,"goodsTypeName":"美食配送","addr":"要去","oldtupian":"upload/head/20210514/171714972.png","endTime":"2022-05-24 13:35:00.0","old_name":"刘守民","cost":"0.01"},"reply":{"reply_content":"","fuwurenyuanuser_id":72}},{"evaluate":{"content":null,"startTime":"2021-05-28 15:46:00.0","id":"0fb0a974f73f419ca7ca3555587f7c53","xingji":"5","old_phone":"18854806444","fuwu_value":"炒锅饭","pinglunTime":null,"goodsTypeName":"美食配送","addr":"测试地址","oldtupian":"upload/head/20210514/171714972.png","endTime":"2021-05-28 15:46:00.0","old_name":"刘守民","cost":"0.01"},"reply":{"reply_content":"","fuwurenyuanuser_id":72}},{"evaluate":{"content":null,"startTime":"2021-05-26 16:39:00.0","id":"21e4d674f5be4cefb8e3a636fe9edf36","xingji":"5","old_phone":"18854806444","fuwu_value":"土豆片","pinglunTime":null,"goodsTypeName":"美食配送","addr":"要去","oldtupian":"upload/head/20210514/171714972.png","endTime":"2021-05-26 16:39:00.0","old_name":"刘守民","cost":"0.01"},"reply":{"reply_content":"","fuwurenyuanuser_id":72}},{"evaluate":{"content":null,"startTime":"2021-05-24 11:13:00.0","id":"051dfdae62564a03adeec0e8994f4bd4","xingji":"5","old_phone":"18854806444","fuwu_value":"土豆片","pinglunTime":null,"goodsTypeName":"美食配送","addr":"i我","oldtupian":"upload/head/20210514/171714972.png","endTime":"2021-05-24 11:13:00.0","old_name":"刘守民","cost":"0.01"},"reply":{"reply_content":"","fuwurenyuanuser_id":72}},{"evaluate":{"content":null,"startTime":"2021-04-27 15:51:52.0","id":"434456788978766","xingji":"2","old_phone":"18854806444","fuwu_value":"做饭","pinglunTime":null,"goodsTypeName":"超值配送","addr":null,"oldtupian":"upload/head/20210514/171714972.png","endTime":"2021-04-27 18:50:59.0","old_name":"刘守民","cost":"0.01"},"reply":{"reply_content":null,"fuwurenyuanuser_id":72}}]
      * message : null
      */
 
@@ -46,75 +46,81 @@ public class PingJiaListBean {
 
     public static class DataBean {
         /**
-         * user_name : 18266860807
-         * huifu : 测试
-         * gongdan : {"id":1,"xingji":"2","user_id":68,"fuwutype_id":2,"fuwu_value":"做饭","startTime":"2021-03-26 15:51:52.0","endTime":"2021-03-26 18:50:59.0","waiter_address":"泰安市泰山区明堂路60号","cost":"1000","state":"1","creatTime":"2021-03-26 11:52:08.0","wanchengState":"0","pingjiak":null}
+         * evaluate : {"content":null,"startTime":"2024-05-25 18:13:00.0","id":"191e43c04d1c4f64a3555e115809241d","xingji":"5","old_phone":"18854806444","fuwu_value":"打扫卫生","pinglunTime":null,"goodsTypeName":"家政保洁","addr":"要去","oldtupian":"upload/head/20210514/171714972.png","endTime":"2024-05-25 18:13:00.0","old_name":"刘守民","cost":"0.01"}
+         * reply : {"reply_content":"","fuwurenyuanuser_id":72}
          */
 
-        private String user_name;
-        private String huifu;
-        private GongdanBean gongdan;
+        private EvaluateBean evaluate;
+        private ReplyBean reply;
 
-        public String getUser_name() {
-            return user_name;
+        public EvaluateBean getEvaluate() {
+            return evaluate;
         }
 
-        public void setUser_name(String user_name) {
-            this.user_name = user_name;
+        public void setEvaluate(EvaluateBean evaluate) {
+            this.evaluate = evaluate;
         }
 
-        public String getHuifu() {
-            return huifu;
+        public ReplyBean getReply() {
+            return reply;
         }
 
-        public void setHuifu(String huifu) {
-            this.huifu = huifu;
+        public void setReply(ReplyBean reply) {
+            this.reply = reply;
         }
 
-        public GongdanBean getGongdan() {
-            return gongdan;
-        }
-
-        public void setGongdan(GongdanBean gongdan) {
-            this.gongdan = gongdan;
-        }
-
-        public static class GongdanBean {
+        public static class EvaluateBean {
             /**
-             * id : 1
-             * xingji : 2
-             * user_id : 68
-             * fuwutype_id : 2
-             * fuwu_value : 做饭
-             * startTime : 2021-03-26 15:51:52.0
-             * endTime : 2021-03-26 18:50:59.0
-             * waiter_address : 泰安市泰山区明堂路60号
-             * cost : 1000
-             * state : 1
-             * creatTime : 2021-03-26 11:52:08.0
-             * wanchengState : 0
-             * pingjiak : null
+             * content : null
+             * startTime : 2024-05-25 18:13:00.0
+             * id : 191e43c04d1c4f64a3555e115809241d
+             * xingji : 5
+             * old_phone : 18854806444
+             * fuwu_value : 打扫卫生
+             * pinglunTime : null
+             * goodsTypeName : 家政保洁
+             * addr : 要去
+             * oldtupian : upload/head/20210514/171714972.png
+             * endTime : 2024-05-25 18:13:00.0
+             * old_name : 刘守民
+             * cost : 0.01
              */
 
-            private int id;
-            private String xingji;
-            private int user_id;
-            private int fuwutype_id;
-            private String fuwu_value;
+            private Object content;
             private String startTime;
+            private String id;
+            private String xingji;
+            private String old_phone;
+            private String fuwu_value;
+            private Object pinglunTime;
+            private String goodsTypeName;
+            private String addr;
+            private String oldtupian;
             private String endTime;
-            private String waiter_address;
+            private String old_name;
             private String cost;
-            private String state;
-            private String creatTime;
-            private String wanchengState;
-            private Object pingjiak;
 
-            public int getId() {
+            public Object getContent() {
+                return content;
+            }
+
+            public void setContent(Object content) {
+                this.content = content;
+            }
+
+            public String getStartTime() {
+                return startTime;
+            }
+
+            public void setStartTime(String startTime) {
+                this.startTime = startTime;
+            }
+
+            public String getId() {
                 return id;
             }
 
-            public void setId(int id) {
+            public void setId(String id) {
                 this.id = id;
             }
 
@@ -126,20 +132,12 @@ public class PingJiaListBean {
                 this.xingji = xingji;
             }
 
-            public int getUser_id() {
-                return user_id;
+            public String getOld_phone() {
+                return old_phone;
             }
 
-            public void setUser_id(int user_id) {
-                this.user_id = user_id;
-            }
-
-            public int getFuwutype_id() {
-                return fuwutype_id;
-            }
-
-            public void setFuwutype_id(int fuwutype_id) {
-                this.fuwutype_id = fuwutype_id;
+            public void setOld_phone(String old_phone) {
+                this.old_phone = old_phone;
             }
 
             public String getFuwu_value() {
@@ -150,12 +148,36 @@ public class PingJiaListBean {
                 this.fuwu_value = fuwu_value;
             }
 
-            public String getStartTime() {
-                return startTime;
+            public Object getPinglunTime() {
+                return pinglunTime;
             }
 
-            public void setStartTime(String startTime) {
-                this.startTime = startTime;
+            public void setPinglunTime(Object pinglunTime) {
+                this.pinglunTime = pinglunTime;
+            }
+
+            public String getGoodsTypeName() {
+                return goodsTypeName;
+            }
+
+            public void setGoodsTypeName(String goodsTypeName) {
+                this.goodsTypeName = goodsTypeName;
+            }
+
+            public String getAddr() {
+                return addr;
+            }
+
+            public void setAddr(String addr) {
+                this.addr = addr;
+            }
+
+            public String getOldtupian() {
+                return oldtupian;
+            }
+
+            public void setOldtupian(String oldtupian) {
+                this.oldtupian = oldtupian;
             }
 
             public String getEndTime() {
@@ -166,12 +188,12 @@ public class PingJiaListBean {
                 this.endTime = endTime;
             }
 
-            public String getWaiter_address() {
-                return waiter_address;
+            public String getOld_name() {
+                return old_name;
             }
 
-            public void setWaiter_address(String waiter_address) {
-                this.waiter_address = waiter_address;
+            public void setOld_name(String old_name) {
+                this.old_name = old_name;
             }
 
             public String getCost() {
@@ -181,37 +203,31 @@ public class PingJiaListBean {
             public void setCost(String cost) {
                 this.cost = cost;
             }
+        }
 
-            public String getState() {
-                return state;
+        public static class ReplyBean {
+            /**
+             * reply_content :
+             * fuwurenyuanuser_id : 72
+             */
+
+            private String reply_content;
+            private int fuwurenyuanuser_id;
+
+            public String getReply_content() {
+                return reply_content;
             }
 
-            public void setState(String state) {
-                this.state = state;
+            public void setReply_content(String reply_content) {
+                this.reply_content = reply_content;
             }
 
-            public String getCreatTime() {
-                return creatTime;
+            public int getFuwurenyuanuser_id() {
+                return fuwurenyuanuser_id;
             }
 
-            public void setCreatTime(String creatTime) {
-                this.creatTime = creatTime;
-            }
-
-            public String getWanchengState() {
-                return wanchengState;
-            }
-
-            public void setWanchengState(String wanchengState) {
-                this.wanchengState = wanchengState;
-            }
-
-            public Object getPingjiak() {
-                return pingjiak;
-            }
-
-            public void setPingjiak(Object pingjiak) {
-                this.pingjiak = pingjiak;
+            public void setFuwurenyuanuser_id(int fuwurenyuanuser_id) {
+                this.fuwurenyuanuser_id = fuwurenyuanuser_id;
             }
         }
     }

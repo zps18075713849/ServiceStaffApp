@@ -11,17 +11,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.haitian.servicestaffapp.R;
+import com.haitian.servicestaffapp.bean.GongDanJinXingZhong_Bean;
 import com.haitian.servicestaffapp.bean.NewGongDan_Bean;
+import com.haitian.servicestaffapp.utils.HcUtils;
 
 import java.util.ArrayList;
 
 import me.zhouzhuo.zzratingbar.ZzRatingBar;
 
+import static com.haitian.servicestaffapp.utils.DateUtils.FORMAT_1;
+
 public class NewGongDan_Adapter extends RecyclerView.Adapter {
     private final FragmentActivity mActivity;
-    private final ArrayList<NewGongDan_Bean.DataBean> mMlist;
+    private final ArrayList<GongDanJinXingZhong_Bean.DataBean> mMlist;
 
-    public NewGongDan_Adapter(FragmentActivity activity, ArrayList<NewGongDan_Bean.DataBean> mlist) {
+    public NewGongDan_Adapter(FragmentActivity activity, ArrayList<GongDanJinXingZhong_Bean.DataBean> mlist) {
         mActivity = activity;
         mMlist = mlist;
     }
@@ -29,7 +33,7 @@ public class NewGongDan_Adapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View inflate = LayoutInflater.from(mActivity).inflate(R.layout.new_gongdan_item, null, false);
+        View inflate = LayoutInflater.from(mActivity).inflate(R.layout.new_gongdan_item, viewGroup, false);
 //        View inflate = LayoutInflater.from(mActivity).inflate(R.layout.jinxingzhong_gongdan_item, null, false);
         viewholderItem viewholderItem = new viewholderItem(inflate);
         return viewholderItem;
@@ -38,11 +42,24 @@ public class NewGongDan_Adapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         viewholderItem viewitem = (viewholderItem) viewHolder;
-        viewitem.mFuwu_address.setText("地址："+mMlist.get(i).getWaiter_address());
-        viewitem.mFuwuleixing_tv.setText("服务类型：");
-        viewitem.mFuwuneirong_tv.setText("服务内容："+mMlist.get(i).getFuwu_value());
-        viewitem.mFuwutime_tv.setText("服务时间："+mMlist.get(i).getStartTime()+"-"+mMlist.get(i).getEndTime());
-        viewitem.mPrice_tv.setText("￥"+mMlist.get(i).getCost());
+        try {
+            viewitem.mFuwu_address.setText("地址："+mMlist.get(i).getWaiter_address());
+            viewitem.mFuwuleixing_tv.setText("服务类型："+mMlist.get(i).getGoodstypeName());
+            viewitem.mFuwuneirong_tv.setText("服务内容："+mMlist.get(i).getFuwu_value());
+            viewitem.mFuwutime_tv.setText("服务时间："+mMlist.get(i).getStartTime()+"-"+mMlist.get(i).getEndTime());
+            viewitem.mPrice_tv.setText("￥"+mMlist.get(i).getCost());
+            viewitem.mMobile_tv.setText(mMlist.get(i).getOld_phone()+"");
+            viewitem.mXing_bar.setRating(Integer.valueOf(mMlist.get(i).getXingji()));
+
+            long start = mMlist.get(i).getStartTime();
+            long end = mMlist.get(i).getEndTime();
+            String starttime = HcUtils.getData(start, FORMAT_1);
+            String endTime = HcUtils.getData(end, FORMAT_1);
+            viewitem.mFuwutime_tv.setText("服务时间："+starttime+"-"+endTime);
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
 
 //        viewitem.mZhuanchu_btn.setOnClickListener(new View.OnClickListener() {
         viewitem.mJujue_btn.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +114,7 @@ public class NewGongDan_Adapter extends RecyclerView.Adapter {
             mZhuanchu_btn = itemView.findViewById(R.id.zhuanchu_btn);
             mJiedan_btn = itemView.findViewById(R.id.jiedan_btn);
             mJujue_btn = itemView.findViewById(R.id.jujue_btn);
+
         }
     }
 

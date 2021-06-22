@@ -9,6 +9,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -62,7 +64,7 @@ import static com.haitian.servicestaffapp.utils.DateUtils.getMonthTime;
 import static com.haitian.servicestaffapp.utils.DateUtils.getYearTime;
 
 
-public class FuWuTongJi_Activity extends BaseActivity2 {
+public class FuWuTongJi_Activity extends BaseActivity2  {
 
     private ImageView mBack;
     private TextView mTitle_tv;
@@ -110,6 +112,7 @@ public class FuWuTongJi_Activity extends BaseActivity2 {
     private TextView mShangjiduzengzhang_tv;
     private ArrayList<String> yuefenlist = new ArrayList<>();
     private ArrayList<String> dancountlist = new ArrayList<>();
+    private String mStartTime;
 
     @Override
     protected Activity provideBindView() {
@@ -361,9 +364,9 @@ public class FuWuTongJi_Activity extends BaseActivity2 {
                     @Override
                     public void run() {
                         if (bean.getCode() == 20041) {
-                            mShangzhouzengzhang_tv.setText("+" + bean.getData().getShangzhou() + "%");
-                            mShangyuezengzhang_tv.setText("+" + bean.getData().getShangyue() + "%");
-                            mShangjiduzengzhang_tv.setText("+" + bean.getData().getShangjidu() + "%");
+                            mShangzhouzengzhang_tv.setText(bean.getData().getShangzhou());
+                            mShangyuezengzhang_tv.setText(bean.getData().getShangyue());
+                            mShangjiduzengzhang_tv.setText(bean.getData().getShangjidu());
 
                             //服务统计工单数量
                             requestTongJiAllCount(1);       //1全部 2上周 3上月 4上季度 5上半年
@@ -416,6 +419,45 @@ public class FuWuTongJi_Activity extends BaseActivity2 {
             }
         });
     }
+
+    private void requestTongJiAllTimeCount(String startTime,String endTime) {
+        showWaitDialog();
+        Map<String, Object> map = new HashMap<>();
+        map.put("user_id", DoctorBaseAppliction.spUtil.getString(Constants.USERID, ""));
+        map.put("biaoshi", 1);
+        map.put("startTime",startTime);
+        map.put("endTime",endTime);
+
+        OkHttpUtil.getInteace().doPost(Constants.TONGJIALL, map, FuWuTongJi_Activity.this, new OkHttpUtil.OkCallBack() {
+            @Override
+            public void onFauile(Exception e) {
+                hideWaitDialog();
+                LogUtil.e("服务统计工单数量失败：" + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(String json) {
+                hideWaitDialog();
+                LogUtil.e("服务统计工单数量成功：" + json);
+                Gson gson = new Gson();
+                final TongJiGongDanCount_Bean bean = gson.fromJson(json, TongJiGongDanCount_Bean.class);
+
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (bean.getCode() == 20041) {
+                            mGongdan_count.setText(bean.getData() + "");
+                        } else {
+                            mGongdan_count.setText("--");
+                        }
+                    }
+                });
+
+            }
+        });
+    }
+
 
     private void getAxisPoints() {
         for (int i = 0; i < mValuesY.length; i++) {
@@ -565,6 +607,7 @@ public class FuWuTongJi_Activity extends BaseActivity2 {
         mStarttime_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mEndtime_tv.setText("");
                 HcUtils.hideKeyboard(FuWuTongJi_Activity.this);
                 pvTime.show(mStarttime_tv);
             }
@@ -573,8 +616,21 @@ public class FuWuTongJi_Activity extends BaseActivity2 {
         mEndtime_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String startHintTime = mStarttime_tv.getHint().toString().trim();
+                mStartTime = mStarttime_tv.getText().toString().trim();
+                if (startHintTime.equals("选择开始时间")&& mStartTime.isEmpty()){
+                    Toast.makeText(mContext, "请选择开始时间", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 HcUtils.hideKeyboard(FuWuTongJi_Activity.this);
                 pvTime.show(mEndtime_tv);
+            }
+        });
+
+        mEndtime_tv.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
             }
         });
 
@@ -598,6 +654,8 @@ public class FuWuTongJi_Activity extends BaseActivity2 {
 
                         mShangbannian_rb.setTextColor(getResources().getColor(R.color.hui_1));
                         mShangbannian_rb.setBackground(getResources().getDrawable(R.drawable.white_bg));
+                        mStarttime_tv.setText("");
+                        mEndtime_tv.setText("");
                         requestTongJiAllCount(1);
                         break;
                     }
@@ -616,6 +674,8 @@ public class FuWuTongJi_Activity extends BaseActivity2 {
 
                         mShangbannian_rb.setTextColor(getResources().getColor(R.color.hui_1));
                         mShangbannian_rb.setBackground(getResources().getDrawable(R.drawable.white_bg));
+                        mStarttime_tv.setText("");
+                        mEndtime_tv.setText("");
                         requestTongJiAllCount(2);
 
                         break;
@@ -636,6 +696,8 @@ public class FuWuTongJi_Activity extends BaseActivity2 {
 
                         mShangbannian_rb.setTextColor(getResources().getColor(R.color.hui_1));
                         mShangbannian_rb.setBackground(getResources().getDrawable(R.drawable.white_bg));
+                        mStarttime_tv.setText("");
+                        mEndtime_tv.setText("");
                         requestTongJiAllCount(3);
 
                         break;
@@ -656,6 +718,8 @@ public class FuWuTongJi_Activity extends BaseActivity2 {
 
                         mShangbannian_rb.setTextColor(getResources().getColor(R.color.hui_1));
                         mShangbannian_rb.setBackground(getResources().getDrawable(R.drawable.white_bg));
+                        mStarttime_tv.setText("");
+                        mEndtime_tv.setText("");
                         requestTongJiAllCount(4);
 
                         break;
@@ -676,6 +740,8 @@ public class FuWuTongJi_Activity extends BaseActivity2 {
 
                         mShangbannian_rb.setTextColor(getResources().getColor(R.color.white));
                         mShangbannian_rb.setBackground(getResources().getDrawable(R.drawable.blue_bg));
+                        mStarttime_tv.setText("");
+                        mEndtime_tv.setText("");
                         requestTongJiAllCount(5);
 
                         break;
@@ -711,6 +777,27 @@ public class FuWuTongJi_Activity extends BaseActivity2 {
             public void onTimeSelect(Date date, View v) {
                 String found_date = DateUtils.dateToString(date, FORMAT_5);
                 ((TextView) v).setText(found_date);
+                if (v.getId() == R.id.endtime_tv){
+                    LogUtil.e("结束时间");
+                    mQuanbu_rb.setTextColor(getResources().getColor(R.color.hui_1));
+                    mQuanbu_rb.setBackground(getResources().getDrawable(R.drawable.white_bg));
+
+
+                    mShangzhou_rb.setTextColor(getResources().getColor(R.color.hui_1));
+                    mShangzhou_rb.setBackground(getResources().getDrawable(R.drawable.white_bg));
+
+                    mShangyue_rb.setTextColor(getResources().getColor(R.color.hui_1));
+                    mShangyue_rb.setBackground(getResources().getDrawable(R.drawable.white_bg));
+
+                    mShangjidu_rb.setTextColor(getResources().getColor(R.color.hui_1));
+                    mShangjidu_rb.setBackground(getResources().getDrawable(R.drawable.white_bg));
+
+                    mShangbannian_rb.setTextColor(getResources().getColor(R.color.hui_1));
+                    mShangbannian_rb.setBackground(getResources().getDrawable(R.drawable.white_bg));
+
+                    requestTongJiAllTimeCount(mStartTime,found_date);
+
+                }
             }
         })
                 //年月日时分秒 的显示与否，不设置则默认全部显示
@@ -732,4 +819,6 @@ public class FuWuTongJi_Activity extends BaseActivity2 {
     public Context context() {
         return null;
     }
+
+
 }

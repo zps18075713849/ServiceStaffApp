@@ -15,13 +15,16 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.adapter.NewGongDan_Adapter;
 import com.haitian.servicestaffapp.app.Constants;
 import com.haitian.servicestaffapp.app.DoctorBaseAppliction;
 import com.haitian.servicestaffapp.base.BaseFragment;
 import com.haitian.servicestaffapp.bean.GongDanIngJuJue_Bean;
+import com.haitian.servicestaffapp.bean.GongDanJinXingZhong_Bean;
 import com.haitian.servicestaffapp.bean.NewGongDan_Bean;
+import com.haitian.servicestaffapp.bean.TouSuHuiFu_Bean;
 import com.haitian.servicestaffapp.okutils.OkHttpUtil;
 import com.haitian.servicestaffapp.utils.LogUtil;
 
@@ -33,7 +36,7 @@ public class JinXingZhongQiangDan_Fragment extends BaseFragment {
     private PopupWindow mPopupWindow;
     private LinearLayout mLl;
     private RecyclerView mRecy_id;
-    private ArrayList<NewGongDan_Bean.DataBean> mlist = new ArrayList<>();
+    private ArrayList<GongDanJinXingZhong_Bean.DataBean> mlist = new ArrayList<>();
     private NewGongDan_Adapter mAdapter;
 
     @Override
@@ -53,19 +56,24 @@ public class JinXingZhongQiangDan_Fragment extends BaseFragment {
         mRecy_id = view.findViewById(R.id.recy_id);
 
         mRecy_id.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new NewGongDan_Adapter(getActivity(),mlist);
+        mAdapter = new NewGongDan_Adapter(getActivity(), mlist);
         mRecy_id.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
 
     }
 
+    @Override
+    protected void initData() {
+        super.initData();
+        requestListData();
+    }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden) {   // 不在最前端显示 相当于调用了onPause();
             return;
-        }else{  // 在最前端显示 相当于调用了onResume();
+        } else {  // 在最前端显示 相当于调用了onResume();
             requestListData();
         }
     }
@@ -76,12 +84,12 @@ public class JinXingZhongQiangDan_Fragment extends BaseFragment {
         mAdapter.setOnClickItem(new NewGongDan_Adapter.onClickItem() {
             @Override
             public void onClick(int position, int type) {
-                switch (type){
-                    case 0:{
+                switch (type) {
+                    case 0: {
                         openPopup(position);
                         break;
                     }
-                    case 1:{
+                    case 1: {
                         //接单
                         requestJieDan(position);
                         break;
@@ -122,11 +130,11 @@ public class JinXingZhongQiangDan_Fragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 String jujue = jujue_ed.getText().toString().trim();
-                if (jujue.equals("")){
+                if (jujue.equals("")) {
                     Toast.makeText(getActivity(), "请输入拒单原因", Toast.LENGTH_SHORT).show();
                     return;
-                }else {
-                    requestJuJue(position,jujue);
+                } else {
+                    requestJuJue(position, jujue);
                     mPopupWindow.dismiss();
                 }
             }
@@ -134,37 +142,42 @@ public class JinXingZhongQiangDan_Fragment extends BaseFragment {
     }
 
     //拒单
-    private void requestJuJue(int position,String jujue) {
+    private void requestJuJue(int position, String jujue) {
         showWaitDialog();
-        int id = mlist.get(position).getId();
+        String id = mlist.get(position).getId();
         Map<String, Object> map = new HashMap<>();
-        map.put("user_id",DoctorBaseAppliction.spUtil.getString(Constants.USERID,""));
-        map.put("jujueyuanyintext",jujue);
-        map.put("id",id+"");
+        map.put("user_id", DoctorBaseAppliction.spUtil.getString(Constants.USERID, ""));
+        map.put("jujueyuanyintext", jujue);
+        map.put("id", id + "");
 
         OkHttpUtil.getInteace().doPost(Constants.GONGDANINGJUJUE, map, getActivity(), new OkHttpUtil.OkCallBack() {
             @Override
             public void onFauile(Exception e) {
                 hideWaitDialog();
-                LogUtil.e("进行中工单拒绝接口失败："+e.getMessage());
+                LogUtil.e("进行中工单拒绝接口失败：" + e.getMessage());
             }
 
             @Override
-            public void onResponse(String json) {
+            public void onResponse(final String json) {
                 hideWaitDialog();
-                LogUtil.e("进行中工单拒绝接口成功："+json);
-                Gson gson = new Gson();
-                final GongDanIngJuJue_Bean bean = gson.fromJson(json, GongDanIngJuJue_Bean.class);
+                LogUtil.e("进行中工单拒绝接口成功：" + json);
+
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (bean.getCode() == 20011){
-                            Toast.makeText(getContext(), bean.getMessage(), Toast.LENGTH_SHORT).show();
-                            mlist.clear();
-                            requestListData();
-                        }else {
-                            Toast.makeText(getContext(), bean.getMessage(), Toast.LENGTH_SHORT).show();
+                        try {
+                            Gson gson = new Gson();
+                            final GongDanIngJuJue_Bean bean = gson.fromJson(json, GongDanIngJuJue_Bean.class);
+                            if (bean.getCode() == 20011) {
+                                Toast.makeText(getContext(), bean.getMessage(), Toast.LENGTH_SHORT).show();
+                                mlist.clear();
+                                requestListData();
+                            } else {
+                                Toast.makeText(getContext(), bean.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JsonSyntaxException e) {
+                            e.printStackTrace();
                         }
                     }
                 });
@@ -175,44 +188,51 @@ public class JinXingZhongQiangDan_Fragment extends BaseFragment {
     //接单
     private void requestJieDan(int position) {
         showWaitDialog();
-        int id = mlist.get(position).getId();
+        String id = mlist.get(position).getId();
         String userid = DoctorBaseAppliction.spUtil.getString(Constants.USERID, "");
         Integer user_id = Integer.valueOf(userid);
         Map<String, Object> map = new HashMap<>();
-        map.put("user_id",user_id);
-        map.put("gongdanid",id);
+        map.put("user_id", user_id);
+        map.put("gongdanid", id);
 
         OkHttpUtil.getInteace().doPost(Constants.GONGDANJIEDAN, map, getActivity(), new OkHttpUtil.OkCallBack() {
             @Override
             public void onFauile(Exception e) {
-                LogUtil.e("接单失败："+e.getMessage());
+                LogUtil.e("接单失败：" + e.getMessage());
                 hideWaitDialog();
             }
 
             @Override
-            public void onResponse(String json) {
-                LogUtil.e("接单成功："+json);
-                Gson gson = new Gson();
-                final NewGongDan_Bean bean = gson.fromJson(json, NewGongDan_Bean.class);
+            public void onResponse(final String json) {
+                hideWaitDialog();
+                LogUtil.e("接单成功：" + json);
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (bean.getCode() == 20011){
-                            hideWaitDialog();
-                            Toast.makeText(getContext(), bean.getMessage()+"", Toast.LENGTH_SHORT).show();
-                            mlist.clear();
-                            requestListData();
-                        }else if (bean.getCode() == 20010){
-                            Toast.makeText(getContext(), "接单失败", Toast.LENGTH_SHORT).show();
-                            hideWaitDialog();
+                        try {
+                            Gson gson = new Gson();
+                            final TouSuHuiFu_Bean bean = gson.fromJson(json, TouSuHuiFu_Bean.class);
+                            if (bean.getCode() == 20011) {
+                                hideWaitDialog();
+                                Toast.makeText(getContext(), bean.getMessage() + "", Toast.LENGTH_SHORT).show();
+                                mlist.clear();
+                                requestListData();
+                            } else if (bean.getCode() == 20010) {
+                                Toast.makeText(getContext(), "接单失败", Toast.LENGTH_SHORT).show();
+                                hideWaitDialog();
+                            }else {
+                                Toast.makeText(getContext(), bean.getMessage(), Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        } catch (JsonSyntaxException e) {
+                            e.printStackTrace();
                         }
                     }
                 });
             }
         });
     }
-
 
 
     private void requestListData() {
@@ -220,39 +240,43 @@ public class JinXingZhongQiangDan_Fragment extends BaseFragment {
         String userid = DoctorBaseAppliction.spUtil.getString(Constants.USERID, "");
         Integer id = Integer.valueOf(userid);
         Map<String, Object> map = new HashMap<>();
-        map.put("user_id",id);
+        map.put("user_id", id);
 
-        OkHttpUtil.getInteace().doPost(Constants.NEWXINGONGDAN, map, getActivity(), new OkHttpUtil.OkCallBack() {
+        OkHttpUtil.getInteace().doPost(Constants.GONGDANING, map, getActivity(), new OkHttpUtil.OkCallBack() {
             @Override
             public void onFauile(Exception e) {
                 hideWaitDialog();
-                LogUtil.e("新工单失败："+e.getMessage());
+                LogUtil.e("进行中失败：" + e.getMessage());
             }
 
             @Override
-            public void onResponse(String json) {
+            public void onResponse(final String json) {
                 hideWaitDialog();
-                LogUtil.e("新工单成功："+json);
-                Gson gson = new Gson();
-                final NewGongDan_Bean bean = gson.fromJson(json, NewGongDan_Bean.class);
+                LogUtil.e("进行中成功：" + json);
+
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (bean.getCode() == 20041){
-                            try {
+                        try {
+                            Gson gson = new Gson();
+                            final GongDanJinXingZhong_Bean bean = gson.fromJson(json, GongDanJinXingZhong_Bean.class);
+                            if (bean.getCode() == 20041) {
+                                mlist.clear();
                                 mlist.addAll(bean.getData());
                                 mAdapter.notifyDataSetChanged();
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                            }else {
+                                mlist.clear();
+                                mAdapter.notifyDataSetChanged();
                             }
+                        } catch (JsonSyntaxException e) {
+                            e.printStackTrace();
                         }
                     }
                 });
             }
         });
     }
-
 
 
 }

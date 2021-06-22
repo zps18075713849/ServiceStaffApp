@@ -4,9 +4,10 @@ import java.util.List;
 
 public class YiJieDanList_Bean {
 
+
     /**
      * code : 20041
-     * data : [{"id":3,"xingji":"3","user_id":7,"fuwutype_id":2,"fuwu_value":"洗脚","startTime":"2021-03-26 15:51:52.0","endTime":"2021-03-26 18:50:59.0","waiter_address":"泰安市泰山区明堂路60","cost":null,"state":"1","creatTime":"2021-03-26 15:01:30.0","wanchengState":"0","pingjiak":null}]
+     * data : [{"id":"4566554344556","startTime":1619509912000,"goodstypeName":"超值配送","xingji":"2","old_phone":"15954875421","fuwu_value":"做饭","dingdanlaiyuan":"1","waiter_address":"泰安市泰山区明堂路60号","endTime":1619520659000,"cost":0.01},{"id":"4958358621544d1dac99b6a608e8d3e2","startTime":1685005860000,"goodstypeName":"美食配送","xingji":"5","old_phone":"18854806444","fuwu_value":"炒锅饭","dingdanlaiyuan":"1","waiter_address":"江苏苏州市张家港市要去 张先生 13611127052","endTime":1684998660000,"cost":0.01},{"id":"4434355555444","startTime":1619509912000,"goodstypeName":"超值配送","xingji":"3","old_phone":"18854806444","fuwu_value":"洗脚","dingdanlaiyuan":"1","waiter_address":"泰安市泰山区明堂路60","endTime":1619520659000,"cost":0.01},{"id":"4445566655","startTime":1619509912000,"goodstypeName":"超值配送","xingji":"2","old_phone":"18854806444","fuwu_value":"做饭","dingdanlaiyuan":"1","waiter_address":"泰安市泰山区明堂路60号","endTime":1619520659000,"cost":0.01},{"id":"445665654444","startTime":1619509912000,"goodstypeName":"超值配送","xingji":"2","old_phone":"18514822585","fuwu_value":"做饭","dingdanlaiyuan":"1","waiter_address":"泰安市泰山区明堂路60号","endTime":1619520659000,"cost":0.01},{"id":"47a550b8c5ad4b96a5ad0eedd12ceaf7","startTime":1717321500000,"goodstypeName":"家政保洁","xingji":"5","old_phone":"13254987521","fuwu_value":"空气净化","dingdanlaiyuan":"1","waiter_address":"内蒙古赤峰市市辖区就爱看 abc 13611127052","endTime":1717321500000,"cost":0.01},{"id":"445665654444","startTime":1619509912000,"goodstypeName":"超值配送","xingji":"2","old_phone":"18514822585","fuwu_value":"做饭","dingdanlaiyuan":"1","waiter_address":"泰安市泰山区明堂路60号","endTime":1619520659000,"cost":0.01}]
      * message : null
      */
 
@@ -40,41 +41,51 @@ public class YiJieDanList_Bean {
 
     public static class DataBean {
         /**
-         * id : 3
-         * xingji : 3
-         * user_id : 7
-         * fuwutype_id : 2
-         * fuwu_value : 洗脚
-         * startTime : 2021-03-26 15:51:52.0
-         * endTime : 2021-03-26 18:50:59.0
-         * waiter_address : 泰安市泰山区明堂路60
-         * cost : null
-         * state : 1
-         * creatTime : 2021-03-26 15:01:30.0
-         * wanchengState : 0
-         * pingjiak : null
+         * id : 4566554344556
+         * startTime : 1619509912000
+         * goodstypeName : 超值配送
+         * xingji : 2
+         * old_phone : 15954875421
+         * fuwu_value : 做饭
+         * dingdanlaiyuan : 1
+         * waiter_address : 泰安市泰山区明堂路60号
+         * endTime : 1619520659000
+         * cost : 0.01
          */
 
-        private int id;
+        private String id;
+        private long startTime;
+        private String goodstypeName;
         private String xingji;
-        private int user_id;
-        private int fuwutype_id;
+        private String old_phone;
         private String fuwu_value;
-        private String startTime;
-        private String endTime;
+        private String dingdanlaiyuan;
         private String waiter_address;
-        private Object cost;
-        private String state;
-        private String creatTime;
-        private String wanchengState;
-        private Object pingjiak;
+        private long endTime;
+        private double cost;
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
+        }
+
+        public long getStartTime() {
+            return startTime;
+        }
+
+        public void setStartTime(long startTime) {
+            this.startTime = startTime;
+        }
+
+        public String getGoodstypeName() {
+            return goodstypeName;
+        }
+
+        public void setGoodstypeName(String goodstypeName) {
+            this.goodstypeName = goodstypeName;
         }
 
         public String getXingji() {
@@ -85,20 +96,12 @@ public class YiJieDanList_Bean {
             this.xingji = xingji;
         }
 
-        public int getUser_id() {
-            return user_id;
+        public String getOld_phone() {
+            return old_phone;
         }
 
-        public void setUser_id(int user_id) {
-            this.user_id = user_id;
-        }
-
-        public int getFuwutype_id() {
-            return fuwutype_id;
-        }
-
-        public void setFuwutype_id(int fuwutype_id) {
-            this.fuwutype_id = fuwutype_id;
+        public void setOld_phone(String old_phone) {
+            this.old_phone = old_phone;
         }
 
         public String getFuwu_value() {
@@ -109,20 +112,12 @@ public class YiJieDanList_Bean {
             this.fuwu_value = fuwu_value;
         }
 
-        public String getStartTime() {
-            return startTime;
+        public String getDingdanlaiyuan() {
+            return dingdanlaiyuan;
         }
 
-        public void setStartTime(String startTime) {
-            this.startTime = startTime;
-        }
-
-        public String getEndTime() {
-            return endTime;
-        }
-
-        public void setEndTime(String endTime) {
-            this.endTime = endTime;
+        public void setDingdanlaiyuan(String dingdanlaiyuan) {
+            this.dingdanlaiyuan = dingdanlaiyuan;
         }
 
         public String getWaiter_address() {
@@ -133,44 +128,20 @@ public class YiJieDanList_Bean {
             this.waiter_address = waiter_address;
         }
 
-        public Object getCost() {
+        public long getEndTime() {
+            return endTime;
+        }
+
+        public void setEndTime(long endTime) {
+            this.endTime = endTime;
+        }
+
+        public double getCost() {
             return cost;
         }
 
-        public void setCost(Object cost) {
+        public void setCost(double cost) {
             this.cost = cost;
-        }
-
-        public String getState() {
-            return state;
-        }
-
-        public void setState(String state) {
-            this.state = state;
-        }
-
-        public String getCreatTime() {
-            return creatTime;
-        }
-
-        public void setCreatTime(String creatTime) {
-            this.creatTime = creatTime;
-        }
-
-        public String getWanchengState() {
-            return wanchengState;
-        }
-
-        public void setWanchengState(String wanchengState) {
-            this.wanchengState = wanchengState;
-        }
-
-        public Object getPingjiak() {
-            return pingjiak;
-        }
-
-        public void setPingjiak(Object pingjiak) {
-            this.pingjiak = pingjiak;
         }
     }
 }

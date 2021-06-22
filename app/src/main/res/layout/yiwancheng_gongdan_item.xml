@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_124"
+    android:layout_height="@dimen/dp_140"
     android:background="@color/white">
 
     <ImageView
@@ -10,6 +10,7 @@
         android:layout_width="@dimen/dp_24"
         android:layout_height="@dimen/dp_24"
         android:layout_marginLeft="@dimen/dp_13"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/dp_11"
         android:src="@drawable/red_bg" />
 
@@ -17,7 +18,8 @@
         android:id="@+id/mobile_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_4"
+        android:layout_marginLeft="@dimen/dp_14"
+
         android:layout_marginTop="@dimen/dp_7"
         android:layout_toRightOf="@id/img_id"
         android:text="13333333333"
@@ -29,10 +31,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/mobile_tv"
-        android:layout_marginLeft="@dimen/dp_6"
+        android:layout_marginLeft="@dimen/dp_14"
+
         android:layout_toRightOf="@id/img_id"
         android:clickable="false"
-        app:zrb_rating="3"
+        app:zrb_click_enable="false"
         app:zrb_star_count="5"
         app:zrb_star_dimension="@dimen/dp_12" />
 
@@ -73,11 +76,12 @@
 
     <TextView
         android:id="@+id/fuwutime_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dp_300"
         android:layout_height="wrap_content"
         android:layout_below="@id/fuwuneirong_tv"
         android:layout_marginLeft="@dimen/dp_14"
         android:text="服务时间：2020-07-02 13：00 ~ 15：00"
+        android:layout_marginTop="@dimen/dp_5"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_14" />
 
@@ -88,6 +92,7 @@
         android:layout_below="@id/fuwutime_tv"
         android:layout_marginLeft="@dimen/dp_14"
         android:text="地址：北京海淀区康德大厦2-098"
+        android:layout_marginTop="@dimen/dp_5"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_14" />
 
@@ -128,5 +133,12 @@
         android:text="接单"
         android:visibility="gone"
         android:textColor="@color/white" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_5"
+        android:background="#f5f6fe"
+        android:layout_alignParentBottom="true"
+        />
 
 </RelativeLayout>

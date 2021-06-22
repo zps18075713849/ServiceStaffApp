@@ -11,7 +11,7 @@ public class DataSettingBean {
 
     /**
      * code : 20041
-     * data : {"leixing":{"id":2,"fuwutype":"理疗","fuwutext":null,"creattime":null,"updatetime":null,"delFlag":0,"app_biaoshi":null,"agencyid":1,"createuser":null},"bumen":{"supplier_id":3,"supplier_name":"3332","supplier_type":1,"link_man":"111","phone_number":"a","provinceID":"110000","cityID":"110100","regionID":"","address":"111","scope":5,"isHaveFuwuMan":1,"modified_time":"2019-11-16 13:52:13.0","supplier_status":1,"create_time":"2019-11-16 09:05:58.0"},"user":{"user_id":68,"user_name":"18266860807","user_nickname":null,"user_card_name":"颜哲童","user_pwd":"329dbc42c8b6096fe6518549e7688baf","user_affiliate":null,"user_role_id":null,"user_dept":null,"messageId":null,"messgae":null,"user_type":"2","user_department":"3","user_zhengjian":"http://localhost:8080/images/25257826-564c-47db-be8d-934e8cf97b27.jpg,http://localhost:8080/images/1ec60be1-073a-4724-9761-babf24c9e2f9.jpg,","newuser_pwd":null,"shenfenzheng":null,"shouchizhaop":"http://localhost:8080/images/52986d4d-42a3-4415-ae9d-2426d5986594.jpg,http://localhost:8080/images/ae96971d-1d89-4b56-a994-372c16f8aefe.jpg,","huojiangzhengshu":"http://localhost:8080/images/2c07f1bb-befd-4330-bda4-ff4d07f452ba.jpg,http://localhost:8080/images/228f9897-1881-485f-a89b-f0e14af11d04.jpg,","zhiyezhengshu":null,"shouchi":null,"huojiangzhengs":null,"shenfenzhenglist":null,"zhiyezhengshuList":null,"biaoji":null}}
+     * data : {"leixing":{"id":2,"fuwutype":"理疗","fuwutext":null,"creattime":null,"updatetime":null,"delFlag":0,"app_biaoshi":null,"agencyid":1,"createuser":null},"bumen":{"bumen":{"id":41,"agencyName":"测试2","agencyType":3,"mobile":null,"province":null,"city":null,"region":null,"provinceId":null,"cityId":null,"regionId":null,"addr":null,"createUser":null,"createTime":null,"updateUser":null,"updateTime":null,"remark":null},"shequjigou_biaoshi":1},"user":{"user_id":72,"user_name":"13611127052","user_nickname":null,"user_card_name":"手机","user_pwd":"e10adc3949ba59abbe56e057f20f883e","user_affiliate":null,"user_role_id":null,"user_dept":null,"messageId":null,"messgae":null,"user_type":"2","user_department":"41","user_zhengjian":null,"newuser_pwd":null,"shenfenzheng":"http://111.17.215.37:817/waiter/images/612b0200-9b36-43bd-8bb8-7ab941a835ae.png,http://111.17.215.37:817/waiter/images/656475f0-ae75-445f-8e30-54bcfecec257.png,","shouchizhaop":"http://111.17.215.37:817/waiter/images/18998a9f-abad-4edc-81d2-208cb2fd3590.png,","huojiangzhengshu":null,"zhiyezhengshu":null,"shequjigou_biaoshi":1,"fuwurenyuan_adress":"北京市昌平区","shouchi":null,"huojiangzhengs":null,"shenfenzhenglist":null,"zhiyezhengshuList":null,"biaoji":null}}
      * message : null
      */
 
@@ -46,12 +46,12 @@ public class DataSettingBean {
     public static class DataBean {
         /**
          * leixing : {"id":2,"fuwutype":"理疗","fuwutext":null,"creattime":null,"updatetime":null,"delFlag":0,"app_biaoshi":null,"agencyid":1,"createuser":null}
-         * bumen : {"supplier_id":3,"supplier_name":"3332","supplier_type":1,"link_man":"111","phone_number":"a","provinceID":"110000","cityID":"110100","regionID":"","address":"111","scope":5,"isHaveFuwuMan":1,"modified_time":"2019-11-16 13:52:13.0","supplier_status":1,"create_time":"2019-11-16 09:05:58.0"}
-         * user : {"user_id":68,"user_name":"18266860807","user_nickname":null,"user_card_name":"颜哲童","user_pwd":"329dbc42c8b6096fe6518549e7688baf","user_affiliate":null,"user_role_id":null,"user_dept":null,"messageId":null,"messgae":null,"user_type":"2","user_department":"3","user_zhengjian":"http://localhost:8080/images/25257826-564c-47db-be8d-934e8cf97b27.jpg,http://localhost:8080/images/1ec60be1-073a-4724-9761-babf24c9e2f9.jpg,","newuser_pwd":null,"shenfenzheng":null,"shouchizhaop":"http://localhost:8080/images/52986d4d-42a3-4415-ae9d-2426d5986594.jpg,http://localhost:8080/images/ae96971d-1d89-4b56-a994-372c16f8aefe.jpg,","huojiangzhengshu":"http://localhost:8080/images/2c07f1bb-befd-4330-bda4-ff4d07f452ba.jpg,http://localhost:8080/images/228f9897-1881-485f-a89b-f0e14af11d04.jpg,","zhiyezhengshu":null,"shouchi":null,"huojiangzhengs":null,"shenfenzhenglist":null,"zhiyezhengshuList":null,"biaoji":null}
+         * bumen : {"bumen":{"id":41,"agencyName":"测试2","agencyType":3,"mobile":null,"province":null,"city":null,"region":null,"provinceId":null,"cityId":null,"regionId":null,"addr":null,"createUser":null,"createTime":null,"updateUser":null,"updateTime":null,"remark":null},"shequjigou_biaoshi":1}
+         * user : {"user_id":72,"user_name":"13611127052","user_nickname":null,"user_card_name":"手机","user_pwd":"e10adc3949ba59abbe56e057f20f883e","user_affiliate":null,"user_role_id":null,"user_dept":null,"messageId":null,"messgae":null,"user_type":"2","user_department":"41","user_zhengjian":null,"newuser_pwd":null,"shenfenzheng":"http://111.17.215.37:817/waiter/images/612b0200-9b36-43bd-8bb8-7ab941a835ae.png,http://111.17.215.37:817/waiter/images/656475f0-ae75-445f-8e30-54bcfecec257.png,","shouchizhaop":"http://111.17.215.37:817/waiter/images/18998a9f-abad-4edc-81d2-208cb2fd3590.png,","huojiangzhengshu":null,"zhiyezhengshu":null,"shequjigou_biaoshi":1,"fuwurenyuan_adress":"北京市昌平区","shouchi":null,"huojiangzhengs":null,"shenfenzhenglist":null,"zhiyezhengshuList":null,"biaoji":null}
          */
 
         private LeixingBean leixing;
-        private BumenBean bumen;
+        private BumenBeanX bumen;
         private UserBean user;
 
         public LeixingBean getLeixing() {
@@ -62,11 +62,11 @@ public class DataSettingBean {
             this.leixing = leixing;
         }
 
-        public BumenBean getBumen() {
+        public BumenBeanX getBumen() {
             return bumen;
         }
 
-        public void setBumen(BumenBean bumen) {
+        public void setBumen(BumenBeanX bumen) {
             this.bumen = bumen;
         }
 
@@ -174,172 +174,220 @@ public class DataSettingBean {
             }
         }
 
-        public static class BumenBean {
+        public static class BumenBeanX {
             /**
-             * supplier_id : 3
-             * supplier_name : 3332
-             * supplier_type : 1
-             * link_man : 111
-             * phone_number : a
-             * provinceID : 110000
-             * cityID : 110100
-             * regionID :
-             * address : 111
-             * scope : 5
-             * isHaveFuwuMan : 1
-             * modified_time : 2019-11-16 13:52:13.0
-             * supplier_status : 1
-             * create_time : 2019-11-16 09:05:58.0
+             * bumen : {"id":41,"agencyName":"测试2","agencyType":3,"mobile":null,"province":null,"city":null,"region":null,"provinceId":null,"cityId":null,"regionId":null,"addr":null,"createUser":null,"createTime":null,"updateUser":null,"updateTime":null,"remark":null}
+             * shequjigou_biaoshi : 1
              */
 
-            private int supplier_id;
-            private String supplier_name;
-            private int supplier_type;
-            private String link_man;
-            private String phone_number;
-            private String provinceID;
-            private String cityID;
-            private String regionID;
-            private String address;
-            private int scope;
-            private int isHaveFuwuMan;
-            private String modified_time;
-            private int supplier_status;
-            private String create_time;
+            private BumenBean bumen;
+            private int shequjigou_biaoshi;
 
-            public int getSupplier_id() {
-                return supplier_id;
+            public BumenBean getBumen() {
+                return bumen;
             }
 
-            public void setSupplier_id(int supplier_id) {
-                this.supplier_id = supplier_id;
+            public void setBumen(BumenBean bumen) {
+                this.bumen = bumen;
             }
 
-            public String getSupplier_name() {
-                return supplier_name;
+            public int getShequjigou_biaoshi() {
+                return shequjigou_biaoshi;
             }
 
-            public void setSupplier_name(String supplier_name) {
-                this.supplier_name = supplier_name;
+            public void setShequjigou_biaoshi(int shequjigou_biaoshi) {
+                this.shequjigou_biaoshi = shequjigou_biaoshi;
             }
 
-            public int getSupplier_type() {
-                return supplier_type;
-            }
+            public static class BumenBean {
+                /**
+                 * id : 41
+                 * agencyName : 测试2
+                 * agencyType : 3
+                 * mobile : null
+                 * province : null
+                 * city : null
+                 * region : null
+                 * provinceId : null
+                 * cityId : null
+                 * regionId : null
+                 * addr : null
+                 * createUser : null
+                 * createTime : null
+                 * updateUser : null
+                 * updateTime : null
+                 * remark : null
+                 */
 
-            public void setSupplier_type(int supplier_type) {
-                this.supplier_type = supplier_type;
-            }
+                private int id;
+                private String agencyName;
+                private int agencyType;
+                private Object mobile;
+                private Object province;
+                private Object city;
+                private Object region;
+                private Object provinceId;
+                private Object cityId;
+                private Object regionId;
+                private Object addr;
+                private Object createUser;
+                private Object createTime;
+                private Object updateUser;
+                private Object updateTime;
+                private Object remark;
 
-            public String getLink_man() {
-                return link_man;
-            }
+                public int getId() {
+                    return id;
+                }
 
-            public void setLink_man(String link_man) {
-                this.link_man = link_man;
-            }
+                public void setId(int id) {
+                    this.id = id;
+                }
 
-            public String getPhone_number() {
-                return phone_number;
-            }
+                public String getAgencyName() {
+                    return agencyName;
+                }
 
-            public void setPhone_number(String phone_number) {
-                this.phone_number = phone_number;
-            }
+                public void setAgencyName(String agencyName) {
+                    this.agencyName = agencyName;
+                }
 
-            public String getProvinceID() {
-                return provinceID;
-            }
+                public int getAgencyType() {
+                    return agencyType;
+                }
 
-            public void setProvinceID(String provinceID) {
-                this.provinceID = provinceID;
-            }
+                public void setAgencyType(int agencyType) {
+                    this.agencyType = agencyType;
+                }
 
-            public String getCityID() {
-                return cityID;
-            }
+                public Object getMobile() {
+                    return mobile;
+                }
 
-            public void setCityID(String cityID) {
-                this.cityID = cityID;
-            }
+                public void setMobile(Object mobile) {
+                    this.mobile = mobile;
+                }
 
-            public String getRegionID() {
-                return regionID;
-            }
+                public Object getProvince() {
+                    return province;
+                }
 
-            public void setRegionID(String regionID) {
-                this.regionID = regionID;
-            }
+                public void setProvince(Object province) {
+                    this.province = province;
+                }
 
-            public String getAddress() {
-                return address;
-            }
+                public Object getCity() {
+                    return city;
+                }
 
-            public void setAddress(String address) {
-                this.address = address;
-            }
+                public void setCity(Object city) {
+                    this.city = city;
+                }
 
-            public int getScope() {
-                return scope;
-            }
+                public Object getRegion() {
+                    return region;
+                }
 
-            public void setScope(int scope) {
-                this.scope = scope;
-            }
+                public void setRegion(Object region) {
+                    this.region = region;
+                }
 
-            public int getIsHaveFuwuMan() {
-                return isHaveFuwuMan;
-            }
+                public Object getProvinceId() {
+                    return provinceId;
+                }
 
-            public void setIsHaveFuwuMan(int isHaveFuwuMan) {
-                this.isHaveFuwuMan = isHaveFuwuMan;
-            }
+                public void setProvinceId(Object provinceId) {
+                    this.provinceId = provinceId;
+                }
 
-            public String getModified_time() {
-                return modified_time;
-            }
+                public Object getCityId() {
+                    return cityId;
+                }
 
-            public void setModified_time(String modified_time) {
-                this.modified_time = modified_time;
-            }
+                public void setCityId(Object cityId) {
+                    this.cityId = cityId;
+                }
 
-            public int getSupplier_status() {
-                return supplier_status;
-            }
+                public Object getRegionId() {
+                    return regionId;
+                }
 
-            public void setSupplier_status(int supplier_status) {
-                this.supplier_status = supplier_status;
-            }
+                public void setRegionId(Object regionId) {
+                    this.regionId = regionId;
+                }
 
-            public String getCreate_time() {
-                return create_time;
-            }
+                public Object getAddr() {
+                    return addr;
+                }
 
-            public void setCreate_time(String create_time) {
-                this.create_time = create_time;
+                public void setAddr(Object addr) {
+                    this.addr = addr;
+                }
+
+                public Object getCreateUser() {
+                    return createUser;
+                }
+
+                public void setCreateUser(Object createUser) {
+                    this.createUser = createUser;
+                }
+
+                public Object getCreateTime() {
+                    return createTime;
+                }
+
+                public void setCreateTime(Object createTime) {
+                    this.createTime = createTime;
+                }
+
+                public Object getUpdateUser() {
+                    return updateUser;
+                }
+
+                public void setUpdateUser(Object updateUser) {
+                    this.updateUser = updateUser;
+                }
+
+                public Object getUpdateTime() {
+                    return updateTime;
+                }
+
+                public void setUpdateTime(Object updateTime) {
+                    this.updateTime = updateTime;
+                }
+
+                public Object getRemark() {
+                    return remark;
+                }
+
+                public void setRemark(Object remark) {
+                    this.remark = remark;
+                }
             }
         }
 
         public static class UserBean {
             /**
-             * user_id : 68
-             * user_name : 18266860807
+             * user_id : 72
+             * user_name : 13611127052
              * user_nickname : null
-             * user_card_name : 颜哲童
-             * user_pwd : 329dbc42c8b6096fe6518549e7688baf
+             * user_card_name : 手机
+             * user_pwd : e10adc3949ba59abbe56e057f20f883e
              * user_affiliate : null
              * user_role_id : null
              * user_dept : null
              * messageId : null
              * messgae : null
              * user_type : 2
-             * user_department : 3
-             * user_zhengjian : http://localhost:8080/images/25257826-564c-47db-be8d-934e8cf97b27.jpg,http://localhost:8080/images/1ec60be1-073a-4724-9761-babf24c9e2f9.jpg,
+             * user_department : 41
+             * user_zhengjian : null
              * newuser_pwd : null
-             * shenfenzheng : null
-             * shouchizhaop : http://localhost:8080/images/52986d4d-42a3-4415-ae9d-2426d5986594.jpg,http://localhost:8080/images/ae96971d-1d89-4b56-a994-372c16f8aefe.jpg,
-             * huojiangzhengshu : http://localhost:8080/images/2c07f1bb-befd-4330-bda4-ff4d07f452ba.jpg,http://localhost:8080/images/228f9897-1881-485f-a89b-f0e14af11d04.jpg,
+             * shenfenzheng : http://111.17.215.37:817/waiter/images/612b0200-9b36-43bd-8bb8-7ab941a835ae.png,http://111.17.215.37:817/waiter/images/656475f0-ae75-445f-8e30-54bcfecec257.png,
+             * shouchizhaop : http://111.17.215.37:817/waiter/images/18998a9f-abad-4edc-81d2-208cb2fd3590.png,
+             * huojiangzhengshu : null
              * zhiyezhengshu : null
+             * shequjigou_biaoshi : 1
+             * fuwurenyuan_adress : 北京市昌平区
              * shouchi : null
              * huojiangzhengs : null
              * shenfenzhenglist : null
@@ -359,12 +407,14 @@ public class DataSettingBean {
             private Object messgae;
             private String user_type;
             private String user_department;
-            private String user_zhengjian;
+            private Object user_zhengjian;
             private Object newuser_pwd;
-            private Object shenfenzheng;
+            private String shenfenzheng;
             private String shouchizhaop;
-            private String huojiangzhengshu;
+            private Object huojiangzhengshu;
             private Object zhiyezhengshu;
+            private int shequjigou_biaoshi;
+            private String fuwurenyuan_adress;
             private Object shouchi;
             private Object huojiangzhengs;
             private Object shenfenzhenglist;
@@ -467,11 +517,11 @@ public class DataSettingBean {
                 this.user_department = user_department;
             }
 
-            public String getUser_zhengjian() {
+            public Object getUser_zhengjian() {
                 return user_zhengjian;
             }
 
-            public void setUser_zhengjian(String user_zhengjian) {
+            public void setUser_zhengjian(Object user_zhengjian) {
                 this.user_zhengjian = user_zhengjian;
             }
 
@@ -483,11 +533,11 @@ public class DataSettingBean {
                 this.newuser_pwd = newuser_pwd;
             }
 
-            public Object getShenfenzheng() {
+            public String getShenfenzheng() {
                 return shenfenzheng;
             }
 
-            public void setShenfenzheng(Object shenfenzheng) {
+            public void setShenfenzheng(String shenfenzheng) {
                 this.shenfenzheng = shenfenzheng;
             }
 
@@ -499,11 +549,11 @@ public class DataSettingBean {
                 this.shouchizhaop = shouchizhaop;
             }
 
-            public String getHuojiangzhengshu() {
+            public Object getHuojiangzhengshu() {
                 return huojiangzhengshu;
             }
 
-            public void setHuojiangzhengshu(String huojiangzhengshu) {
+            public void setHuojiangzhengshu(Object huojiangzhengshu) {
                 this.huojiangzhengshu = huojiangzhengshu;
             }
 
@@ -513,6 +563,22 @@ public class DataSettingBean {
 
             public void setZhiyezhengshu(Object zhiyezhengshu) {
                 this.zhiyezhengshu = zhiyezhengshu;
+            }
+
+            public int getShequjigou_biaoshi() {
+                return shequjigou_biaoshi;
+            }
+
+            public void setShequjigou_biaoshi(int shequjigou_biaoshi) {
+                this.shequjigou_biaoshi = shequjigou_biaoshi;
+            }
+
+            public String getFuwurenyuan_adress() {
+                return fuwurenyuan_adress;
+            }
+
+            public void setFuwurenyuan_adress(String fuwurenyuan_adress) {
+                this.fuwurenyuan_adress = fuwurenyuan_adress;
             }
 
             public Object getShouchi() {

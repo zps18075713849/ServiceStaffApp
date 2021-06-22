@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -27,11 +29,14 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baoyz.actionsheet.ActionSheet;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.activity.AboutAs_Activity;
 import com.haitian.servicestaffapp.activity.DataSetting_Activity;
@@ -41,7 +46,12 @@ import com.haitian.servicestaffapp.activity.Register_Upload_CardId_Activity;
 import com.haitian.servicestaffapp.activity.Reigster_UploadCertificate_Activity;
 import com.haitian.servicestaffapp.activity.UpdatePassWord_Activity;
 import com.haitian.servicestaffapp.activity.UpdateZiTiSize_Activity;
+import com.haitian.servicestaffapp.app.Constants;
+import com.haitian.servicestaffapp.app.DoctorBaseAppliction;
 import com.haitian.servicestaffapp.base.BaseFragment;
+import com.haitian.servicestaffapp.bean.UpdateVersion_Bean;
+import com.haitian.servicestaffapp.okutils.OkHttpUtil;
+import com.haitian.servicestaffapp.utils.LogUtil;
 import com.haitian.servicestaffapp.utils.ToastUtils;
 
 import org.w3c.dom.Text;
@@ -50,6 +60,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.haitian.servicestaffapp.utils.HcUtils.getAppProcessName;
 
@@ -113,6 +125,8 @@ public class Setting_Fragment extends BaseFragment {
         //主布局
         mRelative_id = view.findViewById(R.id.relative_id);
 
+        String nickname = DoctorBaseAppliction.spUtil.getString(Constants.USER_CARD_NAME, "");
+        mIdcard_tv.setText(nickname+"");
     }
 
     @Override
@@ -167,31 +181,35 @@ public class Setting_Fragment extends BaseFragment {
         mBanben_line.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.gengxin_popup, null);
-                mPopupWindow = new PopupWindow(inflate, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//                View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.gengxin_popup, null);
+//                mPopupWindow = new PopupWindow(inflate, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//
+//                mPopupWindow.setBackgroundDrawable(null);
+//                mPopupWindow.setOutsideTouchable(true);
+//
+//                //主界面linealayout的id，并给自己定义的popwindow xml文件backgrount    android:background="#33000000"
+//                mPopupWindow.showAtLocation(mRelative_id, Gravity.CENTER, 0, 0);
+//
+//                inflate.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        mPopupWindow.dismiss();
+//                    }
+//                });
+//
+//                //自己定义的popwondow布局里面的按钮id
+//                Button bt = inflate.findViewById(R.id.gengxin_btn);
+//                //自己定义的popwondow里面的按钮  点击隐藏popwondow
+//                bt.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        mPopupWindow.dismiss();
+//                    }
+//                });
 
-                mPopupWindow.setBackgroundDrawable(null);
-                mPopupWindow.setOutsideTouchable(true);
+                //请求版本更新接口
+                requestUpdateVersion();
 
-                //主界面linealayout的id，并给自己定义的popwindow xml文件backgrount    android:background="#33000000"
-                mPopupWindow.showAtLocation(mRelative_id, Gravity.CENTER, 0, 0);
-
-                inflate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mPopupWindow.dismiss();
-                    }
-                });
-
-                //自己定义的popwondow布局里面的按钮id
-                Button bt = inflate.findViewById(R.id.gengxin_btn);
-                //自己定义的popwondow里面的按钮  点击隐藏popwondow
-                bt.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mPopupWindow.dismiss();
-                    }
-                });
             }
         });
 
@@ -199,15 +217,70 @@ public class Setting_Fragment extends BaseFragment {
         mPhoto_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                    showSelect();
-                } else {
-                    //否则去请求相机权限
-                    ToastUtils.showMessage(getActivity(), "请打开相机权限");
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 100);
-                }
+//                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+//                    showSelect();
+//                } else {
+//                    //否则去请求相机权限
+//                    ToastUtils.showMessage(getActivity(), "请打开相机权限");
+//                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 100);
+//                }
             }
         });
+    }
+
+    private void requestUpdateVersion() {
+        showWaitDialog();
+        Map<String, Object> map = new HashMap<>();
+        map.put("type","waiter");
+        map.put("version","1.0");
+
+        OkHttpUtil.getInteace().doPost(Constants.UPDATEVERSION, map, getActivity(), new OkHttpUtil.OkCallBack() {
+            @Override
+            public void onFauile(Exception e) {
+                hideWaitDialog();
+                LogUtil.e("版本更新接口失败："+e.getMessage());
+            }
+
+            @Override
+            public void onResponse(final String json) {
+                hideWaitDialog();
+                LogUtil.e("版本更新接口成功："+json);
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Gson gson = new Gson();
+                            UpdateVersion_Bean bean = gson.fromJson(json, UpdateVersion_Bean.class);
+                            if (bean.getCode() == 20041){
+                                Toast.makeText(getContext(), bean.getMessage()+"", Toast.LENGTH_SHORT).show();
+                                return;
+                            }else if (bean.getCode() == 20040){
+                                Toast.makeText(getContext(), "请下载安装新版本", Toast.LENGTH_SHORT).show();
+                                String url = bean.getData().getUrl();
+                                if (url!=null){
+                                    if (!url.equals("")){
+                                        boolean apk = url.contains("apk");
+                                        if (apk){
+                                            Uri uri = Uri.parse(url);
+                                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
+                                        }else {
+                                            Toast.makeText(getContext(), "文件类型异常", Toast.LENGTH_SHORT).show();
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (JsonSyntaxException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+        });
+
     }
 
 

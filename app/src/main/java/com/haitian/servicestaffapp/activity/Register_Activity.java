@@ -134,9 +134,20 @@ public class Register_Activity extends BaseActivity {
         map.put("biaoji",2);
         OkHttpUtil.getInteace().doPost(Constants.GETCODE, map, Register_Activity.this, new OkHttpUtil.OkCallBack() {
             @Override
-            public void onFauile(Exception e) {
+            public void onFauile(final Exception e) {
                 hideWaitDialog();
                 LogUtil.e("获取验证码失败：" + e.getMessage());
+
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (e.getMessage().equals("java.net.SocketTimeoutException: timeout")){
+                            Toast.makeText(mContext, "服务器请求超时", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+                });
+
             }
 
             @Override

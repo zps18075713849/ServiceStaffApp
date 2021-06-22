@@ -107,9 +107,9 @@ public class Home_Fragment extends BaseFragment {
         mKehuguanli_line = view.findViewById(R.id.kehuguanli_line);
 
 
-        final ArrayList<String> photoUrlList = new ArrayList<>();
-        photoUrlList.add("https://img.ivsky.com/img/tupian/pre/202002/29/dongji_xuejing-001.jpg");
-        photoUrlList.add("https://img.ivsky.com/img/tupian/pre/202002/29/dongji_xuejing-003.jpg");
+        final ArrayList<Integer> photoUrlList = new ArrayList<>();
+        photoUrlList.add(R.mipmap.banner_two);
+        photoUrlList.add(R.mipmap.banner_three);
 
         mBanner_id.setImages(photoUrlList)
                 .setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
@@ -119,14 +119,14 @@ public class Home_Fragment extends BaseFragment {
                     @Override
                     public void displayImage(Context context, Object path, ImageView imageView) {
                         LogUtil.e("Path:" + path);
-                        Glide.with(getContext()).load(path.toString()).into(imageView);
+                        Glide.with(getContext()).load(path).into(imageView);
                     }
                 }).start();
 
 
-        titleList.add("测试1");
-        titleList.add("测试2");
-        titleList.add("测试3");
+        titleList.add("欢迎使用服务人员APP");
+//        titleList.add("测试2");
+//        titleList.add("测试3");
 
         // 为ViewFlipper设置内容
         List<TextView> list = getData();
@@ -237,7 +237,7 @@ public class Home_Fragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 int displayedChild = mViewfil.getDisplayedChild();
-                Toast.makeText(getContext(), "标题：" + titleList.get(displayedChild), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "标题：" + titleList.get(displayedChild), Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent(getActivity(), LunBoTitle_Info_Activity.class);
 //                intent.putExtra("titleName", mTitlelist.get(displayedChild).getTitle());
 ////                intent.putExtra("text", mTitlelist.get(displayedChild).getText());

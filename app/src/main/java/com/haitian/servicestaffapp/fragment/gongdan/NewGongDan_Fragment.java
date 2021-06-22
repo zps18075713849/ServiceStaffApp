@@ -14,6 +14,7 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.adapter.NewGongDan_Adapter;
 import com.haitian.servicestaffapp.app.Constants;
@@ -36,8 +37,6 @@ public class NewGongDan_Fragment extends BaseFragment {
     private PopupWindow mPopupWindow;
 
 
-
-
     private LinearLayout mLl;
 
     @Override
@@ -55,16 +54,11 @@ public class NewGongDan_Fragment extends BaseFragment {
         super.initViews(view);
         mRecy_id = view.findViewById(R.id.recy_id);
         mLl = view.findViewById(R.id.ll);
-
-        mRecy_id.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new NewGongDan_Adapter(getActivity(),mlist);
-        mRecy_id.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-
-
-
-
-
+//
+//        mRecy_id.setLayoutManager(new LinearLayoutManager(getContext()));
+//        mAdapter = new NewGongDan_Adapter(getActivity(), mlist);
+//        mRecy_id.setAdapter(mAdapter);
+//        mAdapter.notifyDataSetChanged();
 
 
     }
@@ -75,11 +69,15 @@ public class NewGongDan_Fragment extends BaseFragment {
         requestListData();
     }
 
-
-
-
-
-
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
+            return;
+        } else {
+            requestListData();
+        }
+    }
 
     @Override
     protected void initListener() {
@@ -87,12 +85,12 @@ public class NewGongDan_Fragment extends BaseFragment {
         mAdapter.setOnClickItem(new NewGongDan_Adapter.onClickItem() {
             @Override
             public void onClick(int position, int type) {
-                switch (type){
-                    case 0:{
+                switch (type) {
+                    case 0: {
 
                         break;
                     }
-                    case 1:{
+                    case 1: {
                         //接单
                         requestJieDan(position);
                         break;
@@ -102,22 +100,7 @@ public class NewGongDan_Fragment extends BaseFragment {
         });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
 
 
     //接单
@@ -127,99 +110,32 @@ public class NewGongDan_Fragment extends BaseFragment {
         String userid = DoctorBaseAppliction.spUtil.getString(Constants.USERID, "");
         Integer user_id = Integer.valueOf(userid);
         Map<String, Object> map = new HashMap<>();
-        map.put("user_id",user_id);
-        map.put("gongdanid",id);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        map.put("user_id", user_id);
+        map.put("gongdanid", id);
 
 
         OkHttpUtil.getInteace().doPost(Constants.GONGDANJIEDAN, map, getActivity(), new OkHttpUtil.OkCallBack() {
             @Override
             public void onFauile(Exception e) {
-                LogUtil.e("接单失败："+e.getMessage());
+                LogUtil.e("接单失败：" + e.getMessage());
                 hideWaitDialog();
             }
 
             @Override
             public void onResponse(String json) {
-                LogUtil.e("接单成功："+json);
+                LogUtil.e("接单成功：" + json);
                 Gson gson = new Gson();
                 final NewGongDan_Bean bean = gson.fromJson(json, NewGongDan_Bean.class);
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (bean.getCode() == 20011){
+                        if (bean.getCode() == 20011) {
                             hideWaitDialog();
-                            Toast.makeText(getContext(), bean.getMessage()+"", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), bean.getMessage() + "", Toast.LENGTH_SHORT).show();
                             mlist.clear();
                             requestListData();
-                        }else if (bean.getCode() == 20010){
+                        } else if (bean.getCode() == 20010) {
                             Toast.makeText(getContext(), "接单失败", Toast.LENGTH_SHORT).show();
                             hideWaitDialog();
                         }
@@ -230,38 +146,42 @@ public class NewGongDan_Fragment extends BaseFragment {
     }
 
 
-
     private void requestListData() {
         showWaitDialog();
         String userid = DoctorBaseAppliction.spUtil.getString(Constants.USERID, "");
         Integer id = Integer.valueOf(userid);
         Map<String, Object> map = new HashMap<>();
-        map.put("user_id",id);
+        map.put("user_id", id);
 
         OkHttpUtil.getInteace().doPost(Constants.NEWXINGONGDAN, map, getActivity(), new OkHttpUtil.OkCallBack() {
             @Override
             public void onFauile(Exception e) {
                 hideWaitDialog();
-                LogUtil.e("新工单失败："+e.getMessage());
+                LogUtil.e("新工单失败：" + e.getMessage());
             }
 
             @Override
-            public void onResponse(String json) {
+            public void onResponse(final String json) {
                 hideWaitDialog();
-                LogUtil.e("新工单成功："+json);
-                Gson gson = new Gson();
-                final NewGongDan_Bean bean = gson.fromJson(json, NewGongDan_Bean.class);
+                LogUtil.e("新工单成功：" + json);
+
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (bean.getCode() == 20041){
-                            try {
+                        try {
+                            Gson gson = new Gson();
+                            final NewGongDan_Bean bean = gson.fromJson(json, NewGongDan_Bean.class);
+                            if (bean.getCode() == 20041) {
+                                mlist.clear();
                                 mlist.addAll(bean.getData());
                                 mAdapter.notifyDataSetChanged();
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                            }else {
+                                mlist.clear();
+                                mAdapter.notifyDataSetChanged();
                             }
+                        } catch (JsonSyntaxException e) {
+                            e.printStackTrace();
                         }
                     }
                 });

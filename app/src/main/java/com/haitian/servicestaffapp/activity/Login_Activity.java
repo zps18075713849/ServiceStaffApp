@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,9 @@ public class Login_Activity extends BaseActivity {
     private Button mLogin_bt;
     private TextView mLijizhuce_tv;
     private TextView mCode_login_tv;
+    private TextView mFuwuxieyi_tv;
+    private TextView mYinsi_tv;
+    private CheckBox mTongyi_check;
 
     @Override
     protected Activity provideBindView() {
@@ -70,6 +74,10 @@ public class Login_Activity extends BaseActivity {
         //验证码登录
         mCode_login_tv = findViewById(R.id.code_login_tv);
 
+        mFuwuxieyi_tv = findViewById(R.id.yonghuxieyi_tv);
+        mYinsi_tv = findViewById(R.id.yinsi_tv);
+        mTongyi_check = findViewById(R.id.tongyi_check);
+
     }
 
     @Override
@@ -87,7 +95,14 @@ public class Login_Activity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                login();
+                boolean checked = mTongyi_check.isChecked();
+                if (checked){
+                    login();
+                }else {
+                    Toast.makeText(mContext, "请阅读并同意相关协议后登录！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
             }
         });
@@ -104,6 +119,28 @@ public class Login_Activity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Login_Activity.this, CodeLogin_Activity.class);
+                startActivity(intent);
+            }
+        });
+
+        //服务协议
+        mFuwuxieyi_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login_Activity.this, XieYi_Web.class);
+                intent.putExtra("totalbarName","服务协议");
+                intent.putExtra("webUrl","http://111.17.215.37/yanglao/app/serviceAgreement.html");
+                startActivity(intent);
+            }
+        });
+
+        //隐私协议
+        mYinsi_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login_Activity.this, XieYi_Web.class);
+                intent.putExtra("totalbarName","隐私协议");
+                intent.putExtra("webUrl","http://111.17.215.37/yanglao/app/privacyPolicy.html");
                 startActivity(intent);
             }
         });
@@ -133,9 +170,19 @@ public class Login_Activity extends BaseActivity {
         map.put("user_pwd", password);
         OkHttpUtil.getInteace().doPost(Constants.LOGIN, map, Login_Activity.this, new OkHttpUtil.OkCallBack() {
             @Override
-            public void onFauile(Exception e) {
+            public void onFauile(final Exception e) {
                 hideWaitDialog();
                 LogUtil.e("登录失败:" + e.getMessage());
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (e.getMessage().equals("java.net.SocketTimeoutException: timeout")){
+                            Toast.makeText(mContext, "服务器请求超时", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+                });
+
             }
 
             @Override

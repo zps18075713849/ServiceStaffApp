@@ -43,7 +43,7 @@ public class FuWuXiangMu_Activity extends BaseActivity {
         mTitle_back.setVisibility(View.VISIBLE);
         mSousuo_tv2.setVisibility(View.VISIBLE);
         mRight_tv.setVisibility(View.VISIBLE);
-        mRight_tv.setText("添加项目");
+        mRight_tv.setText("服务项目");
 
         RelativeLayout xiangmu_relative = findViewById(R.id.xiangmu_relative);
         Button delete_btn = findViewById(R.id.delete_btn);

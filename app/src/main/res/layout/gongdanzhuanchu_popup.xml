@@ -56,6 +56,8 @@
             android:background="@drawable/jianjie_shape"
             android:gravity="top"
             android:hint="转入账号"
+            android:singleLine="true"
+            android:numeric="integer"
             android:padding="@dimen/dp_5"
             android:textColor="@color/black"
             android:textSize="18sp" />

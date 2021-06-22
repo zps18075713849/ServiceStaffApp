@@ -2,7 +2,9 @@ package com.haitian.servicestaffapp.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.design.widget.TabLayout;
@@ -30,6 +32,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class KeHuGuanLi_Activity extends BaseActivity {
@@ -88,6 +91,7 @@ public class KeHuGuanLi_Activity extends BaseActivity {
     }
     //客户管理列表接口
     private void requestKeHuList(String i) {
+        showWaitDialog();
         Map<String, Object> map = new HashMap<>();
         map.put("user_id", DoctorBaseAppliction.spUtil.getString(Constants.USERID,""));
         map.put("biaoshi",i);
@@ -95,11 +99,13 @@ public class KeHuGuanLi_Activity extends BaseActivity {
         OkHttpUtil.getInteace().doPost(Constants.KEHUGUANLILIST, map, KeHuGuanLi_Activity.this, new OkHttpUtil.OkCallBack() {
             @Override
             public void onFauile(Exception e) {
+                hideWaitDialog();
                 LogUtil.e("客户管理失败："+e.getMessage());
             }
 
             @Override
             public void onResponse(String json) {
+                hideWaitDialog();
                 LogUtil.e("客户管理成功："+json);
                 Gson gson = new Gson();
                 final KeHuGuanLi_Bean bean = gson.fromJson(json, KeHuGuanLi_Bean.class);
@@ -109,10 +115,24 @@ public class KeHuGuanLi_Activity extends BaseActivity {
                         @Override
                         public void run() {
                             if (bean.getCode() == 20041){
-                                mlist.add(bean.getData()+"");
-                                mAdapter.notifyDataSetChanged();
+                                if (bean.getData()!=null){
+                                    List<String> data = bean.getData();
+                                    for (int j = 0; j < data.size(); j++) {
+                                        LogUtil.e(data.get(j));
+                                    }
+                                    mlist.addAll(data);
+                                    mAdapter.notifyDataSetChanged();
+                                }else {
+                                    mlist.clear();
+                                    mAdapter.notifyDataSetChanged();
+                                    Toast.makeText(mContext, "暂无数据", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+
                             }else {
-                                Toast.makeText(mContext, "客户管理暂无数据", Toast.LENGTH_SHORT).show();
+                                mlist.clear();
+                                mAdapter.notifyDataSetChanged();
+                                Toast.makeText(mContext, bean.getMessage()+"", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         }
@@ -159,6 +179,31 @@ public class KeHuGuanLi_Activity extends BaseActivity {
             }
         });
 
+        mAdapter.setOnClickItem(new KeHuGuanLi_Adapter.onClickItem() {
+            @Override
+            public void onClick(int position) {
+                callPhone(mlist.get(position));
+            }
+        });
+
+    }
+
+
+    /**
+     * 拨打电话（跳转到拨号界面，用户手动点击拨打）
+     *
+     * @param phoneNum 电话号码
+     */
+    public void callPhone(String phoneNum) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            Uri data = Uri.parse("tel:" + phoneNum);
+            intent.setData(data);
+            startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(mContext, "跳转拨号页失败！请手动拨打"+phoneNum, Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 
     @Override

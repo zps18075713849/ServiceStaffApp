@@ -17,14 +17,14 @@
     <RadioGroup
         android:id="@+id/main_radiogroup"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/rb_homepage"
             android:layout_width="@dimen/dp_0"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
             android:checked="true"
@@ -52,7 +52,7 @@
         <RadioButton
             android:id="@+id/rb_setting"
             android:layout_width="@dimen/dp_0"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@drawable/rb_setting_selector"

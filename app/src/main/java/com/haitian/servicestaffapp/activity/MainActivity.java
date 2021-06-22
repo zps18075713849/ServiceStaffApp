@@ -1,8 +1,11 @@
 package com.haitian.servicestaffapp.activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +20,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.base.BaseActivity;
 import com.haitian.servicestaffapp.fragment.Home_Fragment;
@@ -27,6 +32,8 @@ import com.haitian.servicestaffapp.utils.LogUtil;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
@@ -125,6 +132,24 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+    }
+
+
+    //    退出应用
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void exitAPP() {
+        ActivityManager activityManager = (ActivityManager) this.getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.AppTask> appTaskList = activityManager.getAppTasks();
+        for (ActivityManager.AppTask appTask : appTaskList) {
+            appTask.finishAndRemoveTask();
+        }
+    }
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exitAPP();
+        }
+        return false;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)

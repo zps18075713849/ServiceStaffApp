@@ -42,7 +42,7 @@ public class Tousu_Fragment extends BaseFragment {
         mRecy_id = view.findViewById(R.id.recy_id);
 
         mRecy_id.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new YiwanchangGongDan_Adapter(getActivity(),mQiangdanlist);
+//        mAdapter = new YiwanchangGongDan_Adapter(getActivity(),mQiangdanlist);
         mRecy_id.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
     }

@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.baoyz.actionsheet.ActionSheet;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.adapter.AddDataSetting_Adapter;
 import com.haitian.servicestaffapp.app.Constants;
@@ -173,20 +174,21 @@ public class Reigster_UploadCertificate_Activity extends BaseActivity {
                 mZhengShuList.clear();
 
                 if (mNewPic.size() == 0) {
+                    hideWaitDialog();
                     Toast.makeText(mContext, "请上传您的执业证书", Toast.LENGTH_SHORT).show();
                     return;
                 }
 //                try {
-//                    LogUtil.e("服务id：" + mFuwu_typeid);
-//                    LogUtil.e("所属id：" + mFuwu_suoshuid);
-//                    LogUtil.e("手机号：" + mMobile);
-//                    LogUtil.e("密码：" + mPassword);
-//                    LogUtil.e("验证码：" + mMes_code);
-//                    LogUtil.e("名字：" + mName);
-//                    LogUtil.e("验证码id：" + mYanzheng_code);
-//                    LogUtil.e("身份证正面：" + mIdcard_zheng);
-//                    LogUtil.e("身份证反面：" + mIdcard_fan);
-//                    LogUtil.e("手持身份证：" + mIdcard_shouchi);
+                    LogUtil.e("服务id：" + mFuwu_typeid);
+                    LogUtil.e("所属id：" + mFuwu_suoshuid);
+                    LogUtil.e("手机号：" + mMobile);
+                    LogUtil.e("密码：" + mPassword);
+                    LogUtil.e("验证码：" + mMes_code);
+                    LogUtil.e("名字：" + mName);
+                    LogUtil.e("验证码id：" + mYanzheng_code);
+                    LogUtil.e("身份证正面：" + mIdcard_zheng);
+                    LogUtil.e("身份证反面：" + mIdcard_fan);
+                    LogUtil.e("手持身份证：" + mIdcard_shouchi);
 //
 //                    for (int i = 0; i < mNewPic.size(); i++) {
 //                        LogUtil.e("第" + i + "张职业证书：" + mNewPic.get(i));
@@ -344,21 +346,26 @@ public class Reigster_UploadCertificate_Activity extends BaseActivity {
                         LogUtil.e("注册成功");
                         if (response.isSuccessful()) {
                             final String str = response.body().string();
-                            Gson gson = new Gson();
-                            final Register_Bean bean = gson.fromJson(str, Register_Bean.class);
+
 
                             Handler handler = new Handler(Looper.getMainLooper());
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    if (bean.getCode() == 20011) {
-                                        Toast.makeText(Reigster_UploadCertificate_Activity.this, "注册成功！", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(Reigster_UploadCertificate_Activity.this, Login_Activity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        Toast.makeText(Reigster_UploadCertificate_Activity.this, bean.getMessage(), Toast.LENGTH_SHORT).show();
-                                        return;
+                                    try {
+                                        Gson gson = new Gson();
+                                        final Register_Bean bean = gson.fromJson(str, Register_Bean.class);
+                                        if (bean.getCode() == 20011) {
+                                            Toast.makeText(Reigster_UploadCertificate_Activity.this, "注册成功！", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(Reigster_UploadCertificate_Activity.this, Login_Activity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        } else {
+                                            Toast.makeText(Reigster_UploadCertificate_Activity.this, bean.getMessage(), Toast.LENGTH_SHORT).show();
+                                            return;
+                                        }
+                                    } catch (JsonSyntaxException e) {
+                                        e.printStackTrace();
                                     }
                                 }
                             });
@@ -385,7 +392,12 @@ public class Reigster_UploadCertificate_Activity extends BaseActivity {
                     @Override
                     public void onOtherButtonClick(ActionSheet actionSheet, int index) {
                         if (index == 0) {
-                            startcamera();
+                            try {
+                                startcamera();
+                            } catch (Exception e) {
+                                Toast.makeText(mContext, "相机未启动，请检查权限或真机使用", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                            }
                         } else {
                             startPhotoAlbum();
                         }

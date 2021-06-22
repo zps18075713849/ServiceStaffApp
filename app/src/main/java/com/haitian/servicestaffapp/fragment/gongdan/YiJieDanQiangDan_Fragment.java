@@ -15,12 +15,14 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.adapter.YiJieDan_Adapter;
 import com.haitian.servicestaffapp.app.Constants;
 import com.haitian.servicestaffapp.app.DoctorBaseAppliction;
 import com.haitian.servicestaffapp.base.BaseFragment;
 import com.haitian.servicestaffapp.bean.GongDanIngJuJue_Bean;
+import com.haitian.servicestaffapp.bean.TouSuHuiFu_Bean;
 import com.haitian.servicestaffapp.bean.YiJieDanList_Bean;
 import com.haitian.servicestaffapp.okutils.OkHttpUtil;
 import com.haitian.servicestaffapp.utils.LogUtil;
@@ -57,7 +59,7 @@ public class YiJieDanQiangDan_Fragment extends BaseFragment {
         mLl = view.findViewById(R.id.ll);
 
         mRecy_id.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new YiJieDan_Adapter(getActivity(),mlist);
+        mAdapter = new YiJieDan_Adapter(getActivity(), mlist);
         mRecy_id.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
 
@@ -73,9 +75,9 @@ public class YiJieDanQiangDan_Fragment extends BaseFragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (hidden){
+        if (hidden) {
             return;
-        }else {
+        } else {
             requestListData();
         }
     }
@@ -83,32 +85,37 @@ public class YiJieDanQiangDan_Fragment extends BaseFragment {
     private void requestListData() {
         showWaitDialog();
         final Map<String, Object> map = new HashMap<>();
-        map.put("user_id",DoctorBaseAppliction.spUtil.getString(Constants.USERID,""));
+        map.put("user_id", DoctorBaseAppliction.spUtil.getString(Constants.USERID, ""));
 
-        OkHttpUtil.getInteace().doPost(Constants.YIJIEDANGONGDANLIST, map, getActivity(), new OkHttpUtil.OkCallBack() {
+        OkHttpUtil.getInteace().doPost(Constants.GONGDANYIJIEDAN, map, getActivity(), new OkHttpUtil.OkCallBack() {
             @Override
             public void onFauile(Exception e) {
                 hideWaitDialog();
-                LogUtil.e("已接单列表失败："+e.getMessage());
+                LogUtil.e("已接单列表失败：" + e.getMessage());
             }
 
             @Override
-            public void onResponse(String json) {
+            public void onResponse(final String json) {
                 hideWaitDialog();
-                LogUtil.e("已接单列表成功："+json);
-                Gson gson = new Gson();
-                final YiJieDanList_Bean bean = gson.fromJson(json, YiJieDanList_Bean.class);
+                LogUtil.e("已接单列表成功：" + json);
+
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (bean.getCode() == 20040){
-                            Toast.makeText(getContext(), "暂无已接单订单", Toast.LENGTH_SHORT).show();
-                            return;
-                        }else if (bean.getCode() == 20041){
-                            mlist.addAll(bean.getData());
-                            mAdapter.notifyDataSetChanged();
-
+                        try {
+                            Gson gson = new Gson();
+                            final YiJieDanList_Bean bean = gson.fromJson(json, YiJieDanList_Bean.class);
+                            if (bean.getCode() == 20041) {
+                                mlist.clear();
+                                mlist.addAll(bean.getData());
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                mlist.clear();
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        } catch (JsonSyntaxException e) {
+                            e.printStackTrace();
                         }
                     }
                 });
@@ -122,18 +129,18 @@ public class YiJieDanQiangDan_Fragment extends BaseFragment {
         mAdapter.setOnClickItem(new YiJieDan_Adapter.onClickItem() {
             @Override
             public void onClick(int position, int type) {
-                switch (type){
-                    case 1:{
+                switch (type) {
+                    case 0: {
                         openPopupwindow(position);
                         break;
                     }
-                    case 2:{
+                    case 1: {
                         YiJieDanList_Bean.DataBean dataBean = mlist.get(position);
-                        int id = dataBean.getId();
+                        String id = dataBean.getId();
                         reqeustZhiXing(id);
                         break;
                     }
-                    default:{
+                    default: {
                         break;
                     }
                 }
@@ -154,7 +161,7 @@ public class YiJieDanQiangDan_Fragment extends BaseFragment {
         inflate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPopupWindow.dismiss();
+
             }
         });
 
@@ -184,7 +191,7 @@ public class YiJieDanQiangDan_Fragment extends BaseFragment {
                     Toast.makeText(getActivity(), "请填写转出原因", Toast.LENGTH_SHORT).show();
                 } else {
                     YiJieDanList_Bean.DataBean dataBean = mlist.get(position);
-                    int id = dataBean.getId();
+                    String id = dataBean.getId();
                     mPopupWindow.dismiss();
                     requestZhuanChu(id, yuanyin);
                 }
@@ -195,7 +202,7 @@ public class YiJieDanQiangDan_Fragment extends BaseFragment {
     }
 
     //转出
-    private void requestZhuanChu(int gongdanid, String yuanyin) {
+    private void requestZhuanChu(String gongdanid, String yuanyin) {
         showWaitDialog();
         Map<String, Object> map = new HashMap<>();
         map.put("user_id", DoctorBaseAppliction.spUtil.getString(Constants.USERID, ""));
@@ -211,7 +218,7 @@ public class YiJieDanQiangDan_Fragment extends BaseFragment {
             }
 
             @Override
-            public void onResponse(String json) {
+            public void onResponse(final String json) {
                 hideWaitDialog();
                 LogUtil.e("工单转出成功：" + json);
 
@@ -219,8 +226,21 @@ public class YiJieDanQiangDan_Fragment extends BaseFragment {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-//                        mlist.clear();
-//                        requestListData();
+                        try {
+                            Gson gson = new Gson();
+                            TouSuHuiFu_Bean bean = gson.fromJson(json, TouSuHuiFu_Bean.class);
+                            if (bean.getCode() == 20011) {
+                                Toast.makeText(getContext(), bean.getMessage() + "", Toast.LENGTH_SHORT).show();
+                                mlist.clear();
+                                requestListData();
+                                return;
+                            } else {
+                                Toast.makeText(getContext(), bean.getMessage(), Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        } catch (JsonSyntaxException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
 
@@ -230,36 +250,43 @@ public class YiJieDanQiangDan_Fragment extends BaseFragment {
     }
 
     //执行
-    private void reqeustZhiXing(int gongdanid){
+    private void reqeustZhiXing(String gongdanid) {
         Map<String, Object> map = new HashMap<>();
-        map.put("user_id",DoctorBaseAppliction.spUtil.getString(Constants.USERID,""));
-        map.put("id",gongdanid);
+        map.put("user_id", DoctorBaseAppliction.spUtil.getString(Constants.USERID, ""));
+        map.put("id", gongdanid);
 
         OkHttpUtil.getInteace().doPost(Constants.ZHIXINGGONGDAN, map, getActivity(), new OkHttpUtil.OkCallBack() {
             @Override
             public void onFauile(Exception e) {
-                LogUtil.e("执行工单接口失败："+e.getMessage());
+                LogUtil.e("执行工单接口失败：" + e.getMessage());
             }
 
             @Override
-            public void onResponse(String json) {
-                LogUtil.e("执行工单接口成功："+json);
-                Gson gson = new Gson();
-                final GongDanIngJuJue_Bean bean = gson.fromJson(json, GongDanIngJuJue_Bean.class);
+            public void onResponse(final String json) {
+                LogUtil.e("执行工单接口成功：" + json);
+
 
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (bean.getCode() == 20011){
-                            Toast.makeText(getContext(), bean.getMessage(), Toast.LENGTH_SHORT).show();
-                            //刷新界面
+                        try {
+                            Gson gson = new Gson();
+                            final GongDanIngJuJue_Bean bean = gson.fromJson(json, GongDanIngJuJue_Bean.class);
+                            if (bean.getCode() == 20011) {
+                                //刷新界面
+                                mlist.clear();
+                                requestListData();
+                                Toast.makeText(getContext(), bean.getMessage(), Toast.LENGTH_SHORT).show();
 
-                        }else if (bean.getCode() == 20010){
-                            Toast.makeText(getContext(), bean.getMessage(), Toast.LENGTH_SHORT).show();
-                            return;
-                        }else {
-                            Toast.makeText(getContext(), bean.getMessage(), Toast.LENGTH_SHORT).show();
+                            } else if (bean.getCode() == 20010) {
+                                Toast.makeText(getContext(), bean.getMessage(), Toast.LENGTH_SHORT).show();
+                                return;
+                            } else {
+                                Toast.makeText(getContext(), bean.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JsonSyntaxException e) {
+                            e.printStackTrace();
                         }
                     }
                 });

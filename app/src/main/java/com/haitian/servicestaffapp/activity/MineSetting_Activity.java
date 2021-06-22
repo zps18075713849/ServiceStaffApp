@@ -22,6 +22,8 @@ public class MineSetting_Activity extends BaseActivity {
     private TextView mTitle_tv;
     private ImageView mBack;
     private Button mExit_bt;
+    private TextView mFuwuxieyi_tv;
+    private TextView mYinsi_tv;
 
     @Override
     protected Activity provideBindView() {
@@ -39,6 +41,9 @@ public class MineSetting_Activity extends BaseActivity {
         mTitle_tv = findViewById(R.id.title_tv);
         mBack = findViewById(R.id.title_back);
         mExit_bt = findViewById(R.id.exit_bt);
+
+        mFuwuxieyi_tv = findViewById(R.id.fuwuxieyi_tv);
+        mYinsi_tv = findViewById(R.id.yinsi_tv);
 
         mTitle_tv.setVisibility(View.VISIBLE);
         mBack.setVisibility(View.VISIBLE);
@@ -64,6 +69,29 @@ public class MineSetting_Activity extends BaseActivity {
                 finish();
             }
         });
+
+        //服务协议
+        mFuwuxieyi_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MineSetting_Activity.this, XieYi_Web.class);
+                intent.putExtra("totalbarName","服务协议");
+                intent.putExtra("webUrl","http://111.17.215.37/yanglao/app/serviceAgreement.html");
+                startActivity(intent);
+            }
+        });
+
+        //隐私协议
+        mYinsi_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MineSetting_Activity.this, XieYi_Web.class);
+                intent.putExtra("totalbarName","隐私协议");
+                intent.putExtra("webUrl","http://111.17.215.37/yanglao/app/privacyPolicy.html");
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override

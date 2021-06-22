@@ -8,11 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.bean.NewGongDan_Bean;
 import com.haitian.servicestaffapp.bean.PingJiaListBean;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -38,23 +43,64 @@ public class PingjiaList_Adapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         viewholderItem viewitem = (viewholderItem) viewHolder;
-        viewitem.mFuwu_address.setText("地址："+mMlist.get(i).getGongdan().getWaiter_address());
-        viewitem.mFuwuleixing_tv.setText("服务类型：");
-        viewitem.mFuwuneirong_tv.setText("服务内容："+mMlist.get(i).getGongdan().getFuwu_value());
-        viewitem.mFuwutime_tv.setText("服务时间："+mMlist.get(i).getGongdan().getStartTime()+"-"+mMlist.get(i).getGongdan().getEndTime());
-        viewitem.mPrice_tv.setText("￥"+mMlist.get(i).getGongdan().getCost());
+        try {
+            if (mMlist.get(i).getEvaluate().getAddr() == null){
+                viewitem.mFuwu_address.setText("地址：");
+            }else {
+                viewitem.mFuwu_address.setText("地址：" + mMlist.get(i).getEvaluate().getAddr());
+            }
+            viewitem.mFuwuleixing_tv.setText("服务类型：" + mMlist.get(i).getEvaluate().getGoodsTypeName());
+            viewitem.mFuwuneirong_tv.setText("服务内容：" + mMlist.get(i).getEvaluate().getFuwu_value());
+            viewitem.mFuwutime_tv.setText("服务时间：" + mMlist.get(i).getEvaluate().getStartTime() + "-" + mMlist.get(i).getEvaluate().getEndTime());
+            viewitem.mPrice_tv.setText("￥" + mMlist.get(i).getEvaluate().getCost());
+            viewitem.mXing_bar.setRating(Integer.valueOf(mMlist.get(i).getEvaluate().getXingji()));
+
+
+            if (mMlist.get(i).getEvaluate().getContent() == null) {
+                viewitem.mKehupingjia_tv.setText("客户评价：");
+            } else {
+                viewitem.mKehupingjia_tv.setText("客户评价：" + mMlist.get(i).getEvaluate().getContent());
+
+            }
+
+
+            viewitem.mMobile_tv.setText(mMlist.get(i).getEvaluate().getOld_phone());
+            Glide.with(mActivity).load(mMlist.get(i).getEvaluate().getOldtupian()).error(R.mipmap.icon_jibenzhongxin).into(viewitem.mImg_id);
+
+
+            if (mMlist.get(i).getReply().getReply_content() != null) {
+                if (mMlist.get(i).getReply().getReply_content().equals("")) {
+                    viewitem.mHuifu_btn.setVisibility(View.VISIBLE);
+                    viewitem.mHuifu_ll.setVisibility(View.VISIBLE);
+                    viewitem.mHuifu_line.setVisibility(View.GONE);
+                } else {
+                    viewitem.mHuifu_ll.setVisibility(View.GONE);
+                    viewitem.mHuifu_btn.setVisibility(View.GONE);
+                    viewitem.mHuifu_line.setVisibility(View.VISIBLE);
+                    viewitem.mHuifu_tv.setText("回复内容：" + mMlist.get(i).getReply().getReply_content());
+                }
+            }else {
+                viewitem.mHuifu_btn.setVisibility(View.VISIBLE);
+                viewitem.mHuifu_ll.setVisibility(View.VISIBLE);
+                viewitem.mHuifu_line.setVisibility(View.GONE);
+            }
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
 
 
         viewitem.mZhuanchu_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mOnClickItem!=null){
-                    mOnClickItem.onClick(i,0);
+                if (mOnClickItem != null) {
+                    mOnClickItem.onClick(i, 0);
                 }
             }
         });
 
-        viewitem.mJiedan_btn.setOnClickListener(new View.OnClickListener() {
+        //回复
+        viewitem.mHuifu_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mOnClickItem!=null){
@@ -62,6 +108,7 @@ public class PingjiaList_Adapter extends RecyclerView.Adapter {
                 }
             }
         });
+
     }
 
     @Override
@@ -80,7 +127,11 @@ public class PingjiaList_Adapter extends RecyclerView.Adapter {
         private final TextView mFuwu_address;
         private final TextView mPrice_tv;
         private final Button mZhuanchu_btn;
-        private final Button mJiedan_btn;
+        private final TextView mKehupingjia_tv;
+        private final TextView mHuifu_tv;
+        private final LinearLayout mHuifu_line;
+        private final Button mHuifu_btn;
+        private final RelativeLayout mHuifu_ll;
 
         public viewholderItem(@NonNull View itemView) {
             super(itemView);
@@ -93,7 +144,12 @@ public class PingjiaList_Adapter extends RecyclerView.Adapter {
             mFuwu_address = itemView.findViewById(R.id.fuwu_address);
             mPrice_tv = itemView.findViewById(R.id.price_tv);
             mZhuanchu_btn = itemView.findViewById(R.id.zhuanchu_btn);
-            mJiedan_btn = itemView.findViewById(R.id.jiedan_btn);
+            mKehupingjia_tv = itemView.findViewById(R.id.kehupingjia_tv);
+            mHuifu_tv = itemView.findViewById(R.id.huifu_tv);
+            mHuifu_line = itemView.findViewById(R.id.huifu_line);
+            mHuifu_btn = itemView.findViewById(R.id.huifu_btn);
+            mHuifu_ll = itemView.findViewById(R.id.huifu_ll);
+
         }
     }
 
@@ -103,7 +159,7 @@ public class PingjiaList_Adapter extends RecyclerView.Adapter {
         mOnClickItem = onClickItem;
     }
 
-    public interface onClickItem{
+    public interface onClickItem {
         void onClick(int position, int type);
     }
 

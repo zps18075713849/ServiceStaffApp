@@ -28,12 +28,17 @@ import com.bumptech.glide.Glide;
 import com.haitian.servicestaffapp.R;
 import com.haitian.servicestaffapp.app.Constants;
 import com.haitian.servicestaffapp.base.BaseActivity;
+import com.haitian.servicestaffapp.utils.CompressImageUtil;
 import com.haitian.servicestaffapp.utils.LogUtil;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 import static com.haitian.servicestaffapp.utils.HcUtils.getAppProcessName;
 
@@ -254,7 +259,12 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
                     @Override
                     public void onOtherButtonClick(ActionSheet actionSheet, int index) {
                         if (index == 0) {
-                            startcamera();
+                            try {
+                                startcamera();
+                            } catch (Exception e) {
+                                Toast.makeText(mContext, "相机未启动，请检查权限或真机使用", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                            }
                         } else {
                             startPhotoAlbum();
                         }
@@ -264,6 +274,7 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
     }
 
 
+    //打开相机
     private void startcamera() {
         if (Build.VERSION.SDK_INT >= 23) {
             int request = ContextCompat.checkSelfPermission(Register_Upload_CardId_Activity.this, Manifest.permission.CAMERA);
@@ -274,11 +285,12 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
             } else {
                 String b = null;
                 try {
-                    b = Environment.getExternalStorageDirectory().getCanonicalPath() + "/Android/data" + "/" + getAppProcessName(Register_Upload_CardId_Activity.this) + "/xxhold/";
+                    b = Environment.getExternalStorageDirectory().getCanonicalPath() + "/xxDoctor/";
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 File file2 = new File(b);
+                LogUtil.e("file2：--------" + file2);
                 if (!file2.exists()) {
                     file2.mkdirs();
                 }
@@ -289,7 +301,7 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
                 //将图片存入sdcard  1.存入   2.在Sdcard创建文件
                 it.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 try {
-                    pathImage = Environment.getExternalStorageDirectory().getCanonicalPath() + "/Android/data" + "/" + getAppProcessName(Register_Upload_CardId_Activity.this) + "/xxhold/" + System.currentTimeMillis() + ".png";
+                    pathImage = Environment.getExternalStorageDirectory().getCanonicalPath() + "/xxDoctor/" + System.currentTimeMillis() + ".png";
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -301,22 +313,58 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
             //低于23 不需要特殊处理，去掉用拍照的方法
         }
     }
-
+    //打开相册
     private void startPhotoAlbum() {
-        //调用相册
-        //Intent.ACTION_PICK打开相册
-        Intent it = new Intent(Intent.ACTION_PICK);
-        //设置图片的格式
-        it.setType("image/*");
-        //启动
-        startActivityForResult(it, REQUEST_CODE_TAKE_PICTURE1);
+        //相册导入
+        Intent intent5 = new Intent(this, MultiImageSelectorActivity.class);
+        // whether show camera
+        intent5.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, false);
+        // max select image amount
+        intent5.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_COUNT, 1);
+        // select mode (MultiImageSelectorActivity.MODE_SINGLE OR MultiImageSelectorActivity.MODE_MULTI)
+        intent5.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_MULTI);
+        // default select images (support array list)
+        ArrayList<String> imageList = new ArrayList<>();
+        intent5.putStringArrayListExtra(MultiImageSelectorActivity.EXTRA_DEFAULT_SELECTED_LIST, imageList);
+        startActivityForResult(intent5, REQUEST_CODE_TAKE_PICTURE1);
     }
 
-    @Override
+    @SuppressLint("WrongConstant")
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //图片
         super.onActivityResult(requestCode, resultCode, data);
-        //2.判断请求码和结果码  结果码系统提供 RESULT_OK
-        if (requestCode == REQUEST_CODE_TAKE_PICTURE && resultCode == Register_Upload_CardId_Activity.RESULT_OK) {
+        String v = Environment.getExternalStorageDirectory() + "/xxDoctor/";
+        File file = new File(v);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        if (requestCode == REQUEST_CODE_TAKE_PICTURE1 && resultCode == this.RESULT_OK) {
+            List<String> resultList = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
+            for (int i = 0; i < resultList.size(); i++) {
+                String a = resultList.get(i);
+                LogUtil.e("tttttttttt", "压缩之前: " + a);
+                Bitmap bitmap = CompressImageUtil.getimage(a);
+                String galleryPath = Environment.getExternalStorageDirectory() + "/xxDoctor/" + System.currentTimeMillis() + ".png";
+                File b = saveBitmapFile(bitmap, galleryPath);
+
+                if (type == 0){
+                    Glide.with(Register_Upload_CardId_Activity.this).load(b.getPath()).into(mId_card_zheng_iv);
+                    mId_card_zheng_iv.setVisibility(View.VISIBLE);
+                    mIdCard_Zheng = b.getPath();
+                }else if (type == 1){
+                    Glide.with(Register_Upload_CardId_Activity.this).load(b.getPath()).into(mId_card_fan_iv);
+                    mId_card_fan_iv.setVisibility(View.VISIBLE);
+                    mIdCard_Fan = b.getPath();
+                }else if (type == 2){
+                    Glide.with(Register_Upload_CardId_Activity.this).load(b.getPath()).into(mShouchi_img);
+                    mShouchi_img.setVisibility(View.VISIBLE);
+                    mIdCard_ShouChi = b.getPath();
+                }
+
+            }
+        }
+
+        if (requestCode == REQUEST_CODE_TAKE_PICTURE && resultCode == Register_Upload_CardId_Activity.this.RESULT_OK) {
             //点击完成后调取的裁剪功能  com.android.camera.action.CROP裁剪的Action
             Intent it = new Intent("com.android.camera.action.CROP");
             //得到图片   1.得到Sdcard的下存的图片，如果有就拿到，如果没有就创建
@@ -335,26 +383,8 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
             startActivityForResult(it, 200);
         } //3.将图片设置展示
 
-        if (requestCode == REQUEST_CODE_TAKE_PICTURE1 && resultCode == Register_Upload_CardId_Activity.RESULT_OK) {
-            //得到图片
-            Uri data2 = data.getData();
-            //调取裁剪功能
-            Intent it = new Intent("com.android.camera.action.CROP");
-            //得到图片设置格式
-            it.setDataAndType(data2, "image/*");
-            //设置是否支持裁剪
-            it.putExtra("CROP", true);
-            //设置宽高比
-            it.putExtra("aspectX", 10);
-            it.putExtra("aspectY", 10);
-            //设置输出图片的大小
-            it.putExtra("outputX", 250);
-            it.putExtra("outputY", 250);
-            //返回
-            it.putExtra("return-data", true);
-            startActivityForResult(it, 201);
-        }
-        if (requestCode == 200 && resultCode == Register_Upload_CardId_Activity.RESULT_OK) {
+
+        if (requestCode == 200 && resultCode == Register_Upload_CardId_Activity.this.RESULT_OK) {
 //            Uri uri = data.getData();
 //            String path = uri.getPath();
 //            Log.e("上传头像11111", "onActivityResult: " + path);
@@ -365,87 +395,42 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
 //            CompressImageUtil.compressImage(this, filePath.getPath());
 
             Bitmap bitmap = data.getParcelableExtra("data");
-            File file = null;
+            File file1 = null;
             try {
-                file = saveBitmapFile(bitmap, Environment.getExternalStorageDirectory().getCanonicalPath() + "/Android/data" + "/" + getAppProcessName(Register_Upload_CardId_Activity.this) + "/xxhold/" + System.currentTimeMillis() + ".png");
+                file1 = saveBitmapFile(bitmap, Environment.getExternalStorageDirectory().getCanonicalPath() + "/xxDoctor/" + System.currentTimeMillis() + ".png");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Log.e("上传头像111111", "onActivityResult: " + file.getPath());
-            if (!file.exists()) {
-                file.mkdirs();
+            Log.e("上传头像22222", "onActivityResult: " + file1.getPath());
+            if (!file1.exists()) {
+                file1.mkdirs();
             }
-//            upLoadPic(file);
+
+            //相机
             if (type == 0){
-                Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_zheng_iv);
+                Glide.with(Register_Upload_CardId_Activity.this).load(file1.getPath()).into(mId_card_zheng_iv);
                 mId_card_zheng_iv.setVisibility(View.VISIBLE);
-                mIdCard_Zheng = file.getPath();
+                mIdCard_Zheng = file1.getPath();
             }else if (type == 1){
-                Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_fan_iv);
+                Glide.with(Register_Upload_CardId_Activity.this).load(file1.getPath()).into(mId_card_fan_iv);
                 mId_card_fan_iv.setVisibility(View.VISIBLE);
-                mIdCard_Fan = file.getPath();
+                mIdCard_Fan = file1.getPath();
             }else if (type == 2){
-                Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mShouchi_img);
+                Glide.with(Register_Upload_CardId_Activity.this).load(file1.getPath()).into(mShouchi_img);
                 mShouchi_img.setVisibility(View.VISIBLE);
-                mIdCard_ShouChi = file.getPath();
+                mIdCard_ShouChi = file1.getPath();
             }
-        }
-        if (requestCode == 201 && resultCode == Register_Upload_CardId_Activity.RESULT_OK) {
-            Bitmap bitmap = data.getParcelableExtra("data");
-            File file = null;
-            try {
-                file = saveBitmapFile(bitmap, Environment.getExternalStorageDirectory().getCanonicalPath() + "/Android/data" + "/" + getAppProcessName(Register_Upload_CardId_Activity.this) + "/xxhold/" + System.currentTimeMillis() + ".png");
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Log.e("上传头像22222", "onActivityResult: " + file.getPath());
-            if (!file.exists()) {
-                file.mkdirs();
-            }
+
+            //上传照片到服务器
 //            upLoadPic(file);
-            if (type == 0){
-                Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_zheng_iv);
-//                Picasso.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_zheng_iv);
-                mId_card_zheng_iv.setVisibility(View.VISIBLE);
-                mIdCard_Zheng = file.getPath();
-
-            }else if (type == 1){
-                Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_fan_iv);
-//                Picasso.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_fan_iv);
-                mId_card_fan_iv.setVisibility(View.VISIBLE);
-                mIdCard_Fan = file.getPath();
-
-            }else if (type == 2){
-//                Picasso.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mShouchi_img);
-
-                Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mShouchi_img);
-                mShouchi_img.setVisibility(View.VISIBLE);
-                mIdCard_ShouChi = file.getPath();
-
-            }
         }
     }
 
-    @SuppressLint("ObsoleteSdkInt")
     public static File saveBitmapFile(Bitmap bitmap, String filepath) {
         File file = new File(filepath);//将要保存图片的路径
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) { //android 11
-//            File file1 = new File(filepath, filepath);
-//            if (!file.exists()) {
-//                try {
-//                    new File(filepath).mkdirs();
-//                    file.createNewFile();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-
-
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-
             bitmap.compress(Bitmap.CompressFormat.JPEG, 80, bos);
             bos.flush();
             bos.close();
@@ -454,6 +439,121 @@ public class Register_Upload_CardId_Activity extends BaseActivity {
         }
         return file;
     }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        //2.判断请求码和结果码  结果码系统提供 RESULT_OK
+//        if (requestCode == REQUEST_CODE_TAKE_PICTURE && resultCode == Register_Upload_CardId_Activity.RESULT_OK) {
+//            //点击完成后调取的裁剪功能  com.android.camera.action.CROP裁剪的Action
+//            Intent it = new Intent("com.android.camera.action.CROP");
+//            //得到图片   1.得到Sdcard的下存的图片，如果有就拿到，如果没有就创建
+//            it.setDataAndType(Uri.fromFile(new File(pathImage)), "image/*");
+//            //设置是否支持裁剪
+//            it.putExtra("CROP", true);
+//            //设置裁剪框的比例
+//            it.putExtra("aspaceX", 1);
+//            it.putExtra("aspaceY", 1);
+//            //设置图片输入的大小
+//            it.putExtra("outputX", 250);
+//            it.putExtra("outputY", 250);
+//            //让图片返回intent接受
+//            it.putExtra("return-data", true);
+//            //启动
+//            startActivityForResult(it, 200);
+//        } //3.将图片设置展示
+//
+//        if (requestCode == REQUEST_CODE_TAKE_PICTURE1 && resultCode == Register_Upload_CardId_Activity.RESULT_OK) {
+//            //得到图片
+//            Uri data2 = data.getData();
+//            //调取裁剪功能
+//            Intent it = new Intent("com.android.camera.action.CROP");
+//            //得到图片设置格式
+//            it.setDataAndType(data2, "image/*");
+//            //设置是否支持裁剪
+//            it.putExtra("CROP", true);
+//            //设置宽高比
+//            it.putExtra("aspectX", 10);
+//            it.putExtra("aspectY", 10);
+//            //设置输出图片的大小
+//            it.putExtra("outputX", 250);
+//            it.putExtra("outputY", 250);
+//            //返回
+//            it.putExtra("return-data", true);
+//            startActivityForResult(it, 201);
+//        }
+//        if (requestCode == 200 && resultCode == Register_Upload_CardId_Activity.RESULT_OK) {
+////            Uri uri = data.getData();
+////            String path = uri.getPath();
+////            Log.e("上传头像11111", "onActivityResult: " + path);
+////            File filePath = new File(path);
+////            if (!filePath.exists()) {
+////                filePath.mkdirs();
+////            }
+////            CompressImageUtil.compressImage(this, filePath.getPath());
+//
+//            Bitmap bitmap = data.getParcelableExtra("data");
+//            File file = null;
+//            try {
+//                file = saveBitmapFile(bitmap, Environment.getExternalStorageDirectory().getCanonicalPath() + "/Android/data" + "/" + getAppProcessName(Register_Upload_CardId_Activity.this) + "/xxhold/" + System.currentTimeMillis() + ".png");
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            Log.e("上传头像111111", "onActivityResult: " + file.getPath());
+//            if (!file.exists()) {
+//                file.mkdirs();
+//            }
+////            upLoadPic(file);
+//            if (type == 0){
+//                Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_zheng_iv);
+//                mId_card_zheng_iv.setVisibility(View.VISIBLE);
+//                mIdCard_Zheng = file.getPath();
+//            }else if (type == 1){
+//                Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_fan_iv);
+//                mId_card_fan_iv.setVisibility(View.VISIBLE);
+//                mIdCard_Fan = file.getPath();
+//            }else if (type == 2){
+//                Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mShouchi_img);
+//                mShouchi_img.setVisibility(View.VISIBLE);
+//                mIdCard_ShouChi = file.getPath();
+//            }
+//        }
+//        if (requestCode == 201 && resultCode == Register_Upload_CardId_Activity.RESULT_OK) {
+//            Bitmap bitmap = data.getParcelableExtra("data");
+//            File file = null;
+//            try {
+//                file = saveBitmapFile(bitmap, Environment.getExternalStorageDirectory().getCanonicalPath() + "/Android/data" + "/" + getAppProcessName(Register_Upload_CardId_Activity.this) + "/xxhold/" + System.currentTimeMillis() + ".png");
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            Log.e("上传头像22222", "onActivityResult: " + file.getPath());
+//            if (!file.exists()) {
+//                file.mkdirs();
+//            }
+////            upLoadPic(file);
+//            if (type == 0){
+//                Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_zheng_iv);
+////                Picasso.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_zheng_iv);
+//                mId_card_zheng_iv.setVisibility(View.VISIBLE);
+//                mIdCard_Zheng = file.getPath();
+//
+//            }else if (type == 1){
+//                Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_fan_iv);
+////                Picasso.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mId_card_fan_iv);
+//                mId_card_fan_iv.setVisibility(View.VISIBLE);
+//                mIdCard_Fan = file.getPath();
+//
+//            }else if (type == 2){
+////                Picasso.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mShouchi_img);
+//
+//                Glide.with(Register_Upload_CardId_Activity.this).load(file.getPath()).into(mShouchi_img);
+//                mShouchi_img.setVisibility(View.VISIBLE);
+//                mIdCard_ShouChi = file.getPath();
+//
+//            }
+//        }
+//    }
 
     @Override
     public Context context() {

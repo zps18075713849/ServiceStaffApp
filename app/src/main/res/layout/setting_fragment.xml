@@ -12,7 +12,7 @@
         android:layout_height="@dimen/dp_68"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_70"
-        android:src="@drawable/red_bg" />
+        android:src="@mipmap/logo" />
 
     <TextView
         android:id="@+id/idcard_tv"
@@ -160,6 +160,7 @@
         <RelativeLayout
             android:id="@+id/aboutAs_line"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="@dimen/dp_45">
 
             <TextView
@@ -185,6 +186,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_2"
+            android:visibility="gone"
             android:background="@color/line_color2"
             />
 

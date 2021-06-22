@@ -141,6 +141,44 @@
 
         </LinearLayout>
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/tongyi_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:checked="false"
+                android:padding="5dp"
+                android:button="@drawable/checkbox_ic_style"
+                android:textColor="@color/white"
+                android:text="我已阅读并同意" />
+
+            <TextView
+                android:id="@+id/yonghuxieyi_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/tongyi_check"
+                android:text="《服务协议》"
+                android:textColor="@color/white" />
+
+
+            <TextView
+                android:id="@+id/yinsi_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/yonghuxieyi_tv"
+                android:text="《隐私政策》"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
 
     </LinearLayout>
 
